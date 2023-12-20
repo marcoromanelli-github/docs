@@ -1,15 +1,13 @@
 
 # Environment Modules
 
-For a user to compile and run computational jobs on a cluster, a special shell environment is typically set up for the software that is used.
+To compile and run jobs on a cluster, a special shell environment is typically set up for the software that is used. However, setting up the right environment for a particular software package and version can be tricky, and it can be hard to keep track of how it was set up.
 
-However, setting up the right environment for a particular software package and version can be tricky, and it can be hard to keep track of how it was set up.
+For example, users want to have a clean way to bring up the right environment for compiling code according to the various MPI implementations, but it can easily get confusing about which libraries have been used or are needed, and one can end up with multiple libraries with similar names installed in a disorganized manner.
 
-For example, users want to have a clean way to bring up the right environment for compiling code according to the various MPI implementations, but can easily get confused about which libraries have been used, and can end up with multiple libraries with similar names installed in a disorganized manner.
+One might also like to conveniently test new versions of a software package before permanently installing the package.
 
-A user might also like to conveniently test new versions of a software package before permanently installing the package.
-
-Within a Linux distribution running without special utilities, setting up environments can be complex. However, the cluster manager makes use of the environment modules package, which provides the module command. The module command is a special utility to make taking care of the shell environment much easier.
+On a Linux system without special utilities, setting up environments can be complex. To simplify this task, HPC clusters often make use of the environment modules package, which provides the `module` command. The `module` command is a handy utility that makes taking care of the shell environment much easier.
 
 ## Available Commands
 
@@ -112,7 +110,6 @@ There is a good chance the cluster administrator has set up the user’s account
 [fred@cluster ~]# module list
 Currently Loaded Modulefiles:
  1) shared   2) slurm/slurm/21.08.8   3) gcc/11.2.0
-
 ```
 
 If there are no modules loaded by default, then the `module list` command just returns nothing.
@@ -227,7 +224,6 @@ If you are unsure about what the module does, it can be checked using `module wh
 $ module whatis openmpi/gcc
 ----------------------------------- /cm/shared/modulefiles ------------------------------------
 openmpi/gcc/64/1.10.7: adds OpenMPI to your environment variables
-
 ```
 
 The man pages for module and modulefile give further details on usage.
