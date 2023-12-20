@@ -1,5 +1,8 @@
+---
+sort: 1
+---
 
-# 1. Quick Start Guide
+# Quick Start Guide
 
 ## Account Access
 
