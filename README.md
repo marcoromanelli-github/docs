@@ -1,6 +1,6 @@
 # Star HPC Documentation
 
-This area provides resources and guides for the Star cluster
+This area provides guides and resources for using the Star cluster
 
 
 ## New users
