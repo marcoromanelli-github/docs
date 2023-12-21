@@ -30,7 +30,7 @@ python my_script.py
 Explanation:
 - `#!/bin/bash`: This line indicates that the script should be run in the bash shell.
 - `#SBATCH --job-name`: Sets the name of the job.
-- `#SBATCH --output`: Specifies where to write the job's standard output.
+- `#SBATCH --output`: Specifies the writing path of the standard output as well as the name of the output file.
 - `#SBATCH --ntasks`: Number of tasks. In this case, it's a single-task job.
 - `#SBATCH --time`: The maximum time for the job (here, 10 minutes).
 - `#SBATCH --mem-per-cpu`: Memory per CPU in megabytes.
