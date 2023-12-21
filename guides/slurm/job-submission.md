@@ -18,10 +18,12 @@ Here's an example job script (named `example_job.sh`):
 #!/bin/bash
 
 #SBATCH --job-name=my_test_job
-#SBATCH --output=result.txt
+#SBATCH --output=/path/to/output/file/result.out
+#SBATCH --error=/path/to/error/file/result.err
 #SBATCH --ntasks=1
-#SBATCH --time=10:00
+#SBATCH --mem=8000
 #SBATCH --mem-per-cpu=1000
+#SBATCH --time=10:00
 
 module load python/3.8
 python my_script.py
@@ -30,10 +32,12 @@ python my_script.py
 Explanation:
 - `#!/bin/bash`: This line indicates that the script should be run in the bash shell.
 - `#SBATCH --job-name`: Sets the name of the job.
-- `#SBATCH --output`: Specifies the writing path of the standard output as well as the name of the output file.
-- `#SBATCH --ntasks`: Number of tasks. In this case, it's a single-task job.
+- `#SBATCH --output`: Defines the names of the standard output for your job at your desired path.
+- `#SBATCH --error`: Defines error log files for your job at your desired path.
+- `#SBATCH --ntasks`: Number of tasks or processes. In this case, it's a single-task job.
+- `#SBATCH --mem`: Total memory in megabytes (here, 8000MB or 8GB).
 - `#SBATCH --time`: The maximum time for the job (here, 10 minutes).
-- `#SBATCH --mem-per-cpu`: Memory per CPU in megabytes.
+- `#SBATCH --mem-per-cpu`: Memory per CPU in megabytes (here, 1000MB or 1GB).
 - `module load python/3.8`: Loads the Python module.
 - `python my_script.py`: The command to run your Python script.
 
