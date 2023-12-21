@@ -36,8 +36,8 @@ Explanation:
 - `#SBATCH --error`: Defines error log files for your job at your desired path.
 - `#SBATCH --ntasks`: Number of tasks or processes. In this case, it's a single-task job.
 - `#SBATCH --mem`: Total memory in megabytes (here, 8000MB or 8GB).
-- `#SBATCH --time`: The maximum time for the job (here, 10 minutes).
 - `#SBATCH --mem-per-cpu`: Memory per CPU in megabytes (here, 1000MB or 1GB).
+- `#SBATCH --time`: The maximum time for the job (here, 10 minutes).
 - `module load python/3.8`: Loads the Python module.
 - `python my_script.py`: The command to run your Python script.
 
