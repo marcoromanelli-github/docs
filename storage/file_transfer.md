@@ -1,66 +1,49 @@
-# Transferring files to/from Star
+# File Transfer to/from Star
 
-Only ssh type of access is open to star. Therefore to upload or
-download data only scp and sftp can be used.
+Star supports file transfers primarily through SCP and SFTP, both of which operate over SSH.
 
-To transfer data to and from star use the following address:
+## File Transfer Address
 
-    star.uit.no
+Currently, there are no dedicated nodes for file transfers at Star. All transfers should be conducted over the login node using the standard server address.
 
-This address has nodes with 10Gb network interfaces.
+## Basic Tools (SCP, SFTP)
 
-Basic tools (scp, sftp)
+Standard SCP and SFTP clients can be used for secure file transfers. Here are the basic commands for using these tools:
 
-Standard scp command and sftp clients can be used:
+    ssh star.hofstra.edu
+    ssh -l <username> star.hofstra.edu
 
-    ssh star.uit.no
-    ssh -l <username> star.uit.no
+    sftp star.hofstra.edu
+    sftp <username>@star.hofstra.edu
 
-    sftp star.uit.no
-    sftp <username>@star.uit.no
+## Mounting the File System on Your Local Machine Using SSHFS
 
-## Mounting the file system on you local machine using sshfs
+Star HPC Cluster allows users to mount remote file systems on their local machines. For Linux, the command would look like this:
 
-For linux users:
+    sshfs [user@]star.hofstra.edu:[dir] mountpoint [options]
 
-    sshfs [user@]star.uit.no:[dir] mountpoint [options]
+For example:
 
-eg.:
+    sshfs yourusername@star.hofstra.edu: /home/yourusername/star-fs/
 
-    sshfs steinar@star.uit.no:  /home/steinar/star-fs/
+Windows and Mac users can use Cyberduck for similar functionality. WinSCP is another option for Windows, and FileZilla can be used across Windows, Mac, and Linux.
 
-Windows users may buy and install
-[expandrive](https://www.expandrive.com/windows).
+### High-Performance Tools
 
-### High-performance tools
+For large data transfers, the performance can vary greatly depending on the source's location and bandwidth. Hofstra does not have unlimited Internet bandwidth, so transfers from external sources might be slower. For high-performance transfers, users are encouraged to use utilities like rsync, which is supported and recommended for its efficiency.
 
-## NONE cipher
+## Subversion and Rsync
 
-This cipher has the highest transfer rate. Keep in mind that data after
-authentication is NOT encrypted, therefore the files can be sniffed and
-collected unencrypted by an attacker. To use you add the following to
-the client command line:
+Rsync is particularly useful and recommended for transferring files to and from the Star HPC Cluster. It provides an efficient way to sync files and directories across different locations while minimizing data transfer.
 
-    -oNoneSwitch=yes -oNoneEnabled=yes
+## Guidelines for Large File Transfers
 
-Anytime the None cipher is used a warning will be printed on the screen:
+When transferring very large files or datasets, it is advised to use rsync and to calculate and confirm checksums to ensure data integrity.
 
-    "WARNING: NONE CIPHER ENABLED"
+## Network Interfaces and Bandwidth
 
-If you do not see this warning then the NONE cipher is not in use.
+All file transfer access to the Star HPC Cluster is currently through the login node's 1GbE interface. Users should be aware of potential bandwidth limitations, especially when transferring large amounts of data.
 
-MT-AES-CTR
+## User Authentication and Permissions
 
-If for some reason (eg: high confidentiality) NONE cipher can't be used,
-the multithreaded AES-CTR cipher can be used, add the following to the
-client command line (choose one of the numbers):
-
-    -oCipher=aes[128|192|256]-ctr
-
-or:
-
-    -caes[128|192|256]-ctr.
-
-## Subversion and rsync
-
-The tools subversion and rsync is also available for transferring files.
+File transfers are authenticated in the same way as SSH access. SSH keys are the preferred method for secure authentication, although password authentication is currently allowed. Plans for implementing Multi-Factor Authentication (MFA) are being considered for future security enhancements.
