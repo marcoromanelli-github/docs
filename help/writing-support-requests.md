@@ -8,10 +8,10 @@ practices.
 
 ## Never send support requests to staff members directly
 
-Always send them to <support@metacenter.no> and staff members will pick
-them up there. On <support@metacenter.no> they get tracked and have
+Always send them to <support@starhpc.hofstra.io> and staff members will pick
+them up there. On <support@starhpc.hofstra.io> they get tracked and have
 higher visibility. Some staff members work on the support line only part
-time. Sending the request to <support@metacenter.no> makes sure that
+time. Sending the request to <support@starhpc.hofstra.io> makes sure that
 somebody will pick it up. Please note in the request that it is about
 Star, as there are more clusters that are handled with this email
 address.
@@ -38,7 +38,7 @@ the top, too: include the actual command you run and actual error
 messages. Copy and paste. If you don't include this, we will be slightly
 annoyed and immediately ask this.
 
-Please, do not screen shoot your ssh terminal and send us pictures (jpg,
+Please, *do not* screen shoot your ssh terminal and send us pictures (jpg,
 png, tiff...) of what you saw on your monitor! From these, we would be
 unable to cut & paste commands or error messages, unnecessarily slowing
 down our research on your problem. Your sample output does not need at

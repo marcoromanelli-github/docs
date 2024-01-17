@@ -16,7 +16,7 @@ The `passwd` command known from other Linuxes does not work. The Star
 system is using a centralised database for user management. This will
 override the password changes done locally on Star.
 
-### What is the ssh key fingerprint for star.uit.no?
+### What is the ssh key fingerprint for star.hofstra.edu?
 
 The SHA256 key fingerprint is:
 `SHA256:YJpwZ91X5FNXTc/5SE1j9UR1UAAI4FFWVwNSoWoq6Hc`

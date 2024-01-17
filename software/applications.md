@@ -26,7 +26,7 @@ List all version of a specific software:
 If there is any software missing on this list that you would like to
 have installed on Star, or you need help to install your own software,
 please feel free to contact the support personal about this:
-<support@metacenter.no>.
+<support@starhpc.hofstra.io>.
 
 If there is software missing on Star that you would like to have,
 there are different options to install it: \* Use our installation
@@ -36,7 +36,7 @@ into your home directory \* Ask us to install for you
 
 In this document we will show some ways of installing a new software. If
 you run into problems, need help or have question, please feel free to
-contact the support personal about this: <support@metacenter.no>.
+contact the support personal about this: <support@starhpc.hofstra.io>.
 
 ## Installing new software using EasyBuild
 
