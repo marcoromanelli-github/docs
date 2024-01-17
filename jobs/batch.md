@@ -1,12 +1,13 @@
 # Batch system
 
-The Star system is a resource that is shared between many of users and
+The Star cluster is a resource that is shared between many of users and
 to ensure fair use everyone must do their computations by submitting
 jobs through a batch system that will execute the applications on the
 available resources.
 
 The batch system on Star is [SLURM](https://slurm.schedmd.com/)
-(Simple Linux Utility for Resource Management.)
+(Simple Linux Utility for Resource Management). Read more about SLURM <a href="./slurm_parameter.html">here</a>.
+<!-- <a href="https://docs.starhpc.hofstra.io/en/latest/jobs/slurm_parameter.html">here</a>. -->
 
 ## Creating a job script
 

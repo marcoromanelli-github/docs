@@ -1,6 +1,6 @@
 # SLURM Workload Manager
 
-SLURM is the workload manager and job scheduler used for Star.
+Slurm Workload Manager, or SLURM (Simple Linux Utility for Resource Management), is a free and open-source job scheduler for managing workloads on Linux and Unix-based clusters, such as Star.
 
 There are two ways of starting jobs with SLURM; either interactively
 with `srun` or as a script with `sbatch`.
@@ -23,6 +23,7 @@ parameter. Replace \<....\> with the value you want, e.g.
 `--job-name=test-job`.
 
 ### Basic settings:
+There is a **Slurm Job Script Generator** at <a href="https://manitofigh.github.io/SlurmJobGeneration" target="_blank">this link</a>, which we suggest you use *after* reading this documentation in order to get a better understanding of how the Slurm directives work and how Slurm scripts are meant to be written.
 
 <table>
 <thead>
@@ -34,11 +35,11 @@ parameter. Replace \<....\> with the value you want, e.g.
 <tbody>
 <tr class="odd">
 <td>--job-name=&lt;name&gt;</td>
-<td>Job name to be displayed by for example <code>squeue</code></td>
+<td>Job name to be displayed by <code>squeue</code></td>
 </tr>
 <tr class="even">
 <td>--output=&lt;path&gt;</td>
-<td><div class="line-block">Path to the file where the job (error)
+<td><div class="line-block">Path to the file where the job
 output is written to</div></td>
 </tr>
 <tr class="odd">
@@ -57,13 +58,13 @@ of BEGIN, END, FAIL, REQUEUE or ALL</div></td>
 
 | Parameter                       | Function                                                                                                                   |
 |---------------------------------|----------------------------------------------------------------------------------------------------------------------------|
-| --time=\<d-hh:mm:ss\>           | Time limit for job. Job will be killed by SLURM after time has run out. Format days-hours:minutes:seconds                  |
-| --nodes=\<num_nodes\>           | Number of nodes. Multiple nodes are only useful for jobs with distributed-memory (e.g. MPI).                               |
-| --mem=\<MB\>                    | Memory (RAM) per node. Number followed by unit prefix, e.g. 16G                                                            |
-| --mem-per-cpu=\<MB\>            | Memory (RAM) per requested CPU core                                                                                        |
-| --ntasks-per-node=\<num_procs\> | Number of (MPI) processes per node. More than one useful only for MPI jobs. Maximum number depends nodes (number of cores) |
-| --cpus-per-task=\<num_threads\> | CPU cores per task. For MPI use one. For parallelized applications benchmark this is the number of threads.                |
-| --exclusive                     | Job will not share nodes with other running jobs. You will be charged for the complete nodes even if you asked for less.   |
+| - -time=\<hh:mm:ss\>           | Time limit for job. Job will be killed by SLURM after time has run out. Format: hours:minutes:seconds                  |
+| - -nodes=\<num_nodes\>           | Number of nodes. Multiple nodes are only useful for jobs with distributed-memory (e.g. MPI).                               |
+| - -mem=\<MB/GB\>                    | Memory (RAM) per node. Number followed by unit prefix, e.g. 16G                                                            |
+| - -mem-per-cpu=\<MB/GB\>            | Memory (RAM) per requested CPU core                                                                                        |
+| - -ntasks-per-node=\<num_procs\> | Number of (MPI) processes per node. More than one useful only for MPI jobs. Maximum number depends nodes (number of cores) |
+| - -cpus-per-task=\<num_threads\> | CPU cores per task. For MPI use one. For parallelized applications benchmark this is the number of threads.                |
+| - -exclusive                     | Job will not share nodes with other running jobs. You will be charged for the complete nodes even if you asked for less.   |
 
 ### Accounting
 
@@ -99,9 +100,9 @@ been satified. E.g. --dependency=afterok:123456</td>
 </tr>
 <tr class="odd">
 <td>--ntasks-per-core=2</td>
-<td><blockquote>
+<td><b>
 <p>Enables hyperthreading. Only useful in special circumstances.</p>
-</blockquote></td>
+</b></td>
 </tr>
 </tbody>
 </table>

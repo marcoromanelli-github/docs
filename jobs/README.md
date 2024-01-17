@@ -2,6 +2,6 @@
 sort: 4
 ---
 
-# Jobs
+# Slurm Jobs
 
 source: `{{ page.path }}`
