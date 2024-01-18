@@ -2,13 +2,16 @@
 
 ## Introduction
 
-Star HPC Cluster is a computing facility designed to cater to a wide range of computational and data-intensive research needs. It serves as a powerful tool for scientists, engineers, and researchers, enabling them to tackle complex scientific problems that require substantial computational resources. The cluster combines computing `nodes` and a high-speed `storage system` with a suite of versatile software applications.
+Star HPC Cluster is a computing facility designed for a variety of research and computational tasks. Combining advanced computing `nodes` and high-speed `storage systems` with a suite of `software applications`. 
 
-At Star we need an effective management and utilization of resources, and we facilita SLURM for this purpose. SLURM (Simple Linux Utility for Resource Management) is a job scheduler that manages the allocation of computational resources. It ensures that users' computational tasks are queued and processed effectively, and everyone gets their fair share of resource at the right time.
+### Overview
 
-Apptainer (formerly known as Singularity) is also used intensively in the cluster. Singularity/Apptainer provides a containerization platform that allows users to create and deploy applications in a consistent, reproducible, and portable manner. If you have used Docker before, Singularity is not going to be a new concept. Singularity is pretty much Docker, except it runs the containers under users’ system privileges, unlike Docker that runs everything under `root`. Furthermore, in conjunction with NGC (NVIDIA GPU Cloud), Singularity/Apptainer enables users to leverage a wide array of pre-built containers. NGC offers a comprehensive catalog of GPU-optimized software containers for deep learning, machine learning, and HPC applications. This integration means that users have access to dozens of ready-to-use containers, eliminating the need to set up these applications from scratch.
+SLURM (Simple Linux Utility for Resource Management) is our chosen job scheduler and queueing system that efficiently manages resource allocation, ensuring everyone gets the right amount of resources at the right time. 
 
-The cluster is also equipped with a range of software applications, each serving specific purposes. For instance, Python and R are included for data analysis and statistical computing, MATLAB for high-level technical computing, Jupyter for interactive data science and scientific computing, and OpenMPI for efficient parallel computing. Anaconda offers a comprehensive package for scientific computing and data science in Python and R, while NetCDF is vital for the manipulation and storage of large scientific datasets. For handling big data, Hadoop/Spark is also available.
+Apptainer (formerly Singularity) is also a major application on the cluster. Apptainer is a containerization platform similar to Docker with the major difference that it runs under user privileges instead of `root`. This platform is enhanced by NGC (NVIDIA GPU Cloud) which provides access to a wide array of pre-built, GPU-optimized software containers for diverse applications. This integration saves all users a lot of time as they don’t need to set up the software applications from scratch and can just pull and use the NGC images with Apptainer.
+
+The cluster also supports various software applications tailored to different needs: Python and R for data analysis, MATLAB for technical computing, Jupyter for interactive projects, and OpenMPI for parallel computing. Anaconda broadens these capabilities with packages for scientific computing, while NetCDF manages large datasets. For big data tasks, Hadoop/Spark offers powerful processing tools.
+
 
 ## Hardware
 
