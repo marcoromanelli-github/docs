@@ -80,7 +80,7 @@ project. To see the status of your quota account(s), type `cost`
 ## Get help
 
 Do you need help with Stallo? Write us an email to
-<support@metacenter.no>. You can also request new software (either an
+<starhpc-support@hofstra.edu>. You can also request new software (either an
 update or entirely new software), suggest changes to this documentation,
 or send us any other suggestions or issues concerning Stallo to that
 email address. Please also read the rest of this documentation.

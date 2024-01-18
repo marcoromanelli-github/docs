@@ -58,7 +58,7 @@ developer mode you may only have one single job in the queue.
 
 launch failed requeued held  
 Job launch failed for some reason. This is normally due to a faulty
-node. Please contact us via <support@metacenter.no> stating the problem,
+node. Please contact us via <starhpc-support@hofstra.edu> stating the problem,
 your user name, and the jobid(s).
 
 Dependency  
