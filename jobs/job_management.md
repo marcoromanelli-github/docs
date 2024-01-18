@@ -6,7 +6,7 @@ commands:
 1.  Submit the job with `sbatch <script_name>`.
 2.  Check the job status with `squeue`. (to limit the display to only
     your jobs use `squeue -u <user_name>`.)
-3.  (optional) Delete the job with `scancel <job_id>`.
+3.  (optional) Delete/kill the job with `scancel <job_id>`.
 
 You can also hold the start of a job:
 

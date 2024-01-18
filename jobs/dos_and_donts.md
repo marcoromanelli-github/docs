@@ -1,3 +1,6 @@
+---
+sort: 1
+---
 
 # Dos and don'ts
 

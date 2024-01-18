@@ -1,3 +1,7 @@
+---
+sort: 2
+---
+
 # Batch system
 
 The Star cluster is a resource that is shared between many of users and

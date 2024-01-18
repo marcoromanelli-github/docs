@@ -1,3 +1,8 @@
+---
+sort: 3
+---
+
+
 # SLURM Workload Manager
 
 Slurm Workload Manager, or SLURM (Simple Linux Utility for Resource Management), is a free and open-source job scheduler for managing workloads on Linux and Unix-based clusters, such as Star.
