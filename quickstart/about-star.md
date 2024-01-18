@@ -1,10 +1,8 @@
 # About Star
 
-## Introduction
+## Overview
 
 Star HPC Cluster is a computing facility designed for a variety of research and computational tasks. Combining advanced computing `nodes` and high-speed `storage systems` with a suite of `software applications`. 
-
-### Overview
 
 SLURM (Simple Linux Utility for Resource Management) is our chosen job scheduler and queueing system that efficiently manages resource allocation, ensuring everyone gets the right amount of resources at the right time. 
 
