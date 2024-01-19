@@ -1,6 +1,6 @@
-# How to get a local account on Star
+# How to get an account on Star
 
-## To get a local account on Star, you need to provide us with:
+## To get an account on Star, you need to provide us with:
 
 -   Your full name, date of birth, and nationality.
 -   Your position (master student, PhD, PostDoc, staff member,
@@ -33,4 +33,4 @@ with the name of your advisor and name of the project you are to be a
 member of.
 
 Compile this list in a proper manner and send to <starhpc-support@hofstra.edu>
-with a comment that the application is for a local account on Star.
+with a comment that the application is for an account on Star.
