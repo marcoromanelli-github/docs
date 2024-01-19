@@ -12,10 +12,10 @@ practices.
 
 ## Never send support requests to staff members directly
 
-Always send them to <support@metacenter.no> and staff members will pick
-them up there. On <support@metacenter.no> they get tracked and have
+Always send them to <support@starhpc.hofstra.io> and staff members will pick
+them up there. On <support@starhpc.hofstra.io> they get tracked and have
 higher visibility. Some staff members work on the support line only part
-time. Sending the request to <support@metacenter.no> makes sure that
+time. Sending the request to <support@starhpc.hofstra.io> makes sure that
 somebody will pick it up. Please note in the request that it is about
 Star, as there are more clusters that are handled with this email
 address.
