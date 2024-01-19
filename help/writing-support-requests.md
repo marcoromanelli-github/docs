@@ -1,3 +1,7 @@
+---
+sort: 2
+---
+
 # How to write good support requests
 
 Writing good support requests is not only good for the support team, it

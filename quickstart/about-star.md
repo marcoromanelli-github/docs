@@ -1,8 +1,12 @@
+---
+sort: 1
+---
+
 # About Star
 
 ## Overview
 
-Star HPC Cluster is a computing facility designed for a variety of research and computational tasks. Combining advanced computing `nodes` and high-speed `storage systems` with a suite of `software applications`. 
+Star HPC Cluster is a computing facility designed for a variety of research and computational tasks. Combining advanced computing **nodes** and high-speed **storage systems** with a suite of **software applications**. 
 
 SLURM (Simple Linux Utility for Resource Management) is our chosen job scheduler and queueing system that efficiently manages resource allocation, ensuring everyone gets the right amount of resources at the right time. 
 
@@ -23,24 +27,36 @@ The cluster also supports various software applications tailored to different ne
 
 ### Storage System
 
-## Software
+## Our vision
 
-### SLURM
+Making complex and time-intensive calculations simple and accessible.
 
-### Singularity/Apptainer
 
-### Python
+### Services
 
-### Jupyter
+The Star HPC support group works within three areas:
 
-### MATLAB
+* Technical and operational computing resource support.
+* Basic to advanced user support for projects and research groups that utilize HPC or is expecting to do so in the future.
 
-### R
 
-### OpenMPI
+### Our Goal
 
-### Anaconda
+Our heart is set on creating a vibrant community where our High-Performance Computing (HPC) cluster is a beacon of collaboration and discovery. We are wishing to provide a supportive space where researchers and students can express their scientific ideas and explore unchanted areas. We are here to make the complicated world of computational research a shared path of growth, learning, and significant discoveries for the ones that are eager to learn.
 
-### NetCDF
 
-### Hadoop/Spark
+## Operations Team
+
+* Alexander Rosenberg
+* Mani Tofigh
+
+
+## The Board
+
+* Edward H. Currie
+* Daniel P. Miller
+* Adam C. Durst
+* Jason D. Williams
+* Thomas G. Re
+* Oren Segal
+* John Ortega
