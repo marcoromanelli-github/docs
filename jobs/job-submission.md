@@ -41,6 +41,8 @@ You should adjust the resource specifications based on your job's requirements a
 
 **Modules and Environment**: The environment setup in the script, e.g. via `module load`, depends on the software and modules available on the cluster.
 
+You can use our [SLURM Job Script Generator](https://manitofigh.github.io/SlurmJobGeneration/) to help you build the script you need.
+
 ## 2. Submitting the Job using `sbatch`
 
 To submit the job, use the `sbatch` command:
