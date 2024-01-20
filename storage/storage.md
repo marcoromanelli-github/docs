@@ -90,4 +90,4 @@ The Star HPC Cluster maintains strict policies regarding the privacy and securit
 
 ## Support
 
-For assistance with storage and backup issues or any other inquiries, users can contact the Star HPC Cluster support team at Starhpcsupport@hofstra.edu.
+For assistance with storage and backup issues or any other inquiries, users can contact the Star HPC Cluster support team at <support@starhpc.hofstra.io>.

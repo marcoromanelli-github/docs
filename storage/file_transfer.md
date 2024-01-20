@@ -1,4 +1,4 @@
-# File Transfer to/from Star
+# Transfering Files to/from Star
 
 Star supports file transfers primarily through SCP and SFTP, both of which operate over SSH.
 
@@ -10,31 +10,39 @@ Currently, there are no dedicated nodes for file transfers at Star. All transfer
 
 Standard SCP and SFTP clients can be used for secure file transfers. Here are the basic commands for using these tools:
 
-    ssh star.hofstra.edu
-    ssh -l <username> star.hofstra.edu
+```bash
+# run this on your local computer to transfer a file to Star
+scp -P 5010 /path/to/my/local/file <username>@star.hofstra.edu:/destination/path/to/file/on/star
 
-    sftp star.hofstra.edu
-    sftp <username>@star.hofstra.edu
+# run this on your local computer to transfer a file from Star
+scp -P 5010 <username>@star.hofstra.edu:/path/to/file/on/star /destination/path/to/file/on/local/computer
+
+sftp <username>@star.hofstra.edu
+```
 
 ## Mounting the File System on Your Local Machine Using SSHFS
 
 Star HPC Cluster allows users to mount remote file systems on their local machines. For Linux, the command would look like this:
 
-    sshfs [user@]star.hofstra.edu:[dir] mountpoint [options]
+```bash
+sshfs [user@]star.hofstra.edu:[dir] mountpoint [options]
+```
 
 For example:
 
-    sshfs yourusername@star.hofstra.edu: /home/yourusername/star-fs/
+```bash
+sshfs yourusername@star.hofstra.edu: /home/yourusername/star-fs/
+```
 
-Windows and Mac users can use Cyberduck for similar functionality. WinSCP is another option for Windows, and FileZilla can be used across Windows, Mac, and Linux.
+Windows and Mac users can use [Cyberduck](https://cs.hofstra.edu/docs/pages/guides/cyberduck_setup.html) for similar functionality. WinSCP is another option for Windows, and FileZilla can be used across Windows, Mac, and Linux.
 
 ### High-Performance Tools
 
 For large data transfers, the performance can vary greatly depending on the source's location and bandwidth. Hofstra does not have unlimited Internet bandwidth, so transfers from external sources might be slower. For high-performance transfers, users are encouraged to use utilities like rsync, which is supported and recommended for its efficiency.
 
-## Subversion and Rsync
+## Rsync
 
-Rsync is particularly useful and recommended for transferring files to and from the Star HPC Cluster. It provides an efficient way to sync files and directories across different locations while minimizing data transfer.
+Rsync is a particularly useful tool and is recommended for transferring files to and from the Star HPC Cluster. It provides an efficient way to sync files and directories across different locations while minimizing data transfer.
 
 ## Guidelines for Large File Transfers
 

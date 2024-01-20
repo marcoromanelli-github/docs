@@ -14,29 +14,54 @@ Access to the cluster comes with responsibilities and certain privileges. Your a
 
 Users should understand the policies on data privacy and user responsibilities.
 
-## Getting started on the machine (account, quota, password)
+## Getting started on the cluster (account, quota, password)
 
 Before you start using the Star cluster, please read Hofstra University's [Acceptable Use Guidelines](http://www.hofstra.edu/scs/aug).
 
 A general introduction to the Star HPC cluster, research community, and support group be found at [starhpc.hofstra.io](https://starhpc.hofstra.io).
 
-## How to get an account and a CPU quota on Star
+To be able to work on the Star cluster, you must have an account and you must have been granted CPU time on the system.
 
-To be able to work on the Star cluster, you must have an account and you must have been granted CPU time on the system. There are two ways to achieve this:
+## How to get an account on Star
 
-### Hofstra Quota
+Members of Hofstra University, Nassau Community College, or Adelphi University, and other researchers affiliated with these institutions in some way may apply for an account.
 
-“Local users” (i.e. users from Hofstra or affiliated with Hofstra in some
-way) can apply for an account and a quota from Hofstra’s share of Star. If
-you want to apply for such a quota follow the instructions here:
+### Requesting an account
 
-* [How to get a local account on Star](huquota.html)
+To get an account on Star, you need to complete out the registration form. There, you will need to provide us the following information:
 
-### Research Council Quota
+-   Your full name, date of birth, and nationality.
+-   Your position (master student, PhD, PostDoc, staff member,
+    visitor/guest).
+-   Your mobile phone number. This is necessary for recovery of
+    passwords.
+-   Your institutional mail address (i.e. your work email at the
+    research institution to which you belong)
+-   The name and address of the instruction you belong to; also
+    including name of the center, institute etc.
+-   Institution username or a preferred username. If you are a member of
+    Hofstra and already have a Hofstra account, you must enter your Hofstra
+	username. A username is defined as a sequence of two to thirty lowercase
+	alphanumeric characters, where the first letter may only be a lowercase
+	character.
+-   Necessary additional group and account memberships.
+-   Optional: If you know in advance, please let us know: how many CPU
+    hours you expect to use, how much long-term storage space (GB) you
+    will need, and what software you will use. Partial answers are also
+    welcome. The more we know about the needs of our users, the better
+    services we can provide and the better we can plan for the future.
 
-Regional users (including users from Hofstra) may apply for an account and a
-CPU quota from the Research Council's share of Star. If you want to
-apply for such a quota please use this [regional quota form](https://www.example.com/application/project/).
+**If you are a staff member and need to get a local project,** we need information about the project:  
+-   Name of the project
+-   Brief description of the project
+-   Field of science for the project
+-   Name of additonal members of the project
+
+**If you are a student, PhD or post-doc,** you need to also provide us
+with the name of your advisor and name of the project you are to be a
+member of.
+
+Submit the above information through the online registration form.
 
 ## Login node
 
