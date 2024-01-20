@@ -4,7 +4,7 @@ sort: 3
 
 # Contact Us
 
-If you need help, please file a support request via <a href="#"> support@starhpc.hofstra.io</a>,
+If you need help, please file a support request via <support@starhpc.hofstra.io>,
 and our local team of experts will try to assist you as soon as possible.
 
 <!-- ![rtfm]({{ site.baseurl }}/help/rtfm.png "rtfm") -->
