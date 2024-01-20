@@ -10,24 +10,24 @@ to understand each problem is at a premium. The easier it is to
 understand yours, the faster we will get to it. Below is a list of good
 practices.
 
-## Never send support requests to staff members directly
+## Never send support requests directly to staff members
 
-Always send them to <support@starhpc.hofstra.io> and staff members will pick
-them up there. On <support@starhpc.hofstra.io> they get tracked and have
-higher visibility. Some staff members work on the support line only part
-time. Sending the request to <support@starhpc.hofstra.io> makes sure that
-somebody will pick it up. Please note in the request that it is about
-Star, as there are more clusters that are handled with this email
-address.
+Please do not contact your cluster administrator directly. Always send
+requests and inquiries to <support@starhpc.hofstra.io> for the quickest
+response. On <support@starhpc.hofstra.io>, requests get tracked and have
+higher visibility. Some of our staff members only work part time.
+Sending the request to <support@starhpc.hofstra.io> makes sure that
+somebody will pick it up. Please note in the request that it is for Star,
+as there are other systems that are managed by us.
 
-## Do not manhandle us as simple "Let me Google that for you" assistants
+## Do not treat us as simple "Let me Google that for you" assistants
 
 Seriously: have you searched the internet with the exact error message
 and the name of your application...? Other scientists may have had the
 very same problem and might have been successful in solving it. By the
-way: that's almost always how we start to research, too...
+way, that's almost always how we start to research issues too!
 
-## Give descriptive subject
+## Give a descriptive subject
 
 Your subject line should be descriptive. "Problem on Star" is not a
 good subject line since it could be valid for basically every support
@@ -35,7 +35,7 @@ email we get. The support staff is a team. The subjects are the first
 thing that we see. We would like to be able to classify emails according
 to subjects before even opening the email.
 
-## Include actual commands and error messages
+## Include the actual commands and error messages
 
 We cover this below, but it's so important it needs to be mentioned at
 the top, too: include the actual command you run and actual error
@@ -81,7 +81,7 @@ achieve. Solving Y can take a long time. We have had cases where after
 enormous effort on Y we realized that the user wanted X and that Y was
 not the best way to achieve X.
 
-## Tell us also what worked
+## Also tell us what worked
 
 Rather often we get requests of the type "I cannot get X to run on two
 nodes". The request then does not mention whether it worked on one node

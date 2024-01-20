@@ -8,40 +8,36 @@ sort: 1
 
 ### I forgot my password - what now?
 
-You can reset it here: <https://www.metacenter.no/user/>
+You can reset it here: [link to be provided]
 
 ### How do I change my password on Star?
 
-The password can be changed on the [password metacenter
-page](https://www.metacenter.no/user/password/), log in using your
-username on Star and the NOTUR domain.
+The password can be changed on the [password reset page](#). Log in using
+your username on Star.
 
 The `passwd` command known from other Linuxes does not work. The Star
 system is using a centralised database for user management. This will
 override the password changes done locally on Star.
 
-### What is the ssh key fingerprint for star.uit.no?
+### What is the ssh key fingerprint for star.hofstra.edu?
 
 The SHA256 key fingerprint is:
-`SHA256:YJpwZ91X5FNXTc/5SE1j9UR1UAAI4FFWVwNSoWoq6Hc`
+`SHA256:W0NKVfQBl5FeOlOkoEIKIVsp1+47yIvzJAYMx6ECpwM`
 
-The MD5 key fingerprint is:
-`MD5:36:a8:c5:f3:21:24:bb:bc:07:6f:af:4a:fe:3e:cb:9a`
-
-If you are more of a visual person, use
-`ssh -o VisualHostKey=yes star.uit.no` and compare it to this visual
+If you are more of a visual person, run
+`ssh -p 5010 -o VisualHostKey=yes binary.star.hofstra.edu` and compare it to this visual
 key:
 
-    +---[RSA 1024]----+
-    |      oo+ooo**BO^|
-    |     . + ..+ o.BO|
-    |  . . * . o . +.=|
-    |   o * . . . . o.|
-    |    o   S     . .|
-    |   .   o         |
-    |  . . .          |
-    | .  ..E          |
-    |  .. .           |
+    +--[ED25519 256]--+
+    |E + ++  . .o=.+=.|
+    |o=.=o..o . . +ooo|
+    |* +o .. o o  .o+ |
+    |+o    .. +    =  |
+    |..   .  S o    o |
+    | .    .  o .     |
+    |  o... ..        |
+    | ..+o o          |
+    |  .oo. .         |
     +----[SHA256]-----+
 
 ## Installing software
