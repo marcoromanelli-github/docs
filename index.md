@@ -1,13 +1,12 @@
 # Star HPC Documentation
 
-This area provides guides and resources for using the Star cluster
+Welcome to the documentation for the Star HPC cluster. This repository provides user guides for getting started with and effectively using the Star cluster.
 
 
 ## New users
 
-Please see the getting started guide for information on accssing and submitting jobs to the Star cluster.
+Please see the [Quick Start Guide]({{site.baseurl}}{% link quickstart/quickstart.md %}) for information on getting access to and submitting jobs to the Star cluster.
 
 ## Getting help
 
-Contact...
-
+First, please read [how to write good support requests]({{site.baseurl}}{% link help/writing-support-requests.md %}). Then shoot us an email.
