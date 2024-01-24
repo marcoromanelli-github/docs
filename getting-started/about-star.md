@@ -32,12 +32,12 @@ The cluster also supports various software applications tailored to different ne
 Making complex and time-intensive calculations simple and accessible.
 
 
-### Services
+<!-- ### Services
 
 The Star HPC support group works within three areas:
 
 * Technical and operational computing resource support.
-* Basic to advanced user support for projects and research groups that utilize HPC or is expecting to do so in the future.
+* Basic to advanced user support for projects and research groups that utilize HPC or is expecting to do so in the future. -->
 
 
 ### Our Goal
