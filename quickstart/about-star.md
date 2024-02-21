@@ -31,15 +31,6 @@ The cluster also supports various software applications tailored to different ne
 
 Making complex and time-intensive calculations simple and accessible.
 
-
-### Services
-
-The Star HPC support group works within three areas:
-
-* Technical and operational computing resource support.
-* Basic to advanced user support for projects and research groups that utilize HPC or is expecting to do so in the future.
-
-
 ### Our Goal
 
 Our heart is set on creating a vibrant community where our High-Performance Computing (HPC) cluster is a beacon of collaboration and discovery. We are wishing to provide a supportive space where researchers and students can express their scientific ideas and explore unchanted areas. We are here to make the complicated world of computational research a shared path of growth, learning, and significant discoveries for the ones that are eager to learn.
