@@ -20,9 +20,9 @@ Sending the request to <support@starhpc.hofstra.io> makes sure that
 somebody will pick it up. Please note in the request that it is for Star,
 as there are other systems that are managed by us.
 
-## Do not treat us as simple "Let me Google that for you" assistants
+## Please do not treat us as "Let me Google that for you" assistants
 
-Seriously: have you searched the internet with the exact error message
+Have you searched the internet with the exact error message
 and the name of your application...? Other scientists may have had the
 very same problem and might have been successful in solving it. By the
 way, that's almost always how we start to research issues too!
