@@ -18,7 +18,13 @@ Here are a list of common directives: <br>
 **Note:** These bullets are just for a better basic understanding on the topic. Complete examples and line-by-line explanations are provided further down on this page.
 
 ### Queues and partitions
+Queues (or partitions in Slurm terminology) are categories within the cluster that organize jobs based on their resource requirements, priority, and other factors.
 
+Our cluster is partitioned into the following categories: <br>
+* **Standard Partition (future_parition_name)**: For general-purpose jobs with moderate resource requirements.
+* **High-Memory Partition (future_parition_name)**: For jobs requiring significant amounts of memory.
+* **GPU Partition (future-partition_name)**: For jobs that need GPU resources, such as gpu1 and gpu2 in our setup.
+Choosing the right partition ensures your job is queued in an environment suited to its needs, potentially reducing wait times and improving overall efficiency.
 ### Simple batch job example
 ### Advanced batch job example
 
