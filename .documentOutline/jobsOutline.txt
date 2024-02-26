@@ -1,0 +1,30 @@
+Jobs
+
+1. Overview
+    1. What are jobs
+    2. Job types
+        1. Interactive jobs
+        2. Batch jobs
+        3. Array jobs
+        4. Parallel jobs
+    3. Resources
+2. Creating Jobs
+    1. Batch jobs (Non-interactive)
+        1. BATCH directives
+        2. Queues and partitions
+        3. Simple batch job example
+        4. Advanced batch job example
+    2. Interactive jobs
+        1. Starting an interactive job
+        2. Keeping interactive jobs alive (Tmux intro and its use case in this scenario)
+    3. Array jobs
+        1. Example and explanation
+    4. Parallel jobs
+        1. Example and explanation
+    5. Batch Script Generator
+3. Submitting Jobs
+    1. Job prioritization
+        1. Slurm policies and how job specifications can be affected by different settings, queues, qos, etc
+    2. Submission commands
+        1. Submission commands for all different job types
+4. Monitoring and Managing Jobs
