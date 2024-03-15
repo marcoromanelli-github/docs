@@ -23,7 +23,7 @@ as there are other systems that are managed by us.
 ## Please do not treat us as "Let me Google that for you" assistants
 
 Have you searched the internet with the exact error message
-and the name of your application...? Other scientists may have had the
+and the name of your application? Other scientists may have had the
 very same problem and might have been successful in solving it. By the
 way, that's almost always how we start to research issues too!
 
@@ -31,30 +31,27 @@ way, that's almost always how we start to research issues too!
 
 Your subject line should be descriptive. "Problem on Star" is not a
 good subject line since it could be valid for basically every support
-email we get. The support staff is a team. The subjects are the first
-thing that we see. We would like to be able to classify emails according
-to subjects before even opening the email.
+E-mail we get. The support staff is a team. The subjects are the first
+thing that we see. We would like to be able to classify E-mails according
+to subjects before even opening the E-mail.
 
 ## Include the actual commands and error messages
 
 We cover this below, but it's so important it needs to be mentioned at
-the top, too: include the actual command you run and actual error
-messages. Copy and paste. If you don't include this, we will be slightly
-annoyed and immediately ask this.
+the top, too: <br>
+Include the actual commands you run and the actual error
+messages you receive. Copy and paste please. If you don't include this, we have to immediately ask you for it before proceeding with the issue.
 
-Please, do not screen shoot your ssh terminal and send us pictures (jpg,
-png, tiff...) of what you saw on your monitor! From these, we would be
-unable to cut & paste commands or error messages, unnecessarily slowing
-down our research on your problem. Your sample output does not need at
-all to "look good", and we don't need to know what fancy ssh- or
-terminal software you have: a simple text-based cut & paste directly
-into the mail or ticket is the best we can work on with.
+Please, do not screenshot your ssh terminal and send us pictures (jpg,
+png, tiff, etc) of what you saw on your monitor. From these, we would be
+unable to copy and paste commands or error messages, unnecessarily slowing
+down our research on your problem.
 
-## New problem--new email
+## New problem--new E-mail
 
 Do not send support requests by replying to unrelated issues. Every
 issue gets a number and this is the number that you see in the subject
-line. Replying to unrelated issues means that your email gets filed
+line. Replying to unrelated issues means that your E-mail gets filed
 under the wrong thread and risks being overlooked.
 
 ## The XY problem
@@ -88,7 +85,7 @@ nodes". The request then does not mention whether it worked on one node
 or on one core or whether it never worked and that this was the first
 attempt. Perhaps the problem has even nothing to do with one or two
 nodes. In order to better isolate the problem and avoid wasting time
-with many back and forth emails, please tell us what actually worked so
+with many back and forth E-mails, please tell us what actually worked so
 far. Tell us what you have tried to isolate the problem. This requires
 some effort from you but this is what we expect from you.
 
