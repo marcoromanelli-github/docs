@@ -47,7 +47,7 @@ png, tiff, etc) of what you saw on your monitor. From these, we would be
 unable to copy and paste commands or error messages, unnecessarily slowing
 down our research on your problem.
 
-## New problem--new E-mail
+## New problem == new E-mail
 
 Do not send support requests by replying to unrelated issues. Every
 issue gets a number and this is the number that you see in the subject
