@@ -36,6 +36,7 @@ To load a specific version of a module:
 ```bash
 module load gcc/11.2.0
 ```
+**Make sure to check the availability of a specific version of the module you are looking for, using `module avail` as it might not be available on the cluster**.
 
 ### Unloading Modules
 To unload a module:
