@@ -21,11 +21,34 @@ The cluster also supports various software applications tailored to different ne
 
 ### Compute Nodes
 
+* Two Apollo 6500 Gen10+ HPE nodes, *each* containing 8 NVIDIA A100 SXM GPUs. 
+* One HPE ProLiant DL385 Gen10+ v2, containing 2 A30 SXM NVIDIA GPUs.
+
 #### HPE Apollo 6500 Gen10
+
+| Attribute\Cluster Name          | gpu1                             | gpu2                             |
+|------------------------|----------------------------------|----------------------------------|
+| Model Name             | HPE ProLiant XL675d Gen10 Plus; Apollo 6500 Gen10 Plus Chassis | HPE ProLiant XL675d Gen10 Plus; Apollo 6500 Gen10 Plus Chassis |
+| Sockets                | 2                                | 2                                |
+| Cores per Socket       | 32                               | 32                               |
+| Threads per Core       | 2                                | 2                                |
+| Memory                 | 1024 GiB Total Memory (16 x 64GiB DIMM DDR4) | 1024 GiB Total Memory (16 x 64GiB DIMM DDR4) |
+| Local Storage (Scratch space) | 407GB                       | 407GB                       |
+
 
 #### HPE DL365 Gen10
 
+| Attribute\Cluster Name              | cn01                                      |
+|------------------------|-------------------------------------------|
+| Model Name             | HPE ProLiant DL385 Gen10 Plus v2          |
+| Sockets                | 2                                         |
+| Cores per Socket       | 32                                        |
+| Threads per Core       | 2                                         |
+| Memory                 | 256GiB Total Memory (16 x 16GiB DIMM DDR4)|
+| Local Storage          | 854G                                      |
+
 ### Storage System
+Our storage system contains of four HPE PFSS nodes, collectively offering a total of 63TB of storage. You can think of these four nodes as one unified 63TB storage unit as it is a **Parallel File System Storage** component. These nodes work in parallel and are all mounted under **one** mount point on the gpu nodes only (`/fs1`).
 
 ## Our vision
 
@@ -33,7 +56,7 @@ Making complex and time-intensive calculations simple and accessible.
 
 ### Our Goal
 
-Our heart is set on creating a vibrant community where our High-Performance Computing (HPC) cluster is a beacon of collaboration and discovery. We are wishing to provide a supportive space where researchers and students can express their scientific ideas and explore unchanted areas. We are here to make the complicated world of computational research a shared path of growth, learning, and significant discoveries for the ones that are eager to learn.
+Our heart is set on creating a community where our cluster is a symbol of collaboration and discovery. We are wishing to provide a supportive space where researchers and students can express their scientific ideas and explore unchanted areas. We aim to make the complicated world of computational research a shared path of growth, learning, and significant discoveries for the ones that are eager to learn.
 
 
 ## Operations Team

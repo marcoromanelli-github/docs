@@ -6,7 +6,7 @@ sort: 2
 
 ## Account Access
 
-A Star HPC account is required to access and submit jobs to the Star HPC cluster.  If you do not have one or need help with your account, please contact your cluster administrator.
+A Star HPC account is required to access and submit jobs to the Star HPC cluster.
 
 The application process may require justification of the need for HPC resources, detailing the kind of work you intend to do, the resources you expect to use, and sometimes, the anticipated outcomes of your research.
 
@@ -28,7 +28,7 @@ Members of Hofstra University, Nassau Community College, or Adelphi University, 
 
 ### Requesting an account
 
-To get an account on Star, you need to complete out the registration form. There, you will need to provide us the following information:
+To get an account on Star, you need to complete out the registration form at [Star Account Management Web Application](http://localhost:3000). There, you will need to provide us the following information:
 
 -   Your full name, date of birth, and nationality.
 -   Your position (master student, PhD, PostDoc, staff member,
@@ -65,7 +65,7 @@ Submit the above information through the online registration form.
 
 ## Login node
 
-Access to the cluster is provided through SSH to the login node. The login node serves as the gateway or entry point to the cluster. It is important to understand that the login node is not for running computationally intensive tasks itself. Instead, it is for tasks such as file management, editing, and job submission. The actual computational work is done on the compute nodes, which you access indirectly by submitting jobs through Slurm, the job scheduling system.
+Access to the cluster is provided through SSH [(What is SSH?)](https://www.youtube.com/watch?v=qWKK_PNHnnA&ab_channel=Tinkernut) to the login node. The login node serves as the gateway or entry point to the cluster. It is important to understand that the login node is not for running computationally intensive tasks itself. Instead, it is for tasks such as file management, editing, and job submission. The actual computational work is done on the compute nodes, which you access indirectly by submitting jobs through Slurm, the job scheduling system.
 
 ## Scheduler policies
 
