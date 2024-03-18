@@ -71,5 +71,50 @@ After the last `#SBATCH` directive, commands are ran like any other regular shel
 * `module load python3`: Loads necessary files and modules in order for the command `python3` to be valid when used. Please refer to `/software/env-modules.html` for more detail on how the command `module` works.
 * `python3 my_script.py`: Just like any other `python3` command, this line runs the `my_script.py` file using Python. **Later, the output(s) and/or error(s) of this operation is written to the files we have specified in our directives.**
 
-### More advanced batch job example
+#### Submit the job
+This script as discussed previously, is a non-interactive job. Non-interactive jobs are submitted to the queue with the use of the `sbatch` command. In this case, we submit our job using `sbatch my_script.sbatch`.
+
+### Jupyter Notebook batch job example
+
+As you know, there is no Graphical User Interface (GUI) available when you connect to the cluster through your shell, hence in order to have access to some application's GUI, port fortforwarding is necessary [(What is SSH port forwarding?)](https://www.youtube.com/watch?v=x1yQF1789cE&ab_channel=TonyTeachesTech). In this example, we will do port forwarding to access Jupyter Notebook's web portal. You will basically send and receive your data through a specified port on your local machine that is tunneled to the port on the cluster where the Jupyter Notebook server is running. This setup enables you to work with Jupyter Notebooks as if they were running locally on your machine, despite actually being executed on a remote cluster node. After a successful setup, you can access Jupyter's portal through your desired browser through a generated link by Jupyter **on your local machine**.
+
+Create your sbatch script file. I'm going to call mine `jupyterTest.sbatch`. Then add the following to it:
+```bash
+#!/bin/bash
+
+#SBATCH --nodelist=cn01
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=1
+#SBATCH --time=00:30:00
+#SBATCH --job-name=jupyterTest1
+#SBATCH --output=/home/mani/outputs/jupyterTest1.out
+#SBATCH --error=/home/mani/outputs/jupyterTest1.err
+
+# get tunneling info
+XDG_RUNTIME_DIR=""
+node=$(hostname -s)
+user=$(whoami)
+port=9001
+
+# print tunneling instructions to jupyterTest1
+echo -e "
+Command to create ssh tunnel:
+ssh -p5010 -N -f -L ${port}:${node}:${port} ${user}@binary.star.hofstra.edu
+
+Use a Browser on your local machine to go to:
+localhost:${port}"
+
+module load jupyter
+
+# Run Jupyter
+jupyter notebook --no-browser --port=${port} --ip=${node}
+```
+
+Most of the directives at the start of the script have previously been discussed at "Basic batch job example", so we are only going to discuss the new ones:
+* `--ntasks=1`: This directive tells SLURM to allocate resources for one task. A "task" in this context is essentially an instance of your application or script running on the cluster. For many applications, especially those that don't explicitly parallelize their workload across multiple CPUs or nodes, specifying a single task is sufficient. However, if you're running applications that can benefit from parallel execution, you might increase this number. This directive is crucial for optimizing resource usage based on the specific needs of your job. For instance, running multiple independent instances of a data analysis script on different subsets of your data could be a scenario where increasing the number of tasks is beneficial.
+* `--cpus-per-task=1`: This sets the number of CPUs allocated to each task specified by `--ntasks`. By default, setting it to 1 assigns one CPU to your task, which is fine for tasks that are not CPU-intensive or designed to run on a single thread. However, for applications that are multi-threaded and can utilize more than one CPU core for processing, you would increase this value to match the application's capability to parallelize its workload.
+
+
+
+Don't worry, we will discuss parallel and multi-threaded jobs in more detail throughout this documentation with real-world examples.
 

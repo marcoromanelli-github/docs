@@ -20,7 +20,7 @@ Before you start using the Star cluster, please read Hofstra University's [Accep
 
 A general introduction to the Star HPC cluster, research community, and support group be found at [starhpc.hofstra.io](https://starhpc.hofstra.io).
 
-To be able to work on the Star cluster, you must have an account and you must have been granted CPU time on the system.
+To be able to work on the Star cluster, you must have an approved account on the cluster.
 
 ## How to get an account on Star
 

@@ -45,7 +45,7 @@ The cluster also supports various software applications tailored to different ne
 | Cores per Socket       | 32                                        |
 | Threads per Core       | 2                                         |
 | Memory                 | 256GiB Total Memory (16 x 16GiB DIMM DDR4)|
-| Local Storage          | 854G                                      |
+| Local Storage (Scratch Space)         | 854G                                      |
 
 ### Storage System
 Our storage system contains of four HPE PFSS nodes, collectively offering a total of 63TB of storage. You can think of these four nodes as one unified 63TB storage unit as it is a **Parallel File System Storage** component. These nodes work in parallel and are all mounted under **one** mount point on the gpu nodes only (`/fs1`).
