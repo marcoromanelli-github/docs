@@ -26,7 +26,7 @@ The cluster also supports various software applications tailored to different ne
 
 #### HPE Apollo 6500 Gen10
 
-| Attribute\Cluster Name          | gpu1                             | gpu2                             |
+| Attribute\Node Name          | gpu1                             | gpu2                             |
 |------------------------|----------------------------------|----------------------------------|
 | Model Name             | HPE ProLiant XL675d Gen10 Plus; Apollo 6500 Gen10 Plus Chassis | HPE ProLiant XL675d Gen10 Plus; Apollo 6500 Gen10 Plus Chassis |
 | Sockets                | 2                                | 2                                |
@@ -38,7 +38,7 @@ The cluster also supports various software applications tailored to different ne
 
 #### HPE DL365 Gen10
 
-| Attribute\Cluster Name              | cn01                                      |
+| Attribute\Node Name              | cn01                                      |
 |------------------------|-------------------------------------------|
 | Model Name             | HPE ProLiant DL385 Gen10 Plus v2          |
 | Sockets                | 2                                         |
