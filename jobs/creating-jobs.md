@@ -15,7 +15,7 @@ Here are a list of common directives: <br>
 * `#SBATCH --time=<some-value>`: Sets the maximum runtime.
 * `#SBATCH --output=<some-value>`: Directs the job's output to a specific file.
 
-**Note:** These bullets are just for a better basic understanding on the topic. Complete examples and line-by-line explanations are provided further down on this page.
+**Note:** These bullets are just for a better basic understanding on the topic. Complete examples and line-by-line explanations are provided further down in this page.
 
 ### Queues and partitions
 Queues (or partitions in Slurm terminology) are categories within the cluster that organize jobs based on their resource requirements, priority, and other factors.
