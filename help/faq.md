@@ -98,7 +98,7 @@ you should
 
 Here is an example:
 
-    $ ssh -Y star.uit.no                 # log in with port forwarding
+    $ ssh -Y binary.star.hofstra.edu                 # log in with port forwarding
     $ srun -N 1 -t 1:0:0 --pty bash -I     # reserve and log in on a compute node
 
 This example assumes that you are running an X-server on your local
@@ -108,13 +108,7 @@ your local PC.
 
 ### How can I access a compute node from the login node?
 
-Log in to star.uit.no and type e.g.:
-
-    $ ssh compute-1-3
-
-or use the shorter version:
-
-    $ ssh c1-3
+Please read about Interactive jobs at `/jobs/creating-jobs.md/`.
 
 ### My ssh connections are dying / freezing
 
@@ -144,7 +138,7 @@ Please read about `label_partitions`.
 
 ### Where can I find an example of job script?
 
-You can find job script examples in `job_script_examples`.
+You can find job script examples at `/jobs/creating-jobs.md/`.
 
 Relevant application specific examples (also for beginning users) for a
 few applications can be found in `sw_guides`.
@@ -167,20 +161,7 @@ new jobs are submitted that get higher priority.
 
 ### How can I see the queing situation?
 
-How can I see how my jobs are doing in the queue, if my jobs are idle,
-blocked, running?
-
-On the webpage
-<http://star-login2.uit.no/slurmbrowser/html/squeue.html> you can find
-information about the current load on star, some information about the
-nodes, and the information you would get from the showq command, which
-is described below. You can also find information about your job and if
-you the job is running, you can find graphs about its usage of the CPUs,
-memory and so on.
-
-If you prefer to use the command line, to see the job queue use:
-
-    $ squeue
+In the command line, see the job queue by using `squeue`.
 
 ### Why does my job not start or give me error feedback when submitting?
 
@@ -273,7 +254,7 @@ sure that you send the email via the login node.
 As an example, add and adapt the following line at the end of your
 script:
 
-    echo "email content" | ssh star-1.local 'mail -s "Job finished: ${SLURM_JOBID}" firstname.lastname@uit.no'
+    echo "email content" | ssh star-1.local 'mail -s "Job finished: ${SLURM_JOBID}" firstname.lastname@hofstra.edu'
 
 ### How can I run many short tasks?
 
