@@ -3,7 +3,7 @@ sort: 2
 ---
 
 # Creating Jobs
-This page is mainly dedicated to examples on different job types. For a more comprehensive on different job types, please refer to `/jobs/Overview.html`.
+This page is mainly dedicated to examples on different job types. For a more comprehensive explanation on different job types, please refer to `/jobs/Overview.html`.
 ## Batch jobs (Non-interactive)
 Batch jobs allow users to execute tasks without direct interaction with the computing environment. These jobs are written in scripts, which include commands for the job's execution and resource requests which will be interpreted by the cluster scheduler which is Slurm in our case, and are submitted to the job scheduling system.
 ### BATCH directives
