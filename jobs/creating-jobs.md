@@ -134,11 +134,90 @@ http://127.0.0.1:9001/?token=...(your token is here)...
 Copy that address and paste it into your browser, and you must successfuly access Jupyter's GUI.
 
 ### Apptainer TensorFlow batch job example
+This example shows how to execute a TensorFlow script, `tfTest.py`, that trains a simple neural network on the MNIST dataset using GPUs.
 
+First, create a Python script called `tfTest.py` with the provided content:
+```python
+import tensorflow as tf
+
+physical_devices = tf.config.list_physical_devices(device_type=None)
+
+print("Num of Devices:", len(physical_devices))
+
+print("Devices:\n", physical_devices)
+
+print("Tensorflow version information:\n",tf.__version__)
+
+print("begin test...")
+
+mnist = tf.keras.datasets.mnist
+mnist = tf.keras.datasets.mnist
+
+(x_train, y_train), (x_test, y_test) = mnist.load_data()
+x_train, x_test = x_train / 255.0, x_test / 255.0
+
+model = tf.keras.models.Sequential([
+   tf.keras.layers.Flatten(input_shape=(28, 28)),
+   tf.keras.layers.Dense(128, activation='relu'),
+   tf.keras.layers.Dropout(0.2),
+   tf.keras.layers.Dense(10)
+ ])
+
+predictions = model(x_train[:1]).numpy()
+
+loss_fn = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True)
+
+loss_fn(y_train[:1], predictions).numpy()
+
+model.compile(optimizer='adam',
+                loss=loss_fn,
+                metrics=['accuracy'])
+
+model.fit(x_train, y_train, epochs=10)
+
+model.evaluate(x_test,  y_test, verbose=2)
+```
+
+Next, create a SLURM batch job script named `job-test-nv-tf.sh`. This script requests GPU resources, loads necessary modules, and runs your TensorFlow script inside an Apptainer container:
+```bash
+#!/bin/bash
+
+#SBATCH --job-name=tensorflow_test_job
+#SBATCH --output=result.txt
+#SBATCH --nodelist=gpu1
+#SBATCH --gres=gpu:A100:2
+#SBATCH --ntasks=1
+#SBATCH --time=10:00
+#SBATCH --mem-per-cpu=1000
+
+module load python3
+module load apptainer
+
+echo "run Apptainer TensorFlow GPU"
+apptainer run --nv tensorflowGPU.sif python3 tfTest.py
+```
+This script runs the `tfTest.py` script inside the TensorFlow GPU container (`tensorflowGPU.sif`)
+
+You can now submit your job to Slurm using `sbatch job-test-nv-tf.sbatch`.
+
+After the job completes, you can check the output in `result.txt`. The output should include information about the available physical devices (GPUs), the TensorFlow version, and the output from training the model on the MNIST dataset.
+
+The beginning and end of the file might look something like this:
+```text
+run Apptainer TensorFlow GPU
+Num of Devices: X
+Devices:
+ [PhysicalDevice(name='/physical_device:CPU:0', device_type='CPU'), PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU'), ...]
+Tensorflow version information:
+ X.XX.X
+begin test...
+...
+313/313 - 0s - loss: X.XXXX - accuracy: 0.XXXX
+```
 
 ## Interactive jobs
 ### Starting an Interactive job
-To start an interactive job, you use the srun command with specific parameters that define your job's resource requirements. Here's an example:
+To start an interactive job, you use the `srun` command with specific parameters that define your job's resource requirements. Here's an example:
 ```bash
 srun --pty --nodelist=cn01 --ntasks=1 --cpus-per-task=1 --time=01:00:00 --mem=4G /bin/bash
 ```
