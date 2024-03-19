@@ -134,7 +134,6 @@ http://127.0.0.1:9001/?token=...(your token is here)...
 Copy that address and paste it into your browser, and you must successfuly access Jupyter's GUI.
 
 ## Interactive jobs
-This page is mainly dedicated to examples on different job types. For a more comprehensive on different job types, please refer to `/jobs/Overview.html`.
 ### Starting an Interactive job
 To start an interactive job, you use the srun command with specific parameters that define your job's resource requirements. Here's an example:
 ```bash
@@ -187,3 +186,134 @@ This option requests 4 GB of memory per allocated CPU.
 --mail-user=your_email@example.com
 ```
 This configuration sends an email to the specified address at the start, completion, and failure of the job.
+
+## Array jobs
+To submit an array job, you use the `--array` as a part of your `sbatch`. This option specifies a range of indices that SLURM uses to create multiple tasks from a single job submission. Each task in the array is assigned a unique SLURM_ARRAY_TASK_ID that can be used within your scripts to differentiate between them.
+
+### Array job example
+Suppose you have a dataset split into multiple files and you want to process each file independently. Instead of submitting a separate job for each file, you can submit a single array job where each task processes a different file.
+
+Now, let's have a simple, low-resource Python task that you can run as part of an array job, let's create a Python script that generates a basic report based on the `SLURM_ARRAY_TASK_ID`. This script will read from a specific input file based on the task ID, perform a simple operation (like counting the number of lines or words), and output the results to a file.
+
+First, let's create your input files. You can make these as simple text files with a few lines of content. For example:
+`input1.txt`, `input2.txt`, and `input3.txt`.
+
+Each file could contain a few lines of arbitrary text. You can create these files manually or use the command line:
+```bash
+echo "This is a simple file." > input1.txt
+echo "This file contains\nseveral lines of text." > input2.txt
+echo "Each file will have\na different\nnumber of lines." > input3.txt
+```
+
+Now here's the content of the Python script, `process_data.py`, which reads from one of these input files based on the `SLURM_ARRAY_TASK_ID` and counts the number of lines:
+```python
+import sys
+
+# Get the task ID from the command line arguments
+task_id = sys.argv[1]
+
+# Construct the filename based on the task ID
+filename = f"input{task_id}.txt"
+
+# Try to open and read the file
+try:
+    with open(filename, 'r') as file:
+        lines = file.readlines()
+        num_lines = len(lines)
+    # Output the results
+    output_filename = f"output{task_id}.txt"
+    with open(output_filename, 'w') as outfile:
+        outfile.write(f"File: {filename}\nNumber of lines: {num_lines}\n")
+    print(f"Processed {filename} successfully.")
+except FileNotFoundError:
+    print(f"File {filename} not found.")
+```
+This script basically takes an argument from the command line (Expected to be the `SLURM_ARRAY_TASK_ID`). Then constructs a filename from this ID, reads the corresponding input file, counts its lines, writes the count to an output file, and in case of any missing files it handles them by printing a message instead of crashing.
+
+Finally, to run this script as part of an array job on 3 files, adjust the `--array` option in your SLURM script (`process_array.sbatch`) to `1-3`.
+```bash
+#!/bin/bash
+#SBATCH --job-name=array_job
+#SBATCH --output=array_job_%A_%a.out
+#SBATCH --error=array_job_%A_%a.err
+#SBATCH --array=1-3
+#SBATCH --mem=1G
+#SBATCH --time=00:10:00
+
+module load python3
+python3 process_data.py $SLURM_ARRAY_TASK_ID
+```
+In the context of SLURM job submission scripts, %A and %a are special placeholders used within directives like --output and --error to dynamically generate filenames based on the job's array ID and the individual task ID within the array. Here's what each placeholder represents:
+
+* `%A`: This placeholder is replaced by the SLURM job array's ID. The job array ID is a unique identifier assigned by SLURM to the entire array job at the time of submission. It helps you group and identify all tasks belonging to the same array job.
+* `%a`: This placeholder is substituted with the specific task ID within the job array. Since an array job consists of multiple tasks, each with a unique task ID (determined by the `--array` option when the job is submitted), `%a` allows you to create distinct output or error files for each task, making it easier to troubleshoot and analyze the results of individual tasks.
+
+For example, if you submit an array job with the --array=1-10 option and use the following in your script:
+```bash
+#SBATCH --output=job_output_%A_%a.out
+#SBATCH --error=job_error_%A_%a.err
+```
+SLURM will create separate output and error files for each of the ten tasks in the array. If the array job's ID is 12345, the files for the first task will be named job_output_12345_1.out and job_error_12345_1.err, the files for the second task will be job_output_12345_2.out and job_error_12345_2.err, and so on. 
+
+Now submit this job using `sbatch process_array.sbatch` and you must see 6 different output files (3 ending in `.out` and 3 in `.err`). The `.out` files each contain the content of the relevant text file they read from, and the `.err` files are expected to be empty if everything has run smoothly.
+
+## Parallel jobs
+### Open MPI job example
+First, you need to create your MPI program. In this example, we are calling it `mpi_hello_world.c`. This program initializes the MPI environment, gets the rank of each process, the total number of processes, and the name of the processor, then prints a greeting from each process.
+```c
+#include <mpi.h>
+#include <stdio.h>
+
+int main(int argc, char** argv) {
+    MPI_Init(NULL, NULL);
+    int PID;
+    MPI_Comm_rank(MPI_COMM_WORLD, &PID);
+    int number_of_processes;
+    MPI_Comm_size(MPI_COMM_WORLD, &number_of_processes);
+    char processor_name[MPI_MAX_PROCESSOR_NAME];
+    int name_length;
+    MPI_Get_processor_name(processor_name, &name_length);
+    printf("Hello MPI user: from process PID %d out of %d processes on machine %s\n", PID, number_of_processes, processor_name);
+    MPI_Finalize();
+    return 0;
+}
+```
+
+Next, create the compilation and execution script. <br>
+Create a Bash script named mpi_hello_world.sh to compile and run the MPI program. This script takes a parameter for the number of processes to spawn.
+```bash
+#!/bin/bash
+SRC=mpi_hello_world.c
+OBJ=mpi_hello_world
+NUM=$1
+mpicc -o $OBJ $SRC
+mpirun -n $NUM ./$OBJ
+```
+This script compiles the MPI program using `mpicc` and runs it with `mpirun`, and specifies the number of processes with `-n`.
+
+Next, prepare a SLURM batch job script named `job-test-mpi.sh` to submit your MPI job. This script requests cluster resources and runs your MPI program through `mpi_hello_world.sh`:
+```bash
+#!/bin/bash
+#SBATCH --job-name=mpi_job_test
+#SBATCH --output=result.txt
+#SBATCH --error=error.txt
+#SBATCH --nodelist=gpu1,gpu2,cn01
+#SBATCH --time=10:00
+#SBATCH --mem-per-cpu=1000
+module load openmpi4
+echo "run mpi program using parallel processes"
+sh mpi_hello_world.sh $1
+```
+This script sets up a job with the name mpi_job_test, specifies output and error files, requests resources (All 3 nodes from the cluster), and loads the OpenMPI module. It then runs the `mpi_hello_world.sh` script and passes the number of processes as an argument.
+
+In the end, submit your parallel MPI job to SLURM using the sbatch command, specifying the desired number of parallel processes with -n. For example, to run with 8 parallel processes:
+```bash
+sbatch -n 8 job-test-mpi.sh 8
+```
+
+After the job completes, check the output in `result.txt`. You should see greetings from each MPI process. The content might look something like this, shortened with `...` for brevity:
+```bash
+Hello MPI user: from process PID 0 out of 8 processes on machine gpu1
+...
+Hello MPI user: from process PID 7 out of 8 processes on machine cn01
+```
