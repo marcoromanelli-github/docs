@@ -133,6 +133,9 @@ http://127.0.0.1:9001/?token=...(your token is here)...
 ```
 Copy that address and paste it into your browser, and you must successfuly access Jupyter's GUI.
 
+### Apptainer TensorFlow batch job example
+
+
 ## Interactive jobs
 ### Starting an Interactive job
 To start an interactive job, you use the srun command with specific parameters that define your job's resource requirements. Here's an example:
@@ -291,7 +294,7 @@ mpirun -n $NUM ./$OBJ
 ```
 This script compiles the MPI program using `mpicc` and runs it with `mpirun`, and specifies the number of processes with `-n`.
 
-Next, prepare a SLURM batch job script named `job-test-mpi.sh` to submit your MPI job. This script requests cluster resources and runs your MPI program through `mpi_hello_world.sh`:
+Next, prepare a SLURM batch job script named `job-test-mpi.sbatch` to submit your MPI job. This script requests cluster resources and runs your MPI program through `mpi_hello_world.sh`:
 ```bash
 #!/bin/bash
 #SBATCH --job-name=mpi_job_test
@@ -300,13 +303,14 @@ Next, prepare a SLURM batch job script named `job-test-mpi.sh` to submit your MP
 #SBATCH --nodelist=gpu1,gpu2,cn01
 #SBATCH --time=10:00
 #SBATCH --mem-per-cpu=1000
+
 module load openmpi4
 echo "run mpi program using parallel processes"
 sh mpi_hello_world.sh $1
 ```
 This script sets up a job with the name mpi_job_test, specifies output and error files, requests resources (All 3 nodes from the cluster), and loads the OpenMPI module. It then runs the `mpi_hello_world.sh` script and passes the number of processes as an argument.
 
-In the end, submit your parallel MPI job to SLURM using the sbatch command, specifying the desired number of parallel processes with -n. For example, to run with 8 parallel processes:
+In the end, submit your parallel MPI job to SLURM using the sbatch command `sbatch job-test-mpi.sbatch`, specifying the desired number of parallel processes with `-n`. For example, to run with 8 parallel processes:
 ```bash
 sbatch -n 8 job-test-mpi.sh 8
 ```
