@@ -56,4 +56,4 @@ Common issues arise from: <br>
 Imagine a user submits a job requiring data analysis with minimal computational intensity but requests all 8 A100 GPUs on gpu1, anticipating it will speed up the process. However, the job only actively uses one GPU, leaving the remaining seven idle but unavailable to other users. This is a significant overallocation of resources, leading to inefficiencies and potential delays for other tasks requiring GPU support.
 
 #### Example Scenario 2
-A user requesting more resource than physically available on the cluster. For instance requesting 9 A100 GPUs on gpu1 where the maximum is 8. This would cause an immediate error and would job would not run and terminate instantly.
+A user requesting more resource than physically available on the cluster. For instance requesting 9 A100 GPUs on gpu1 where the maximum is 8. This would cause an immediate error and the job would not run and terminate instantly.
