@@ -28,7 +28,7 @@ Imagine a user is optimizing a complex algorithm's parameters. By initiating an 
 Batch jobs are submitted to the cluster's job queue and run without user interaction. This is the most common job type for tasks that don't require real-time feedback.
 #### Example Scenario
 You've developed a script for processing a large dataset that requires no human interaction to complete its task. By submitting this as a batch job, the cluster undertakes the task, allowing the job to run to completion, and outputting the results to your desired location for you to view.
-For a real example on Batch jobs, view <u>page-name<u>.
+For a real example on Batch jobs, view `/jobs/creating-jobs.html`.
 
 ### 3. Array jobs
 When you're faced with executing the same task multiple times with only slight variations, array jobs offer an efficient solution. This job type simplifies the process of managing numerous similar jobs by treating them as a single entity that varies only in a specified parameter.
@@ -42,7 +42,7 @@ Imagine a fluid dynamics job that require complex calculations spread over milli
 
 ## Resources
 Resources within an HPC environment are finite and include CPUs, GPUs, memory, and storage. <br>
-For a more comprehensive list of the resources available at Star HPC, take a look at <u>page-name<u>.
+For a more comprehensive list of the resources available at Star HPC, take a look at `/quickstart/about-star.html`.
 
 ### Common Errors
 Strains on the cluster occur when resources are over-requested or misallocated, leading to potential bottlenecks, decreased system performance, and extended wait times for job execution. <br>
