@@ -37,7 +37,7 @@ The cluster also supports various software applications tailored to different ne
 | Local Storage (Scratch space) | 407GB                       | 407GB                       |
 
 
-#### HPE DL365 Gen10
+#### HPE DL385 Gen10
 
 | Attribute\Node Name              | cn01                                      |
 |------------------------|-------------------------------------------|
