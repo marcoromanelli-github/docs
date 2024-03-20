@@ -10,7 +10,7 @@ In the context of High-Performance Computing (HPC), a job is a unit of work that
 
 **Example Scenario**: Suppose you're conducting a simulation. On the cluster, you would submit this task as a job. This job would detail the resources needed (e.g., "use 2 of the A100 GPUs on node gpu1"), the software to run (perhaps a simulation tool contained within an Apptainer container), and the input data. The job system then queues your request and executes it on the appropriate compute nodes when resources become available, without you needing to manually log into those nodes and start the computations.
 
-### Why use jobs?
+### Why are jobs used?
 
 * **Efficiency**: Jobs allow for the efficient use of the cluster's resources by managing the workload and ensuring that resources are not idle. This is especially important in environments where resources are shared among multiple users. 
 * **Scalability**: Jobs can be scaled across multiple nodes and processors, based on your preference and resource requirements.
