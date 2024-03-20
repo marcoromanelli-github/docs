@@ -33,6 +33,7 @@ The cluster also supports various software applications tailored to different ne
 | Cores per Socket       | 32                               | 32                               |
 | Threads per Core       | 2                                | 2                                |
 | Memory                 | 1024 GiB Total Memory (16 x 64GiB DIMM DDR4) | 1024 GiB Total Memory (16 x 64GiB DIMM DDR4) |
+| GPU                    | 8 SXM NVIDIA A100s               | 8 SXM NVIDIA A100s               |
 | Local Storage (Scratch space) | 407GB                       | 407GB                       |
 
 
@@ -45,6 +46,7 @@ The cluster also supports various software applications tailored to different ne
 | Cores per Socket       | 32                                        |
 | Threads per Core       | 2                                         |
 | Memory                 | 256GiB Total Memory (16 x 16GiB DIMM DDR4)|
+| GPU                    | 2 SXM NVIDIA A30s                         | 
 | Local Storage (Scratch Space)         | 854G                                      |
 
 ### Storage System
