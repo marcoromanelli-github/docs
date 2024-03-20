@@ -38,7 +38,7 @@ Suppose a user has to analyze 100 different genomic sequences with the same comp
 ### 4. Parallel jobs
 Parallel jobs are designed to run computations concurrently across multiple nodes or processors, ideal for highly parallelizable tasks. These jobs can significantly reduce computation time for suitable tasks by taking advantage of the cluster's distributed resources.
 #### Example Scenario
-Imagine a fluid dynamics job that require complex calculations spread over millions of grid points. By submitting a parallel job, the simulation can for instance be distributed across multiple A100 GPUs on both gpu1 and gpu2, and enable the task to complete much faster than it would on a single node.
+Imagine a fluid dynamics job that requires complex calculations spread over millions of grid points. By submitting a parallel job, the simulation can for instance be distributed across multiple A100 GPUs on both gpu1 and gpu2, and enable the task to complete much faster than it would on a single node.
 
 ## Resources
 Resources within an HPC environment are finite and include CPUs, GPUs, memory, and storage. <br>
