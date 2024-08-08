@@ -72,18 +72,7 @@ Only home and project partitions have quota.
 
 ### How many CPU hours have I spent?
 
-For a simple summary, you can use the command `cost`, for more details,
-you can use:
-
-    $ gstatement --hours --summarize -p PROSJEKT -s YYYY-MM-DD -e YYYY-MM-DD
-
-For a detailed overview over usage you can use:
-
-    $ gstatement --hours -p PROSJEKT -s YYYY-MM-DD -e YYYY-MM-DD
-
-For more options see:
-
-    $ gstatement --help
+This command gives you a report of account utilization, including CPU hours, for the specified period. `sreport cluster AccountUtilizationByUser start=YYYY-MM-DD end=YYYY-MM-DD`
 
 ## Connecting via ssh
 
