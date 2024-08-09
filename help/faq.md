@@ -73,6 +73,7 @@ Only home and project partitions have quota.
 ### How many CPU hours have I spent?
 
 This command gives you a report of account utilization, including CPU hours, for the specified period.
+
     $ sreport cluster AccountUtilizationByUser start=YYYY-MM-DD end=YYYY-MM-DD
 
 ## Connecting via ssh
