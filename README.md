@@ -17,8 +17,19 @@ code examples are provided under the [MIT](https://opensource.org/licenses/MIT) 
 
 ### Install build tools and dependencies.
 
-Due to Liquid not being updated to work with Ruby 3.2.x, make sure you have Ruby 3.1.x or older installed.
-https://talk.jekyllrb.com/t/liquid-4-0-3-tainted/7946/18
+> [!WARNING]
+> Due to Liquid not being updated to work with Ruby 3.2.x, **make sure you have Ruby 3.1.x or older installed**.
+> https://talk.jekyllrb.com/t/liquid-4-0-3-tainted/7946/18
+> 
+> #### With Cygwin
+> As of this writing (8/8/2024), Cygwin provides Ruby versions 2.6.4-1 and 3.2.2-2. Make sure to install the former. Additionally, the version of bundler supplied with Ruby 2.6 is too old and the version of RubyGems is too new. *After installing the following dependencies*, you must then install the correct versions of RubyGems and bundler manually:
+> ```
+> gem update --system 3.2.3
+> gem install bundler -v 2.1.4
+> 
+> # confirm the correct version is installed
+> bundler -v
+> ```
 
 To allow building of native extensions, install `ruby-devel`, `gcc`, and `make`.
 
@@ -44,8 +55,8 @@ want to try running `bundle update` or removing `Gemfile.lock` and then running
 ### Building the site
 
 ```
-git clone https://github.com/starhpc/docs.git starhpc-docs
-cd starhpc-docs
+git clone https://github.com/starhpc/docs.git star-docs
+cd star-docs
 gem install bundler
 bundle install
 bundle exec jekyll serve
