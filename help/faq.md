@@ -63,12 +63,14 @@ Yes. Please see `/software/python_r_perl`.
 
 ### How can I check my disk quota and disk usage?
 
-To check how large your disk quota is, and how much of it you have used,
-you can use the following command:
+repquota prints a summary of the disc usage and quotas for the specified file systems.
 
-    $ quota -s
+    $ /usr/sbin/repquota -a -s
+    $                    Block limits                 File limits
+    $ User              used    soft    hard  grace    used   soft  hard  grace
+    $ cchave6    --     116M   1024M   1280M           1922      0     0
 
-Only home and project partitions have quota.
+If you want to see the quota on the home directory where the file system is ext4, the quota information is stored in files named aquota.user and aquota.group at the root of filesystem.
 
 ### How many CPU hours have I spent?
 
