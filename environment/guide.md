@@ -401,3 +401,203 @@ In Node.js, the "virtual environment" is essentially your `node_modules` directo
    ```
 
 Remember to keep your `package.json` if you want to reinstall your dependencies later.
+
+# C and C++ Development Guide Using Home Directory
+
+## C
+
+### How to use the home directory for development with C
+
+#### Setup environment
+
+1. Verify installation:
+   ```
+   gcc --version
+   make --version
+   ```
+
+2. Make directory for local installations:
+   ```
+   mkdir -p ~/local/{bin,lib,include}
+   ```
+
+3. Add the following to your `~/.bashrc` or `~/.bash_profile`:
+   ```
+   export PATH=$HOME/local/bin:$PATH
+   export LD_LIBRARY_PATH=$HOME/local/lib:$LD_LIBRARY_PATH
+   export CPATH=$HOME/local/include:$CPATH
+   export PKG_CONFIG_PATH=$HOME/local/lib/pkgconfig:$PKG_CONFIG_PATH
+   ```
+
+4. Reload shell configuration:
+   ```
+   source ~/.bashrc  # or source ~/.bash_profile
+   ```
+
+#### Install packages
+
+Install a library with example libcurl:
+```
+wget https://curl.se/download/curl-7.78.0.tar.gz
+tar xzf curl-7.78.0.tar.gz
+cd curl-7.78.0
+./configure --prefix=$HOME/local
+make
+make install
+```
+
+#### Create project
+
+1. Set up project structure:
+   ```
+   mkdir my_c_project
+   cd my_c_project
+   mkdir src
+   ```
+
+2. Create file that uses the library:
+   ```
+   cat << EOF > src/main.c
+   #include <stdio.h>
+   #include <curl/curl.h>
+   
+   int main(void) {
+       CURL *curl = curl_easy_init();
+       if(curl) {
+           printf("CURL initialized successfully\n");
+           curl_easy_cleanup(curl);
+       } else {
+           printf("Failed to initialize CURL\n");
+       }
+       return 0;
+   }
+   EOF
+   ```
+
+3. Create a makefile for easy compilation:
+   ```
+   cat << EOF > Makefile
+   CC = gcc
+   CFLAGS = -I$(HOME)/local/include
+   LDFLAGS = -L$(HOME)/local/lib
+   LIBS = -lcurl
+   
+   main: src/main.c
+   	$(CC) $(CFLAGS) $(LDFLAGS) $^ $(LIBS) -o $@
+   
+   .PHONY: clean
+   
+   clean:
+   	rm -f main
+   EOF
+   ```
+
+4. Compile using:
+   ```
+   make
+   ```
+
+5. Clean using:
+   ```
+   make clean
+   ```
+
+## C++
+
+### How to use the home directory for development with C++
+
+#### Setup environment
+
+1. Verify installation:
+   ```
+   g++ --version
+   make --version
+   ```
+
+2. Make directory for local installations:
+   ```
+   mkdir -p ~/local/{bin,lib,include}
+   ```
+
+3. Add the following to your `~/.bashrc` or `~/.bash_profile`:
+   ```
+   export PATH=$HOME/local/bin:$PATH
+   export LD_LIBRARY_PATH=$HOME/local/lib:$LD_LIBRARY_PATH
+   export CPATH=$HOME/local/include:$CPATH
+   export PKG_CONFIG_PATH=$HOME/local/lib/pkgconfig:$PKG_CONFIG_PATH
+   ```
+
+4. Reload shell configuration:
+   ```
+   source ~/.bashrc  # or source ~/.bash_profile
+   ```
+
+#### Install packages
+
+Install a library with example boost:
+```
+wget https://boostorg.jfrog.io/artifactory/main/release/1.76.0/source/boost_1_76_0.tar.gz
+tar xzf boost_1_76_0.tar.gz
+cd boost_1_76_0
+./bootstrap.sh --prefix=$HOME/local
+./b2 install
+```
+
+#### Create project
+
+1. Set up project structure:
+   ```
+   mkdir my_cpp_project
+   cd my_cpp_project
+   mkdir src
+   ```
+
+2. Create a C++ file that uses the library:
+   ```
+   cat << EOF > src/main.cpp
+   #include <iostream>
+   #include <boost/version.hpp>
+   #include <boost/algorithm/string.hpp>
+   
+   int main() {
+       std::cout << "Boost version: " 
+                 << BOOST_VERSION / 100000 << "."
+                 << BOOST_VERSION / 100 % 1000 << "."
+                 << BOOST_VERSION % 100 << std::endl;
+   
+       std::string str = "Hello, World!";
+       boost::to_upper(str);
+       std::cout << "Uppercase: " << str << std::endl;
+   
+       return 0;
+   }
+   EOF
+   ```
+
+3. Create a Makefile for easy compilation:
+   ```
+   cat << EOF > Makefile
+   CXX = g++
+   CXXFLAGS = -I$(HOME)/local/include
+   LDFLAGS = -L$(HOME)/local/lib
+   LIBS = -lboost_system
+   
+   main: src/main.cpp
+   	$(CXX) $(CXXFLAGS) $(LDFLAGS) $^ $(LIBS) -o $@
+   
+   .PHONY: clean
+   
+   clean:
+   	rm -f main
+   EOF
+   ```
+
+4. Compile using:
+   ```
+   make
+   ```
+
+5. Clean using:
+   ```
+   make clean
+   ```
