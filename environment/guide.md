@@ -642,4 +642,3 @@ cargo add package
 Install packages using Cargo.toml:
 ```bash
 cargo build
-```   ```
