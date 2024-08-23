@@ -600,4 +600,46 @@ cd boost_1_76_0
 5. Clean using:
    ```
    make clean
+# Rust
+
+### How to simulate a virtual environment with rust
+
+This guide outlines how to create a project-specific environment in Rust, similar to virtual environments in other languages. (Most similar to node)
+
+## Setup Environment
+
+1. Ensure Rust and Cargo are installed:
+   ```bash
+   rustc -V
+   cargo -V
    ```
+
+2. Create directory for project:
+   ```bash
+   mkdir Project
+   ```
+
+3. Navigate to directory:
+   ```bash
+   cd Project
+   ```
+
+4. Initialize a Cargo project:
+   ```bash
+   cargo new my_project
+   cd my_project
+   ```
+
+## Install Packages
+
+Install a package:
+```bash
+cargo add package
+```
+
+## Using Dependencies
+
+Install packages using Cargo.toml:
+```bash
+cargo build
+```   ```
