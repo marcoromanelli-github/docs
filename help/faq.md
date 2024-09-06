@@ -294,3 +294,29 @@ Due to the security model and the cluster's architecture, `root` or `sudo` acces
 **Installing packages without root access**
 
 Because normal users do not have sudo or root access, you may want to create a virtual environment or install into the home directory for your required software packages. Setting up a project like this will allow you to isolate project dependencies, prevent version conflicts, and ensure your environment is reproducible if sharing or collaboration is necessary.
+
+***Python Example***
+Create a virtual environment:
+   ```
+   python3 -m venv research1
+   ```
+Activate the environment:
+   ```
+   source research1/bin/activate
+   ```
+   Your current line should be prefixed with the environment name:
+   ```
+   (research1) user@super-computer
+   ```
+Deactivate the environment (when you're done):
+   ```
+   deactivate
+   ```
+Install new package:
+   ```
+   pip install package_name
+   ```
+Deactivate the environment if it's active:
+   ```
+   deactivate
+   ```
