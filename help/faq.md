@@ -295,7 +295,8 @@ Due to the security model and the cluster's architecture, `root` or `sudo` acces
 
 Because normal users do not have sudo or root access, you may want to create a virtual environment or install into the home directory for your required software packages. Setting up a project like this will allow you to isolate project dependencies, prevent version conflicts, and ensure your environment is reproducible if sharing or collaboration is necessary.
 
-***Python Example***
+**Python Example**
+
 Create a virtual environment:
    ```
    python3 -m venv research1
