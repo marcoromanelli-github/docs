@@ -309,10 +309,6 @@ Activate the environment:
    ```
    (research1) user@super-computer
    ```
-Deactivate the environment (when you're done):
-   ```
-   deactivate
-   ```
 Install new package:
    ```
    pip install package_name
