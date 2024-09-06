@@ -1,6 +1,7 @@
-# Enhanced Virtual Environment Guide
+# Virtual Environment Guide
 
-Guides for setting up development/research environments on the cluster (Made for Linux)
+This guide provides different methods for installing virtual environments in multiple languages including 
+Python, R, Julia, Rust, C, C++, and other languages. This will allow you to create projects in isolated environments that will not require root or sudo access.
 
 ## General Tips (New Section)
 
