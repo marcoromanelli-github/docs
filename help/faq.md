@@ -286,3 +286,11 @@ And here is the `dowork.sh` script:
 files/dowork.sh
 
 </div>
+
+### How can I get sudo access?
+
+Due to the security model and the cluster's architecture, `root` or `sudo` access is restricted for normal users and cannot be openly distributed. Most tasks and projects should not require the use of sudo permissions and may have non-root alternatives anyway. However, if you have specific software to install, please see [here](https://google.com/). For any other tasks that may require `sudo` access, please submit a support request or contact the HPC support team to assist you with your needs. 
+
+**Installing packages without root access**
+
+Because normal users do not have sudo or root access, you may want to create a virtual environment or install into the home directory for your required software packages. Setting up a project like this will allow you to isolate project dependencies, prevent version conflicts, and ensure your environment is reproducible if sharing or collaboration is necessary.
