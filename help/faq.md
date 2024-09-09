@@ -63,14 +63,30 @@ Yes. Please see `/software/python_r_perl`.
 
 ### How can I check my disk quota and disk usage?
 
-repquota prints a summary of the disc usage and quotas for the specified file systems.
+To check the disk quota of your home directory (/home/username), you can use the repquota command which prints a summary of the disc usage and quotas for the specified file systems.
 
     $ /usr/sbin/repquota -a -s
     $                    Block limits                 File limits
     $ User              used    soft    hard  grace    used   soft  hard  grace
     $ cchave6    --     116M   1024M   1280M           1922      0     0
 
-If you want to see the quota on the home directory where the file system is ext4, the quota information is stored in files named aquota.user and aquota.group at the root of filesystem.
+Here,
+Soft Limit -> This is a warning threshold. A user can exceed this limit temporarily, but they must reduce usage back under this limit within a "grace period."
+Hard Limit -> Hard Limit: This is the absolute maximum disk space or number of files a user can use. The user cannot exceed this limit at all.
+Grace Period -> The amount of time a user is allowed to exceed the soft limit before they are required to get back under it. If this period expires, the soft limit becomes enforced like a hard limit.
+File limits (inodes) -> These limit the number of files a user can create, regardless of their size.
+
+
+To check the quota of the main project storage (parallel file system - /fs1/proj/<project>), you can use this command:
+
+    $ mmlsquota -j <fileset_name> <filesystem_name>
+
+-j -> The -j option specifies that you are querying a fileset. Filesets in GPFS are similar to directories that can have independent quota limits.
+fileset_name -> This is the name of the fileset whose quota you want to check.
+filesystem_name -> The name of the GPFS filesystem in which the fileset resides.
+
+example: mmlsquota -j project_fileset gpfs1
+
 
 ### How many CPU hours have I spent?
 
