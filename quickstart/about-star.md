@@ -21,10 +21,10 @@ The cluster also supports various software applications tailored to different ne
 ### Compute Nodes
 
 - Two Apollo 6500 Gen10+ HPE nodes, _each_ containing 8 NVIDIA A100 SXM GPUs.
-- One HPE ProLiant DL385 Gen10+ v2, containing 2 NVIDIA A30 SXM GPUs.
+- One HPE ProLiant DL385 Gen10+ v2, containing 2 A30 SXM NVIDIA GPUs.
 - One HPE A30 node, containing 2 NVIDIA A30 GPUs.
 - Two HPE Apollo 6500 nodes, _each_ containing 8 NVIDIA A100 GPUs.
-- Two DL385s nodes, _each_ containing 2 NVIDIA PCIe H100 GPUs.
+- Two HPE DL385s, _each_ containing 2 NVIDIA PCIe H100 GPUs.
 - Two Cray XD665 nodes, _each_ containing 4 NVIDIA HGX H100 80GB GPUs.
 - One Cray XD670 node, containing 8 NVIDIA HGX H100 80GB GPUs.
 
@@ -52,40 +52,65 @@ The cluster also supports various software applications tailored to different ne
 | GPU                           | 2 SXM NVIDIA A30s                          |
 | Local Storage (Scratch Space) | 854G                                       |
 
-#### HPE A30
+#### HPE A30 Node
 
-| Attribute\Node Name | a30node           |
-| ------------------- | ----------------- |
-| Model Name          | HPE A30 Node      |
-| GPUs                | 2 NVIDIA A30 GPUs |
+| Attribute\Node Name           | gpu3                                       |
+| ----------------------------- | ------------------------------------------ |
+| Model Name                    | HPE A30 Node                               |
+| Sockets                       | 2                                          |
+| Cores per Socket              | 32                                         |
+| Threads per Core              | 2                                          |
+| Memory                        | 256GiB Total Memory (16 x 16GiB DIMM DDR4) |
+| GPU                           | 2 NVIDIA A30s                              |
+| Local Storage (Scratch Space) | 854GB                                      |
 
-#### HPE Apollo 6500
+#### HPE Apollo 6500 (New Nodes)
 
-| Attribute\Node Name | apollo6500node1      | apollo6500node2      |
-| ------------------- | -------------------- | -------------------- |
-| Model Name          | HPE Apollo 6500 Node | HPE Apollo 6500 Node |
-| GPUs                | 8 NVIDIA A100 GPUs   | 8 NVIDIA A100 GPUs   |
+| Attribute\Node Name           | gpu4                                         | gpu5                                         |
+| ----------------------------- | -------------------------------------------- | -------------------------------------------- |
+| Model Name                    | HPE Apollo 6500                              | HPE Apollo 6500                              |
+| Sockets                       | 2                                            | 2                                            |
+| Cores per Socket              | 32                                           | 32                                           |
+| Threads per Core              | 2                                            | 2                                            |
+| Memory                        | 1024 GiB Total Memory (16 x 64GiB DIMM DDR4) | 1024 GiB Total Memory (16 x 64GiB DIMM DDR4) |
+| GPU                           | 8 NVIDIA A100 GPUs                           | 8 NVIDIA A100 GPUs                           |
+| Local Storage (Scratch Space) | 407GB                                        | 407GB                                        |
 
-#### DL385s
+#### HPE DL385 (New Nodes)
 
-| Attribute\Node Name | dl385node1              | dl385node2              |
-| ------------------- | ----------------------- | ----------------------- |
-| Model Name          | DL385s Node             | DL385s Node             |
-| GPUs                | 2 NVIDIA PCIe H100 GPUs | 2 NVIDIA PCIe H100 GPUs |
+| Attribute\Node Name           | gpu6                                       | gpu7                                       |
+| ----------------------------- | ------------------------------------------ | ------------------------------------------ |
+| Model Name                    | HPE DL385                                  | HPE DL385                                  |
+| Sockets                       | 2                                          | 2                                          |
+| Cores per Socket              | 32                                         | 32                                         |
+| Threads per Core              | 2                                          | 2                                          |
+| Memory                        | 256GiB Total Memory (16 x 16GiB DIMM DDR4) | 256GiB Total Memory (16 x 16GiB DIMM DDR4) |
+| GPU                           | 2 NVIDIA PCIe H100 GPUs                    | 2 NVIDIA PCIe H100 GPUs                    |
+| Local Storage (Scratch Space) | 854GB                                      | 854GB                                      |
 
-#### Cray XD665
+#### Cray XD665 Nodes
 
-| Attribute\Node Name | xd665node1                  | xd665node2                  |
-| ------------------- | --------------------------- | --------------------------- |
-| Model Name          | Cray XD665 Node             | Cray XD665 Node             |
-| GPUs                | 4 NVIDIA HGX H100 80GB GPUs | 4 NVIDIA HGX H100 80GB GPUs |
+| Attribute\Node Name           | cray01                                       | cray02                                       |
+| ----------------------------- | -------------------------------------------- | -------------------------------------------- |
+| Model Name                    | Cray XD665                                   | Cray XD665                                   |
+| Sockets                       | 2                                            | 2                                            |
+| Cores per Socket              | 32                                           | 32                                           |
+| Threads per Core              | 2                                            | 2                                            |
+| Memory                        | 1024 GiB Total Memory (16 x 64GiB DIMM DDR4) | 1024 GiB Total Memory (16 x 64GiB DIMM DDR4) |
+| GPU                           | 4 NVIDIA HGX H100 80GB GPUs                  | 4 NVIDIA HGX H100 80GB GPUs                  |
+| Local Storage (Scratch Space) | 1TB                                          | 1TB                                          |
 
-#### Cray XD670
+#### Cray XD670 Node
 
-| Attribute\Node Name | xd670node                   |
-| ------------------- | --------------------------- |
-| Model Name          | Cray XD670 Node             |
-| GPUs                | 8 NVIDIA HGX H100 80GB GPUs |
+| Attribute\Node Name           | cray03                                       |
+| ----------------------------- | -------------------------------------------- |
+| Model Name                    | Cray XD670                                   |
+| Sockets                       | 2                                            |
+| Cores per Socket              | 32                                           |
+| Threads per Core              | 2                                            |
+| Memory                        | 2048 GiB Total Memory (32 x 64GiB DIMM DDR4) |
+| GPU                           | 8 NVIDIA HGX H100 80GB GPUs                  |
+| Local Storage (Scratch Space) | 2TB                                          |
 
 ### Storage System
 
