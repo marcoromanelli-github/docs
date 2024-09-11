@@ -64,7 +64,7 @@ The cluster also supports various software applications tailored to different ne
 | GPU                           | 2 NVIDIA A30s                              |
 | Local Storage (Scratch Space) | 854GB                                      |
 
-#### HPE Apollo 6500 (New Nodes)
+#### HPE Apollo 6500
 
 | Attribute\Node Name           | gpu4                                         | gpu5                                         |
 | ----------------------------- | -------------------------------------------- | -------------------------------------------- |
@@ -76,7 +76,7 @@ The cluster also supports various software applications tailored to different ne
 | GPU                           | 8 NVIDIA A100 GPUs                           | 8 NVIDIA A100 GPUs                           |
 | Local Storage (Scratch Space) | 407GB                                        | 407GB                                        |
 
-#### HPE DL385 (New Nodes)
+#### HPE DL385
 
 | Attribute\Node Name           | gpu6                                       | gpu7                                       |
 | ----------------------------- | ------------------------------------------ | ------------------------------------------ |
