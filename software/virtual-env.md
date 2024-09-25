@@ -423,7 +423,7 @@ To share your project environment:
 
 ### How to create and use a virtual environment in Node JS
 
-Node.js doesn't have traditional virtual environments like Python or R, but it uses npm (Node Package Manager) or Yarn to manage dependencies on a per-project basis. Each project typically has its own package.json file that lists dependencies and scripts. The node_modules folder in each project acts similarly to a virtual environment, containing project-specific packages. THe directions below help to initialize a Node.js project using npm.
+Node.js doesn't have traditional virtual environments like Python or R, but it uses npm (Node Package Manager) or Yarn to manage dependencies on a per-project basis. Each project typically has its own package.json file that lists dependencies and scripts. The node_modules folder in each project acts similarly to a virtual environment, containing project-specific packages. The directions below help to initialize a Node.js project using npm.
 
 #### Setup environment
 Create a new directory and initialize it with npm. This creates a package.json file to manage your project's dependencies.
