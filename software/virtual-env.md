@@ -6,10 +6,10 @@ Managing software dependencies and configurations can be challenging in an HPC e
 
 ### How to create and use a virtual environment in Python
 
-Manage virtual environments for Python and packages within that environment.
+There are several different ways you can create a virtual environment and install packages for Python. The `venv` module that comes with Python 3 is a lightweight tool that provides a standard way to create virtual environments. It is suitable for simple projects with minimal external dependencies. `virtualenv` is another tool that serves a similar purpose, but works with both Python 2 and 3. In either case, you would use `pip` to manage and install the Python packages in the virtual environments created with `venv` or `virtualenv`. Another way that is often recommended is using `conda`, the package manager and environment manager tool provided by Anaconda. Anaconda is better suited for projects that require data science libraries and have more complex dependencies. All these tools allow you to manage virtual environments for Python and packages within that environment. Below are directions for using venv to illustrate the concept. The steps may vary with other tools.
 
 #### Setup environment
-Creating a new Python virtual environment using venv. Other virtual environment managers include conda, virtualenv, pipenv.
+Creating a new Python virtual environment using venv.
 
 1. Ensure Python is installed:
    ```
