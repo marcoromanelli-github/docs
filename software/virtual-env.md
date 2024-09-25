@@ -51,7 +51,7 @@ Create a new Python virtual environment using venv.
    ```
 
 #### Deactivate environment
-Deactivate environemnt when finished:
+Deactivate environment when finished:
 
 ```
 deactivate
