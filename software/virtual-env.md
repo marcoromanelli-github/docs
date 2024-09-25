@@ -2,24 +2,14 @@
 
 Managing software dependencies and configurations can be challenging in an HPC environment. Users often need different versions of the same software or libraries, leading to conflicts and complex setups. Virtual environments provide a solution by allowing users to isolate their project and its dependencies. This simplifies the setup process, ensures that users have the correct software environment for their applications, and reduces conflicts and errors caused by incompatible software versions. This guide provides different methods for installing or simulating virtual environments in multiple languages including Python, R, Julia, Rust, C, C++, and other languages. This will allow you to create projects in isolated environments that will not require root or sudo access.
 
-## General Tips
-
-- Always use version control (e.g., Git) alongside virtual environments
-- Document your project setup and dependencies
-- Regularly update your virtual environment and dependencies
-- Be consistent with naming conventions for your projects and environments
-
-## What is a virtual environment?
-A virtual environment is an environment or directory that isolates packages, libraries, and dependencies for a specific project. This prevents any dependencies from being permanently installed on the actual system while still allowing it to be managed within the project's directory. 
-
 ## Python
 
 ### How to create and use a virtual environment in Python
 
-This section of the guide explains how to use, create, and manage virtual environments for Python as well as install and manage packages within that environment.
+Manage virtual environments for Python and packages within that environment.
 
 #### Setup environment
-This subsection walks you through creating a new Python virtual environment. A virtual environment in Python is an isolated working copy of Python which allows you to work on a specific project without affecting other projects.
+Creating a new Python virtual environment using venv. Other virtual environment managers include conda, virtualenv, pipenv.
 
 1. Ensure Python is installed:
    ```
@@ -110,7 +100,7 @@ Saving your project's dependencies allows you to easily recreate your environmen
    ```
 
 #### Using dependencies
-This section explains how to install dependencies from a requirements file, which is useful when setting up a project on a new machine or collaborating with others.
+Install dependencies from a requirements file, when setting up a project on a new machine or collaborating with others.
 
 1. Install dependencies from requirements file:
    ```
@@ -128,7 +118,7 @@ This section explains how to install dependencies from a requirements file, whic
    ```
 
 #### Running Python scripts
-To run a Python script within the virtual environment:
+Run a script within the virtual environment:
 
 1. Ensure the virtual environment is activated
 2. Run the script:
@@ -138,7 +128,7 @@ To run a Python script within the virtual environment:
 
 
 #### Delete virtual environment
-When you're done with a project or want to start fresh, you can delete the virtual environment. This removes all installed packages and the environment itself.
+Deleting the virtual environment removes all installed packages and the environment itself.
 
 1. Deactivate the environment if it's active:
    ```
@@ -154,10 +144,10 @@ When you're done with a project or want to start fresh, you can delete the virtu
 
 ### How to create and use a virtual environment in R
 
-This section explains how to use, create, and manage virtual environments for R as well as install and manage packages within that environment. R uses the 'renv' package to create project-specific libraries, which function similarly to virtual environments in other languages.
+Manage virtual environments for R and packages within that environment. R uses the 'renv' package to create project-specific libraries.
 
 #### Setup environment
-Setting up an R environment involves creating a new R project and initializing it with renv, which will manage project-specific package libraries.
+Create a new R project and initialize it with renv
 
 1. Ensure R is installed:
    ```
@@ -206,7 +196,7 @@ Deactivating an environment returns you to the global R library, which is useful
 ```
 
 #### Installing Packages
-Installing packages in an renv environment adds them to your project-specific library, keeping your project dependencies isolated.
+Installing packages in an renv environment adds them to your project-specific library.
 
 1. Install a package:
    ```R
@@ -219,7 +209,7 @@ Installing packages in an renv environment adds them to your project-specific li
    ```
 
 #### Using dependencies
-These commands allow you to save the state of your environment, restore it on another machine, or update all packages in your project.
+Save the state of your environment for reuse.
 
 1. Save environment state to lock file:
    ```R
@@ -237,7 +227,7 @@ These commands allow you to save the state of your environment, restore it on an
    ```
 
 #### Running R scripts
-To run an R script within the project environment:
+Run an R script within the project environment:
 
 1. Ensure you're in the project directory
 2. Run the script:
@@ -245,8 +235,6 @@ To run an R script within the project environment:
    Rscript your_script.R
    ```
 
-#### Managing different R versions
-While renv doesn't manage R versions directly, you can use tools like `rig` or `RSwitch` to manage multiple R versions on your system.
 
 #### Sharing environments
 To share your project environment:
@@ -258,7 +246,7 @@ To share your project environment:
    ```
 
 #### Delete virtual environment
-Deleting an R virtual environment involves removing the renv directory and associated files. This completely removes the isolated environment and its packages.
+Remove the renv directory and associated files. This deletes the environment and its packages.
 
 1. Exit R if you're in an R session
 
@@ -276,10 +264,10 @@ Deleting an R virtual environment involves removing the renv directory and assoc
 
 ### How to create and use a virtual environment in Julia
 
-This section outlines how to set up, use, and manage project-specific environments in Julia. Julia's built-in package manager provides functionality similar to virtual environments, allowing you to create isolated project environments.
+Manage project-specific environments in Julia. Julia's built-in package manager provides functionality similar to virtual environments.
 
 #### Setup environment
-Setting up a Julia environment involves creating a new project directory and activating it as a Julia environment. This isolates the project's dependencies from other projects.
+Create a new project directory and activate it as a Julia environment. 
 
 1. Check Julia version:
    ```
@@ -314,7 +302,7 @@ Setting up a Julia environment involves creating a new project directory and act
    ```
 
 #### Activate environment
-To activate an existing environment:
+Activate an existing environment:
 
 ```
 julia> ]
@@ -322,7 +310,7 @@ julia> ]
 ```
 
 #### Deactivate environment
-Deactivating an environment in Julia returns you to the default (global) environment. This is useful when switching between projects.
+Deactivating an environment in Julia returns you to the default (global) environment.
 
 ```
 (@v1.10) pkg> activate
@@ -344,7 +332,7 @@ Installing packages in a Julia environment adds them to your project-specific ma
    ```
 
 #### Using dependencies
-These commands allow you to install dependencies from your project files, ensuring consistency across different machines or for different users of your project.
+Install dependencies from your project files, ensuring consistent version usage.
 
 1. Enter package manager:
    ```
@@ -362,7 +350,7 @@ These commands allow you to install dependencies from your project files, ensuri
    ```
 
 #### Running Julia scripts
-To run a Julia script from within the project environment:
+Run a Julia script from within the project environment:
 
 1. Activate the environment in Julia REPL
 2. Run the script:
@@ -390,9 +378,9 @@ Julia allows you to have multiple environments for different purposes:
    ```
 
 #### Delete virtual environment
-In Julia, deleting a virtual environment simply involves removing the project-specific files. This removes the isolated environment and its package information.
+Removing the project-specific files deletes environment and its package information.
 
-Simply delete the Project.toml and Manifest.toml files from your project directory.
+Delete the Project.toml and Manifest.toml files from your project directory.
 
 #### Sharing environments
 To share your project environment:
@@ -407,10 +395,10 @@ To share your project environment:
 
 ### How to create and use a virtual environment in Node JS
 
-This section explains how to set up and manage project-specific environments in Node.js. While Node.js doesn't have traditional virtual environments, it uses npm (Node Package Manager) to manage dependencies on a per-project basis, which serves a similar purpose.
+Manage project-specific environments in Node.js. While Node.js doesn't have traditional virtual environments, it uses npm (Node Package Manager) to manage dependencies in individual projects. 
 
 #### Setup environment
-Setting up a Node.js project environment involves creating a new directory and initializing it with npm. This creates a package.json file to manage your project's dependencies.
+Create a new directory and initialize it with npm. This creates a package.json file to manage your project's dependencies.
 
 1. Check node version:
    ```
@@ -438,7 +426,7 @@ Setting up a Node.js project environment involves creating a new directory and i
    ```
 
 #### Install packages
-Installing packages in a Node.js project adds them to your package.json file and the node_modules directory, keeping your project dependencies isolated and easily reproducible.
+Installing packages in a Node.js project adds them to your package.json file and the node_modules directory.
 
 1. Install a package and save it to package.json:
    ```
@@ -451,7 +439,7 @@ Installing packages in a Node.js project adds them to your package.json file and
    ```
 
 #### Using dependencies
-These commands allow you to use a specific Node.js version for your project and install or update all dependencies listed in your package.json file.
+Use a specific Node.js version for your project and install or update all dependencies listed in your package.json file.
 
 1. Use .nvmrc for node version:
    ```
@@ -469,7 +457,7 @@ These commands allow you to use a specific Node.js version for your project and 
    ```
 
 #### Managing different Node.js versions
-Node Version Manager (nvm) allows you to install and use different versions of Node.js for different projects, providing a way to isolate not just packages but the JavaScript runtime itself.
+Node Version Manager (nvm) allows you to install and use different versions of Node.js for different projects.
 
 1. Install a specific Node.js version:
    ```
@@ -509,7 +497,7 @@ An .npmrc file can be used to configure npm behavior for your project:
    This will save exact versions of packages instead of using npm's default semantic versioning range operator.
 
 #### Delete virtual environment
-In Node.js, removing the "virtual environment" involves deleting the node_modules directory and optionally the package.json file. This removes all installed packages and dependency information.
+Remove the "virtual environment" by deleting the node_modules directory and optionally the package.json file. This removes all installed packages and dependency information.
 
 1. Delete the node_modules directory:
    ```
@@ -530,10 +518,10 @@ You can keep the `package.json` if you want to reinstall your dependencies later
 
 ### How to use the home directory for development with C
 
-This section provides guidance on setting up a local development environment for C programming without requiring root access. It explains how to configure your home directory to install and use libraries, as well as how to structure and compile C projects.
+Setting up a local development environment for C without requiring root access. Configure your home directory to install and use libraries, as well as how to structure and compile C projects.
 
 #### Setup environment
-Setting up a C development environment in your home directory involves creating directories for binaries, libraries, and include files, and setting up environment variables to use these directories.
+Create directories for binaries, libraries, and include files, and setting up environment variables to use these directories.
 
 1. Verify installation:
    ```
@@ -560,7 +548,7 @@ Setting up a C development environment in your home directory involves creating 
    ```
 
 #### Install packages
-Installing packages (libraries) for C development in your home directory involves downloading source code, compiling it, and installing it in your local directories.
+Installing packages (libraries) for C development in your home directory by downloading source code, compiling it, and installing it in your local directories.
 
 Install a library with example libcurl:
 ```
@@ -573,7 +561,7 @@ make install
 ```
 
 #### Create project
-Creating a C project involves setting up a directory structure, creating source files, and setting up a Makefile for easy compilation.
+Create directory structure, source files, and a Makefile for easy compilation.
 
 1. Set up project structure:
    ```
@@ -637,7 +625,7 @@ To run your compiled C program:
 ```
 
 #### Updating libraries
-To update a library, you typically need to download the new version, compile, and install it similarly to the initial installation process. For example, to update libcurl:
+To update a library, you can download the new version, compile, and install it similar to the initial installation process. For example, to update libcurl:
 
 1. Download and extract the new version
 2. Navigate to the extracted directory
@@ -668,10 +656,10 @@ Remember to also remove or comment out the environment variable settings in your
 
 ### How to use the home directory for development with C++
 
-Similar to the C section, this part of the guide shows how to set up a local C++ development environment using your home directory. It covers installing libraries, creating projects, and compiling C++ code without needing system-wide installations.
+Create a local C++ development environment using your home directory. Install libraries, create projects, and compile C++ code without needing system-wide installations.
 
 #### Setup environment
-Setting up a C++ development environment in your home directory is similar to C, involving creating directories for binaries, libraries, and include files, and setting up environment variables.
+Creating directories for binaries, libraries, and include files, and create environment variables.
 
 1. Verify installation:
    ```
@@ -698,7 +686,7 @@ Setting up a C++ development environment in your home directory is similar to C,
    ```
 
 #### Install packages
-Installing packages (libraries) for C++ development in your home directory involves downloading source code, compiling it, and installing it in your local directories.
+Installing packages (libraries) for C++ development in your home directory by downloading source code, compiling it, and installing it in your local directories.
 
 Install a library with example boost:
 ```
@@ -710,7 +698,7 @@ cd boost_1_76_0
 ```
 
 #### Create project
-Creating a C++ project involves setting up a directory structure, creating source files, and setting up a Makefile for easy compilation.
+Create a C++ project by creating a directory structure, source files, and a Makefile for easy compilation.
 
 1. Set up project structure:
    ```
@@ -777,7 +765,7 @@ To run your compiled C++ program:
 ```
 
 #### Updating libraries
-To update a library, you typically need to download the new version, compile, and install it similarly to the initial installation process. For example, to update Boost:
+To update a library, you can download the new version, compile, and install it similar to the initial installation process. For example, to update Boost:
 
 1. Download and extract the new version
 2. Navigate to the extracted directory
@@ -806,10 +794,10 @@ Remember to also remove or comment out the environment variable settings in your
 
 ### How to simulate a virtual environment with rust
 
-This guide outlines how to create a project-specific environment in Rust, similar to virtual environments in other languages. Rust uses Cargo, its package manager and build system, to manage dependencies and create isolated project environments.
+Rust uses Cargo, its package manager and build system, to manage dependencies and create isolated project environments.
 
 #### Setup Environment
-Setting up a Rust project environment involves creating a new directory and initializing it with Cargo. This creates a new Rust project with its own Cargo.toml file for managing dependencies.
+Create a new directory and intiialize it with Cargo. This creates a new Rust project with its own Cargo.toml file for managing dependencies.
 
 1. Ensure Rust and Cargo are installed:
    ```bash
@@ -850,7 +838,7 @@ cargo build
 ```
 
 #### Delete virtual environment
-In Rust, there isn't a traditional "virtual environment" to delete. The project isolation is achieved through the project-specific Cargo.toml file and the target directory. To "delete" this environment:
+In Rust, there isn't a traditional "virtual environment" to delete. Rust's Cargo.toml handles this by default. To "delete" this environment:
 
 1. Remove the entire project directory:
    ```bash
