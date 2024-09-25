@@ -546,7 +546,7 @@ You can keep the `package.json` if you want to reinstall your dependencies later
 
 ### How to use the home directory for development with C
 
-Setting up a local development environment for C without requiring root access. Configure your home directory to install and use libraries, as well as how to structure and compile C projects.
+C doesn't have a built-in package manager or virtual environment system like more modern languages. Instead, C developers typically manage their development environment and dependencies manually. For system-wide installations, package managers like apt, yum, or Homebrew are often used to install libraries and tools. For user-specific or project-specific setups, developers commonly create custom directory structures in their home directory or project folders to house libraries, header files, and binaries. Environment variables like PATH, LD_LIBRARY_PATH, and CPATH are used to tell the compiler and linker where to find these custom installations. Build tools like Make, CMake, or Autotools are used to manage the compilation process and handle dependencies. This offers fine-grained control over the development environment and appeals to C's nature. Below are directions to set up the C environment using various directory and variable configurations. 
 
 #### Setup environment
 Create directories for binaries, libraries, and include files, and setting up environment variables to use these directories.
@@ -684,7 +684,7 @@ Remember to also remove or comment out the environment variable settings in your
 
 ### How to use the home directory for development with C++
 
-Create a local C++ development environment using your home directory. Install libraries, create projects, and compile C++ code without needing system-wide installations.
+Like C, C++ doesn't have a standardized built-in package manager or virtual environment system like some modern languages. Instead, C++ developers typically manage their development environment and dependencies manually or through third-party tools. For system-wide installations, package managers like apt, yum, or vcpkg are often used to install libraries and tools. For user-specific or project-specific setups, developers commonly create custom directory structures in their home directory or project folders to house libraries, header files, and binaries. Environment variables like PATH, LD_LIBRARY_PATH, and CPATH are used to tell the compiler and linker where to find these custom installations. Build systems like CMake, Make, or Ninja are widely used to manage the compilation process and handle dependencies. This offers fine-grained control over the development environment and appeals to the nature of C++. Below are directions to set up the C++ environment using various directory and variable configurations. 
 
 #### Setup environment
 Creating directories for binaries, libraries, and include files, and create environment variables.
@@ -822,7 +822,7 @@ Remember to also remove or comment out the environment variable settings in your
 
 ### How to simulate a virtual environment with rust
 
-Rust uses Cargo, its package manager and build system, to manage dependencies and create isolated project environments.
+Rust uses Cargo, its built-in package manager and build system, to manage dependencies and create isolated project environments. Unlike some languages that require separate tools for virtual environments, Rust's approach integrates this functionality directly into its core toolchain. Each Rust project, initialized with cargo new, creates a self-contained environment with its own Cargo.toml file for declaring dependencies and build configurations. Cargo handles downloading, compiling, and linking of dependencies, ensuring that each project has its own isolated set of packages. Below are the directions for creating the development environment in rust.
 
 #### Setup Environment
 Create a new directory and intialize it with Cargo. This creates a new Rust project with its own Cargo.toml file for managing dependencies.
