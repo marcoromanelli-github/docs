@@ -140,6 +140,34 @@ Deleting the virtual environment removes all installed packages and the environm
    rm -rf research1
    ```
 
+#### Other tools
+
+#### Virtualenv
+Install virtualenv
+```
+python -m pip --user virtualenv 
+```
+
+Create an environment 
+```
+virtualenv <environment_name>
+```
+
+Activate the environment
+```
+<environment_name>/bin/activate
+```
+#### Conda
+Create an environment with conda 
+```
+conda create --name <environment_name> python=<version>
+```
+
+Activate the environment 
+```
+conda activate <environment_name>
+```
+
 ## R
 
 ### How to create and use a virtual environment in R
