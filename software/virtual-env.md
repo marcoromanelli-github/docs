@@ -825,7 +825,7 @@ Remember to also remove or comment out the environment variable settings in your
 Rust uses Cargo, its package manager and build system, to manage dependencies and create isolated project environments.
 
 #### Setup Environment
-Create a new directory and intiialize it with Cargo. This creates a new Rust project with its own Cargo.toml file for managing dependencies.
+Create a new directory and intialize it with Cargo. This creates a new Rust project with its own Cargo.toml file for managing dependencies.
 
 1. Ensure Rust and Cargo are installed:
    ```bash
