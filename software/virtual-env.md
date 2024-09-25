@@ -172,7 +172,7 @@ conda activate <environment_name>
 
 ### How to create and use a virtual environment in R
 
-Manage virtual environments for R and packages within that environment. R uses the 'renv' package to create project-specific libraries.
+There are several ways to manage project environments and install packages in R. The renv package is a popular tool for creating project-specific libraries. It's suitable for most R projects and works well with version control systems. Another option is packrat, which was a precursor to renv and serves a similar purpose. Regardless, both options allow you to manage project environments and packages within R. Below are directions using renv to create and manage a virtual environment.
 
 #### Setup environment
 Create a new R project and initialize it with renv
