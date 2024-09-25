@@ -51,14 +51,14 @@ Creating a new Python virtual environment using venv.
    ```
 
 #### Deactivate environment
-When you're done working in the virtual environment, you can deactivate it:
+Deactivate environemnt when finished:
 
 ```
 deactivate
 ```
 
 #### Installing packages
-Once your virtual environment is set up and activated, you can install packages specific to your project. This keeps your project dependencies separate from other projects and the global Python installation.
+Install packages specific to your project.
 
 1. Upgrade pip to the latest version:
    ```
