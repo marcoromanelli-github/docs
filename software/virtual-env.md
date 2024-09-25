@@ -292,7 +292,7 @@ Remove the renv directory and associated files. This deletes the environment and
 
 ### How to create and use a virtual environment in Julia
 
-Manage project-specific environments in Julia. Julia's built-in package manager provides functionality similar to virtual environments.
+Julia's built-in package manager, Pkg, provides functionality similar to virtual environments in other languages. The primary method is using project environments, which are defined by Project.toml and Manifest.toml files. These environments allow you to have project-specific package versions and dependencies. To create and manage these environments, you use Julia's REPL in package mode (accessed by pressing ']')
 
 #### Setup environment
 Create a new project directory and activate it as a Julia environment. 
@@ -423,7 +423,7 @@ To share your project environment:
 
 ### How to create and use a virtual environment in Node JS
 
-Manage project-specific environments in Node.js. While Node.js doesn't have traditional virtual environments, it uses npm (Node Package Manager) to manage dependencies in individual projects. 
+Node.js doesn't have traditional virtual environments like Python or R, but it uses npm (Node Package Manager) or Yarn to manage dependencies on a per-project basis. Each project typically has its own package.json file that lists dependencies and scripts. The node_modules folder in each project acts similarly to a virtual environment, containing project-specific packages. THe directions below help to initialize a Node.js project using npm.
 
 #### Setup environment
 Create a new directory and initialize it with npm. This creates a package.json file to manage your project's dependencies.
