@@ -18,15 +18,21 @@ The cluster also supports various software applications tailored to different ne
 
 ### Login Node
 
+- IBM System x3550 with 128GB RAM
+- DL325 Gen10+ with an 8-core EPYC processor, 128GB RAM
+- DL385 Gen10+ v2 with 2x AMD 32-core EPYC processors, 256GB RAM
+
+### Head node
+
+- 1x DL325 Gen10+v2 Server with 16 cores, 128GB RAM, 2x 960GB SSDs
+
 ### Compute Nodes
 
-- Two Apollo 6500 Gen10+ HPE nodes, _each_ containing 8 NVIDIA A100 SXM GPUs.
-- One HPE ProLiant DL385 Gen10+ v2, containing 2 A30 SXM NVIDIA GPUs.
-- Two XL675d Gen10+ servers (Apollo 6500 Gen10+ chassis), _each_ containing 8 NVIDIA A100 SXM4 GPUs.
-- One HPE DL385 Gen10+ v2 with 2 A30 PCIe GPUs.
-- Two HPE DL380a Gen11 servers, _each_ containing 2 NVIDIA H100 80GB GPUs.
-- Two Cray XD665 nodes, _each_ containing 4 NVIDIA HGX H100 80GB GPUs.
-- One Cray XD670 node, containing 8 NVIDIA HGX H100 80GB GPUs.
+- 1x HPE DL385 Gen10+ v2 node with 2x NVIDIA A30 24GB PCIe GPUs, 2x AMD EPYC 32-core processors, 256GiB DDR4 RAM
+- 2x HPE XL675d Gen10+ nodes (Apollo 6500 Gen10+ chassis), each with 8x NVIDIA A100 80GB SXM GPUs, 1TiB 3200 DDR4 RAM, 2x 480GB SSD
+- 2x HPE DL380a Gen11, each with 2x NVIDIA H100 80GB PCIe GPUs, 2x Intel Xeon 32-core processors, 512GiB DDR5 RAM
+- 2x Cray XD665 nodes, each with 4x NVIDIA H100 80GB SXM GPUs, 2x AMD EPYC 32-core processors, 768GiB DDR5 RAM
+- 1x Cray XD670 node with 8x NVIDIA H100 80GB SXM GPUs, 2x Intel Xeon 32-core processors, 2TiB DDR5 RAM
 
 #### HPE Apollo 6500 Gen10
 
