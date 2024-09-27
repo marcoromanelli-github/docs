@@ -58,6 +58,10 @@ want to try running `bundle update` or removing `Gemfile.lock` and then running
 git clone https://github.com/starhpc/docs.git star-docs
 cd star-docs
 gem install bundler
+bundle config set --local path ~/.bundler  # Optionally specify where to install gems (SO Q&A #8257833).
+                                           # Otherwise, bundler may attempt to install gems system-wide,
+                                           # e.g. /usr/share/gems, depending on your GEM_HOME
+                                           # (see SO Q&A #11635042 and #3408868).
 bundle install
 bundle exec jekyll serve
 ```
