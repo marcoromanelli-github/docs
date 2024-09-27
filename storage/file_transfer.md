@@ -76,12 +76,12 @@ Cyberduck is available for both Windows and Mac.
 
    ![3-connection.png]({{ site.baseurl }}/images/cyberduck_setup_images/3-connection.png "3-connection.png")
 
-4. Select "SFTP (SSH File Transfer Protocol)" from the top dropdown menu. Enter the server, port, username, and password for the machine you are trying to access. Then click "Connect".
+4. Select "SFTP (SSH File Transfer Protocol)" from the top dropdown menu. Enter the server, port, h700 number, and Linux Lab password. Then click "Connect".
 
 5. If you see a window asking about an "Unknown fingerprint", click "Always" and then "Allow".
 
    ![4-fingerprint.png]({{ site.baseurl }}/images/cyberduck_setup_images/4-fingerprint.png "4-fingerprint.png")
 
-6. You should now be able to see the files on your remote machine. You can transfer files to and from it by dragging and dropping files between this window and your "Finder" windows.
+6. You should now be able to see your user's home directory on the cluster. You can transfer files to and from it by dragging and dropping files between this window and your "Finder" windows.
 
    ![5-transfer.png]({{ site.baseurl }}/images/cyberduck_setup_images/5-transfer.png "5-transfer.png")
