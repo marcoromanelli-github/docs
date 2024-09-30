@@ -87,5 +87,5 @@ Project-specific directories may be created upon request for shared storage amon
 
 To make proper use of the cluster, please familiarize yourself with the basics of using Slurm, fundamental HPC concepts, and the cluster's architecture.
 
-You may be familiar with the `.bashrc`, `.bash_profile`, or `.cshrc` files for environment customization. To support different environments needed for different software packages, environment modules are used. Modules allow you to load and unload various software environments tailored to your computational tasks.
+You may be familiar with the `.bashrc`, `.bash_profile`, or `.cshrc` files for environment customization. To support different environments needed for different software packages, [environment modules]({{site.baseurl}}{% link software/env-modules.md %}) are used. Modules allow you to load and unload various software environments tailored to your computational tasks.
 

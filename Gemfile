@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-gem "jekyll-rtd-theme", "~> 2.0.10"
+gem "jekyll-rtd-theme", git: "https://github.com/StarHPC/jekyll-rtd-theme"
 
 gem "github-pages", group: :jekyll_plugins
 
