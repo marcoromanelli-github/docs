@@ -56,12 +56,12 @@ All file transfer access to the Star HPC Cluster is currently through the login 
 
 File transfers are authenticated in the same way as SSH access. SSH keys are the preferred method for secure authentication, although password authentication is currently allowed. Plans for implementing Multi-Factor Authentication (MFA) are being considered for future security enhancements.
 
-# Cyberduck
+## Cyberduck
 
 [Cyberduck](https://cyberduck.io/) is a file transfer application with an intuitive graphical interface for transfering files to or from a remote machine.
 Cyberduck is available for both Windows and Mac.
 
-## Installation
+### Installation
 
 1. Download the Cyberduck package from [cyberduck.io](https://cyberduck.io/).
 
