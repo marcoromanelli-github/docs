@@ -820,7 +820,7 @@ In C++, there's no virtual environment to delete. However, you can remove your l
 
 Remember to also remove or comment out the environment variable settings in your `~/.bashrc` or `~/.bash_profile` if you no longer need them.
 
-# Rust
+## Rust
 
 ### How to simulate a virtual environment with rust
 
