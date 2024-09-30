@@ -318,7 +318,7 @@ Deactivate the environment if it's active:
    ```
    deactivate
    ```
-   
+
 **R Example**
 Below are directions on using a simple virtual environment with renv. It is one of the main packages used to manage virtual environments in R.
 
@@ -342,3 +342,9 @@ Deactivate the environment if it's active:
    ```
    renv::deactivate()
    ```
+
+#### For other examples and more in depth guides to setting up or replicating virtual environments for development and as a replacement for sudo access in other langues including Julia, NodeJS, C, C++, Rust, and more please reference [this](https://docs.starhpc.hofstra.io/software/virtual-env.html) guide.
+
+
+
+
