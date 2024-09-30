@@ -44,6 +44,8 @@ For large data transfers, the performance can vary greatly depending on the sour
 
 Rsync is a particularly useful tool and is recommended for transferring files to and from the Star HPC Cluster. It provides an efficient way to sync files and directories across different locations while minimizing data transfer.
 
+## Guidelines for Large File Transfers
+
 When transferring very large files or datasets, it is advised to use rsync and to calculate and confirm checksums to ensure data integrity.
 
 ## Cyberduck
@@ -67,5 +69,4 @@ All file transfer access to the Star HPC Cluster is currently through the login 
 ## User Authentication and Permissions
 
 File transfers are authenticated in the same way as SSH access. SSH keys are the preferred method for secure authentication, although password authentication is currently allowed. Plans for implementing Multi-Factor Authentication (MFA) are being considered for future security enhancements.
-
 
