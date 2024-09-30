@@ -287,7 +287,7 @@ files/dowork.sh
 
 </div>
 
-### How can I get sudo access?
+## How can I get sudo access?
 
 Due to the security model and the cluster's architecture, `root` or `sudo` access is restricted for normal users and cannot be openly distributed. Most tasks and projects should not require the use of sudo permissions and may have non-root alternatives anyway. However, if you have specific software to install, please see [here](https://docs.starhpc.hofstra.io/software/virtual-env.html). For any other tasks that may require `sudo` access, please submit a support request or contact the HPC support team to assist you with your needs. 
 
@@ -295,7 +295,7 @@ Due to the security model and the cluster's architecture, `root` or `sudo` acces
 
 Because normal users do not have sudo or root access, you may want to create a virtual environment or install into the home directory for your required software packages. Setting up a project like this will allow you to isolate project dependencies, prevent version conflicts, and ensure your environment is reproducible if sharing or collaboration is necessary. For more detailed guides to install packagaes in multiple languages please see [here](https://docs.starhpc.hofstra.io/software/virtual-env.html).
 
-### Python Example
+#### Python Example
 Below are directions on using a simple virtual environment with venv. It is one of the many packages that allow you to manage virtual environments along with conda, virtualenv, and others.
 
 Create a virtual environment:
@@ -319,7 +319,7 @@ Deactivate the environment if it's active:
    deactivate
    ```
 
-### R example
+#### R example
 Below are directions on using a simple virtual environment with renv. It is one of the main packages used to manage virtual environments in R.
 
 Create a virtual environment:
