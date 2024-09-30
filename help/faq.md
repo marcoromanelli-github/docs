@@ -318,23 +318,27 @@ Deactivate the environment if it's active:
    ```
    deactivate
    ```
-
+   
 **R Example**
 Below are directions on using a simple virtual environment with renv. It is one of the main packages used to manage virtual environments in R.
 
-Create a new project and initialize renv:
-    ```
-    renv::init()
-    ```
+Create a virtual environment:
+   ```
+   renv::init()
+   ```
 Activate the environment:
-    ```
-    renv::activate()
-    ```
-Install a package:
-    ```
-    install.packages("package_name")
-    ```
-Deactivate an environment:
-    ```
-    renv::deactivate()
-    ```
+   ```
+   renv::activate()
+   ```
+   Your current line should be prefixed with the environment name:
+   ```
+   (research1) user@super-computer
+   ```
+Install new package:
+   ```
+   install.packages("package_name")
+   ```
+Deactivate the environment if it's active:
+   ```
+   renv::deactivate()
+   ```
