@@ -61,61 +61,65 @@ Yes. Please see `/software/python_r_perl`.
 
 ### How can I get sudo access?
 
-Due to the security model and the cluster's architecture, `root` or `sudo` access is restricted for normal users and cannot be openly distributed. Most tasks and projects should not require the use of sudo permissions and may have non-root alternatives anyway. However, if you have specific software to install, please see [here](https://docs.starhpc.hofstra.io/software/virtual-env.html). For any other tasks that may require `sudo` access, please submit a support request or contact the HPC support team to assist you with your needs. 
+Due to the cluster's architecture and security model, `root` or `sudo` access is restricted and standard users cannot perform operations that require root access. However, most standard tasks do not actually require root privledges or have non-root alternatives anyway. Please learn about using [environment modules]({{site.baseurl}}{% link software/env-modules.md %}) and [virtual environments]({{site.baseurl}}{% link software/virtual-env.md %}). If there is any other task that appears to require `sudo` access, please submit a support request or contact the HPC support team to assist you with your needs. 
 
-### Installing packages without root access
+### How can I install packages without root access?
 
-Because normal users do not have sudo or root access, you may want to create a virtual environment or install into the home directory for your required software packages. Setting up a project like this will allow you to isolate project dependencies, prevent version conflicts, and ensure your environment is reproducible if sharing or collaboration is necessary. For more detailed guides to install packagaes in multiple languages please see [here](https://docs.starhpc.hofstra.io/software/virtual-env.html).
+Because normal users do not have sudo or root access, you may want to create a virtual environment or install into the home directory for your required software packages. Setting up a project like this will allow you to isolate project dependencies, prevent version conflicts, and ensure your environment is reproducible if sharing or collaboration is necessary. For more information, please see the [virtual environments guide]({{site.baseurl}}{% link software/virtual-env.md %}).
 
 #### Python Example
 Below are directions on using a simple virtual environment with venv. It is one of the many packages that allow you to manage virtual environments along with conda, virtualenv, and others.
 
 Create a virtual environment:
-   ```
-   python3 -m venv research1
-   ```
+```sh
+python3 -m venv research1
+```
+
 Activate the environment:
-   ```
-   source research1/bin/activate
-   ```
-   Your current line should be prefixed with the environment name:
-   ```
-   (research1) user@super-computer
-   ```
+```sh
+source research1/bin/activate
+```
+
+Your current line should be prefixed with the environment name:
+```
+(research1) user@super-computer
+```
+
 Install new package:
-   ```
-   pip install package_name
-   ```
+```sh
+pip install package_name
+```
+
 Deactivate the environment if it's active:
-   ```
-   deactivate
-   ```
+```sh
+deactivate
+```
 
 #### R example
 Below are directions on using a simple virtual environment with renv. It is one of the main packages used to manage virtual environments in R.
 
 Create a virtual environment:
-   ```
-   renv::init()
-   ```
-Activate the environment:
-   ```
-   renv::activate()
-   ```
-   Your current line should be prefixed with the environment name:
-   ```
-   (research1) user@super-computer
-   ```
-Install new package:
-   ```
-   install.packages("package_name")
-   ```
-Deactivate the environment if it's active:
-   ```
-   renv::deactivate()
-   ```
+```sh
+renv::init()
+```
 
-For other examples and more in depth guides to setting up or replicating virtual environments for development and as a replacement for sudo access in other langues including Julia, NodeJS, C, C++, Rust, and more please reference [this](https://docs.starhpc.hofstra.io/software/virtual-env.html) guide.
+Activate the environment:
+```sh
+renv::activate()
+```
+
+Install new package:
+```sh
+install.packages("package_name")
+```
+
+Deactivate the environment if it's active:
+```sh
+renv::deactivate()
+```
+
+For more information on setting up development environments for other languages, including Julia, NodeJS, C, C++, and Rust, please see the [virtual environments guide]({{site.baseurl}}{% link software/virtual-env.md %}).
+
 
 ## Compute and storage quota
 
