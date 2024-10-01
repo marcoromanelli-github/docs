@@ -9,4 +9,4 @@ Please see the [Quick Start Guide]({{site.baseurl}}{% link quickstart/quickstart
 
 ## Getting help
 
-First, please read [how to write good support requests]({{site.baseurl}}{% link help/writing-support-requests.md %}). Then shoot us an email.
+First, please read [how to write good support requests]({{site.baseurl}}{% link help/writing-support-requests.md %}). Then [contact us]({{site.baseurl}}{% link help/contact.md %}).
