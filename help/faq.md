@@ -59,6 +59,64 @@ solution for you, please contact us and we will do our best to help you.
 
 Yes. Please see `/software/python_r_perl`.
 
+### How can I get sudo access?
+
+Due to the security model and the cluster's architecture, `root` or `sudo` access is restricted for normal users and cannot be openly distributed. Most tasks and projects should not require the use of sudo permissions and may have non-root alternatives anyway. However, if you have specific software to install, please see [here](https://docs.starhpc.hofstra.io/software/virtual-env.html). For any other tasks that may require `sudo` access, please submit a support request or contact the HPC support team to assist you with your needs. 
+
+### Installing packages without root access
+
+Because normal users do not have sudo or root access, you may want to create a virtual environment or install into the home directory for your required software packages. Setting up a project like this will allow you to isolate project dependencies, prevent version conflicts, and ensure your environment is reproducible if sharing or collaboration is necessary. For more detailed guides to install packagaes in multiple languages please see [here](https://docs.starhpc.hofstra.io/software/virtual-env.html).
+
+#### Python Example
+Below are directions on using a simple virtual environment with venv. It is one of the many packages that allow you to manage virtual environments along with conda, virtualenv, and others.
+
+Create a virtual environment:
+   ```
+   python3 -m venv research1
+   ```
+Activate the environment:
+   ```
+   source research1/bin/activate
+   ```
+   Your current line should be prefixed with the environment name:
+   ```
+   (research1) user@super-computer
+   ```
+Install new package:
+   ```
+   pip install package_name
+   ```
+Deactivate the environment if it's active:
+   ```
+   deactivate
+   ```
+
+#### R example
+Below are directions on using a simple virtual environment with renv. It is one of the main packages used to manage virtual environments in R.
+
+Create a virtual environment:
+   ```
+   renv::init()
+   ```
+Activate the environment:
+   ```
+   renv::activate()
+   ```
+   Your current line should be prefixed with the environment name:
+   ```
+   (research1) user@super-computer
+   ```
+Install new package:
+   ```
+   install.packages("package_name")
+   ```
+Deactivate the environment if it's active:
+   ```
+   renv::deactivate()
+   ```
+
+For other examples and more in depth guides to setting up or replicating virtual environments for development and as a replacement for sudo access in other langues including Julia, NodeJS, C, C++, Rust, and more please reference [this](https://docs.starhpc.hofstra.io/software/virtual-env.html) guide.
+
 ## Compute and storage quota
 
 ### How can I check my disk quota and disk usage?
@@ -309,65 +367,3 @@ And here is the `dowork.sh` script:
 files/dowork.sh
 
 </div>
-
-## How can I get sudo access?
-
-Due to the security model and the cluster's architecture, `root` or `sudo` access is restricted for normal users and cannot be openly distributed. Most tasks and projects should not require the use of sudo permissions and may have non-root alternatives anyway. However, if you have specific software to install, please see [here](https://docs.starhpc.hofstra.io/software/virtual-env.html). For any other tasks that may require `sudo` access, please submit a support request or contact the HPC support team to assist you with your needs. 
-
-### Installing packages without root access
-
-Because normal users do not have sudo or root access, you may want to create a virtual environment or install into the home directory for your required software packages. Setting up a project like this will allow you to isolate project dependencies, prevent version conflicts, and ensure your environment is reproducible if sharing or collaboration is necessary. For more detailed guides to install packagaes in multiple languages please see [here](https://docs.starhpc.hofstra.io/software/virtual-env.html).
-
-#### Python Example
-Below are directions on using a simple virtual environment with venv. It is one of the many packages that allow you to manage virtual environments along with conda, virtualenv, and others.
-
-Create a virtual environment:
-   ```
-   python3 -m venv research1
-   ```
-Activate the environment:
-   ```
-   source research1/bin/activate
-   ```
-   Your current line should be prefixed with the environment name:
-   ```
-   (research1) user@super-computer
-   ```
-Install new package:
-   ```
-   pip install package_name
-   ```
-Deactivate the environment if it's active:
-   ```
-   deactivate
-   ```
-
-#### R example
-Below are directions on using a simple virtual environment with renv. It is one of the main packages used to manage virtual environments in R.
-
-Create a virtual environment:
-   ```
-   renv::init()
-   ```
-Activate the environment:
-   ```
-   renv::activate()
-   ```
-   Your current line should be prefixed with the environment name:
-   ```
-   (research1) user@super-computer
-   ```
-Install new package:
-   ```
-   install.packages("package_name")
-   ```
-Deactivate the environment if it's active:
-   ```
-   renv::deactivate()
-   ```
-
-#### For other examples and more in depth guides to setting up or replicating virtual environments for development and as a replacement for sudo access in other langues including Julia, NodeJS, C, C++, Rust, and more please reference [this](https://docs.starhpc.hofstra.io/software/virtual-env.html) guide.
-
-
-
-
