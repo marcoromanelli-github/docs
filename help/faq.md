@@ -8,16 +8,15 @@ sort: 1
 
 ### I forgot my password - what now?
 
-You can reset it here: [link to be provided]
+{% comment %}You can reset it here: [link to be provided]{% endcomment %}
+
+Please contact the [support team]({{site.baseurl}}{% link help/contact.md %}).
 
 ### How do I change my password on Star?
 
-The password can be changed on the [password reset page](#). Log in using
-your username on Star.
+You can run the `passwd` command on the login node to change your password. Please note `passwd` will have no affect from the compute nodes.
 
-The `passwd` command known from other Linuxes does not work. The Star
-system is using a centralised database for user management. This will
-override the password changes done locally on Star.
+{% comment %}A web portal is currently under development. Once launched, your password can also be changed from the password reset page, [link to be provided]. Log in using your username on Star.{% endcomment %}
 
 ### What is the ssh key fingerprint for star.hofstra.edu?
 
