@@ -6,13 +6,14 @@ sort: 1
 
 ## Overview
 
-The Star HPC Cluster is a computing facility designed for a variety of research and computational tasks. It combines advanced computing **nodes** and a high-speed **storage system** with a suite of **software applications**.
+The Star cluster is a High-Performance Computing (HPC) system at the Science and Innovation Center (SIC) that is designed for a variety of advanced research and computational tasks. It combines NVIDIA HGX-based **compute nodes**, a high-speed all-flash parallel file system-based **storage system**, an ultra-high-throughput/low-latency HDR200Gb/s Infiniband **network fabric**, and a suite of **software applications**. The compute nodes feature high-end H100 and A100 GPUs, AMD EPYC and Intel Xeon processors, and over 7 Terabytes of combined RAM.
 
-SLURM (Simple Linux Utility for Resource Management) is our chosen job scheduler and queueing system that efficiently manages resource allocation, ensuring everyone gets the right amount of resources at the right time.
+The cluster runs SLURM (Simple Linux Utility for Resource Management), a job scheduler and queueing system that efficiently allocates the cluster's resources to manage competing resource demands.
 
-Apptainer (formerly Singularity) is also a major application on the cluster. Apptainer is a containerization platform similar to Docker with the major difference that it runs under user privileges instead of `root`. This platform is enhanced by NGC (NVIDIA GPU Cloud) which provides access to a wide array of pre-built, GPU-optimized software containers for diverse applications. This integration saves all users a lot of time as they don’t need to set up the software applications from scratch and can just pull and use the NGC images with Apptainer.
+Users run many different applications on the cluster based on their needs, such as Python projects via Jupyter Notebooks, OpenMPI-based parallel jobs, NetCDF (often used to manage large datasets in climatology, meteorology, oceanography, and GIS applications). Programs are run directly on the hardware (bare-metal) to maximize performance and minimize overhead.
 
-The cluster also supports various software applications tailored to different needs: Python and R for data analysis, MATLAB for technical computing, Jupyter for interactive projects, and OpenMPI for parallel computing. Anaconda broadens these capabilities with packages for scientific computing, while NetCDF manages large datasets. For big data tasks, Hadoop/Spark offers powerful processing tools.
+Containerization is also increasingly popular in HPC it provides isolated environments that allow for the reuse of images for better reproducibility and software portability without the performance impact of other methods or the hastle of manualy installing dependencies. Containers are run using Apptainer (formerly Singularity), a containerization platform similar to Docker with the major difference that it runs under user privileges instead of `root`. Users can deploy images from NGC (NVIDIA GPU Cloud), which provides access to a wide array of pre-built images with GPU-optimized software for diverse applications. Leveraging container images can save a lot of time as users don’t need to set up the software applications from scratch and can just pull and use the NGC images with Apptainer.
+
 
 ## Hardware
 
@@ -24,11 +25,13 @@ The cluster also supports various software applications tailored to different ne
 
 ### Compute Nodes
 
+{%comment%}
 - 1x HPE DL385 Gen10+ v2 node with 2x NVIDIA A30 24GB PCIe GPUs, 2x AMD EPYC 32-core processors, 256GiB DDR4 RAM
 - 2x HPE XL675d Gen10+ nodes (Apollo 6500 Gen10+ chassis), each with 8x NVIDIA A100 80GB SXM GPUs, 1TiB 3200 DDR4 RAM, 2x 480GB SSD
 - 2x HPE DL380a Gen11, each with 2x NVIDIA H100 80GB PCIe GPUs, 2x Intel Xeon 32-core processors, 512GiB DDR5 RAM
 - 2x Cray XD665 nodes, each with 4x NVIDIA H100 80GB SXM GPUs, 2x AMD EPYC 32-core processors, 768GiB DDR5 RAM
 - 1x Cray XD670 node with 8x NVIDIA H100 80GB SXM GPUs, 2x Intel Xeon 32-core processors, 2TiB DDR5 RAM
+{%endcomment%}
 
 #### HPE Apollo 6500 Gen10
 
