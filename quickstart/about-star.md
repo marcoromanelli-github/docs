@@ -39,6 +39,7 @@ The cluster also supports various software applications tailored to different ne
 | Attribute\Node Name           | gpu1 and gpu2                                                           |
 | ----------------------------- | -------------------------------------------------------------- |
 | Model Name                    | HPE ProLiant XL675d Gen10 Plus; Apollo 6500 Gen10 Plus Chassis |
+| Processors                 | AMD EPYC 7513                                               |
 | Sockets                       | 2                                                              |
 | Cores per Socket              | 32                                                             |
 | Threads per Core              | 2                                                              |
@@ -51,6 +52,7 @@ The cluster also supports various software applications tailored to different ne
 | Attribute\Node Name           | cn01                                       |
 | ----------------------------- | ------------------------------------------ |
 | Model Name                    | HPE ProLiant DL385 Gen10 Plus v2           |
+| Processors                  | AMD EPYC 7513 32-Core Processor            |
 | Sockets                       | 2                                          |
 | Cores per Socket              | 32                                         |
 | Threads per Core              | 2                                          |
