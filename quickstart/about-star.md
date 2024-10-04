@@ -22,10 +22,6 @@ The cluster also supports various software applications tailored to different ne
 - DL325 Gen10+ with an 8-core EPYC processor, 128GB RAM
 - DL385 Gen10+ v2 with 2x AMD 32-core EPYC processors, 256GB RAM
 
-### Head node
-
-- 1x DL325 Gen10+v2 Server with 16 cores, 128GB RAM, 2x 960GB SSDs
-
 ### Compute Nodes
 
 - 1x HPE DL385 Gen10+ v2 node with 2x NVIDIA A30 24GB PCIe GPUs, 2x AMD EPYC 32-core processors, 256GiB DDR4 RAM
