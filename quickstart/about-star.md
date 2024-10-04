@@ -58,29 +58,9 @@ The cluster also supports various software applications tailored to different ne
 | GPU                           | 2 SXM NVIDIA A30s                          |
 | Local Scratch | None                                       |
 
-#### XL675d Gen10+ (Apollo 6500 Chassis)
-
-| Attribute\Node Name           | gpu4 and gpu5                             |
-| ----------------------------- | -------------------------------------- |
-| Model Name                    | HPE ProLiant XL675d Gen10 Plus Chassis |
-|       Processors:              |    64 Physical cores / 128 Logical Cores (2 x AMD EPYC 32-core 7513 @ 2.60 GHz)  |
-| Memory                        | 1024 GiB DDR4 3200 RAM                 |
-| GPU                           | 8 NVIDIA A100 80GB SXM4 GPUs           |
-| Local Storage (Scratch Space) | 6.4TB (5.8TiB) SSD                           |
-
-#### HPE DL385 Gen10+ v2
-
-| Attribute\Node Name           | cn02                             |
-| ----------------------------- | -------------------------------- |
-| Model Name                    | HPE ProLiant DL385 Gen10 Plus v2 |
-|       Processors:              |    64 Physical cores / 128 Logical Cores (2 x AMD EPYC 32-core 7513 @ 2.60 GHz w/ HT)  |
-| Memory                        | 256GiB DDR4 RAM                  |
-| GPU                           | 2 NVIDIA A30 24GB HBM2 PCIe GPUs |
-| Local Storage (Scratch Space) | 854G                             |
-
 #### HPE DL380a Gen11
 
-| Attribute\Node Name           | gpu6 and gpu7                             |
+| Attribute\Node Name           | gpu3 and gpu4                             |
 | ----------------------------- | -------------------------------------------- |
 | Model Name                    | HPE DL380a Gen11                             |
 | Processors              | 64 Physical cores / 128 Logical Cores (2 x Intel Xeon-P 8462Y+ @ 2.8GHz)  |
@@ -91,7 +71,7 @@ The cluster also supports various software applications tailored to different ne
 
 #### Cray XD665 Nodes
 
-| Attribute\Node Name           | cray01 and cray02                      |
+| Attribute\Node Name           | gpu5 and gpu6                      |
 | ----------------------------- | -------------------------------------- |
 | Model Name                    | Cray XD665                             |
 | Processors  | 64 Physical cores / 128 Logical Cores (2 x AMD EPYC Genoa 9334 @ 2.7GHz)                  |
@@ -102,7 +82,7 @@ The cluster also supports various software applications tailored to different ne
 
 #### Cray XD670 Node
 
-| Attribute\Node Name           | cray03                                 |
+| Attribute\Node Name           | gpu7                                |
 | ----------------------------- | -------------------------------------- |
 | Model Name                    | Cray XD670                             |
 | Processors  | 64 Physical cores / 128 Logical Cores (2 x Intel Xeon-P 8462Y+ @ 2.8GHz)                  |
