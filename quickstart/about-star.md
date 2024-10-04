@@ -18,102 +18,76 @@ The cluster also supports various software applications tailored to different ne
 
 ### Login Node
 
+- IBM System x3550 with 128GB RAM
+- DL325 Gen10+ with an 8-core EPYC processor, 128GB RAM
+- DL385 Gen10+ v2 with 2x AMD 32-core EPYC processors, 256GB RAM
+
 ### Compute Nodes
 
-- Two Apollo 6500 Gen10+ HPE nodes, _each_ containing 8 NVIDIA A100 SXM GPUs.
-- One HPE ProLiant DL385 Gen10+ v2, containing 2 A30 SXM NVIDIA GPUs.
-- Two XL675d Gen10+ servers (Apollo 6500 Gen10+ chassis), _each_ containing 8 NVIDIA A100 SXM4 GPUs.
-- One HPE DL385 Gen10+ v2 with 2 A30 PCIe GPUs.
-- Two HPE DL380a Gen11 servers, _each_ containing 2 NVIDIA H100 80GB GPUs.
-- Two Cray XD665 nodes, _each_ containing 4 NVIDIA HGX H100 80GB GPUs.
-- One Cray XD670 node, containing 8 NVIDIA HGX H100 80GB GPUs.
+- 1x HPE DL385 Gen10+ v2 node with 2x NVIDIA A30 24GB PCIe GPUs, 2x AMD EPYC 32-core processors, 256GiB DDR4 RAM
+- 2x HPE XL675d Gen10+ nodes (Apollo 6500 Gen10+ chassis), each with 8x NVIDIA A100 80GB SXM GPUs, 1TiB 3200 DDR4 RAM, 2x 480GB SSD
+- 2x HPE DL380a Gen11, each with 2x NVIDIA H100 80GB PCIe GPUs, 2x Intel Xeon 32-core processors, 512GiB DDR5 RAM
+- 2x Cray XD665 nodes, each with 4x NVIDIA H100 80GB SXM GPUs, 2x AMD EPYC 32-core processors, 768GiB DDR5 RAM
+- 1x Cray XD670 node with 8x NVIDIA H100 80GB SXM GPUs, 2x Intel Xeon 32-core processors, 2TiB DDR5 RAM
 
 #### HPE Apollo 6500 Gen10
 
-| Attribute\Node Name           | gpu1                                                           | gpu2                                                           |
-| ----------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- |
-| Model Name                    | HPE ProLiant XL675d Gen10 Plus; Apollo 6500 Gen10 Plus Chassis | HPE ProLiant XL675d Gen10 Plus; Apollo 6500 Gen10 Plus Chassis |
-| Sockets                       | 2                                                              | 2                                                              |
-| Cores per Socket              | 32                                                             | 32                                                             |
-| Threads per Core              | 2                                                              | 2                                                              |
-| Memory                        | 1024 GiB Total Memory (16 x 64GiB DIMM DDR4)                   | 1024 GiB Total Memory (16 x 64GiB DIMM DDR4)                   |
-| GPU                           | 8 SXM NVIDIA A100s                                             | 8 SXM NVIDIA A100s                                             |
-| Local Storage (Scratch space) | 407GB                                                          | 407GB                                                          |
+| Attribute\Node Name           | gpu1 and gpu2                                                           |
+| ----------------------------- | -------------------------------------------------------------- |
+| Model Name                    | HPE ProLiant XL675d Gen10 Plus; Apollo 6500 Gen10 Plus Chassis |
+| Processors                 | AMD EPYC 7513                                               |
+| Sockets                       | 2                                                              |
+| Cores per Socket              | 32                                                             |
+| Threads per Core              | 2                                                              |
+| Memory                        | 1024 GiB Total Memory (16 x 64GiB DIMM DDR4)                   |
+| GPU                           | 8 SXM NVIDIA A100s                                             |
+| Local Storage (Scratch space) | 6.4TB (5.8TiB) SSD                                                          |
 
 #### HPE DL385 Gen10
 
 | Attribute\Node Name           | cn01                                       |
 | ----------------------------- | ------------------------------------------ |
 | Model Name                    | HPE ProLiant DL385 Gen10 Plus v2           |
+| Processors                  | AMD EPYC 7513 32-Core Processor            |
 | Sockets                       | 2                                          |
 | Cores per Socket              | 32                                         |
 | Threads per Core              | 2                                          |
 | Memory                        | 256GiB Total Memory (16 x 16GiB DIMM DDR4) |
 | GPU                           | 2 SXM NVIDIA A30s                          |
-| Local Storage (Scratch Space) | 854G                                       |
-
-#### XL675d Gen10+ (Apollo 6500 Chassis)
-
-| Attribute\Node Name           | gpu4                                   | gpu5                                   |
-| ----------------------------- | -------------------------------------- | -------------------------------------- |
-| Model Name                    | HPE ProLiant XL675d Gen10 Plus Chassis | HPE ProLiant XL675d Gen10 Plus Chassis |
-| Sockets                       | 2 (AMD EPYC 7513 @ 2.60 GHz)           | 2 (AMD EPYC 7513 @ 2.60 GHz)           |
-| Cores per Socket              | 64 Physical Cores                      | 64 Physical Cores                      |
-| Threads per Core              | 2 (128 Logical Cores)                  | 2 (128 Logical Cores)                  |
-| Memory                        | 1024 GiB DDR4 3200 RAM                 | 1024 GiB DDR4 3200 RAM                 |
-| GPU                           | 8 NVIDIA A100 80GB SXM4 GPUs           | 8 NVIDIA A100 80GB SXM4 GPUs           |
-| Local Storage (Scratch Space) | 2x 480GB SSD                           | 2x 480GB SSD                           |
-
-#### HPE DL385 Gen10+ v2
-
-| Attribute\Node Name           | cn02                             |
-| ----------------------------- | -------------------------------- |
-| Model Name                    | HPE ProLiant DL385 Gen10 Plus v2 |
-| Sockets                       | 2 (AMD EPYC 7513 @ 2.60 GHz)     |
-| Cores per Socket              | 64 Physical Cores                |
-| Threads per Core              | 2 (128 Logical Cores)            |
-| Memory                        | 256GiB DDR4 RAM                  |
-| GPU                           | 2 NVIDIA A30 24GB HBM2 PCIe GPUs |
-| Local Storage (Scratch Space) | 854G                             |
+| Local Scratch | None                                       |
 
 #### HPE DL380a Gen11
 
-| Attribute\Node Name           | gpu6                                         | gpu7                                         |
-| ----------------------------- | -------------------------------------------- | -------------------------------------------- |
-| Model Name                    | HPE DL380a Gen11                             | HPE DL380a Gen11                             |
-| Sockets                       | 2 (Intel Xeon-P 8462Y+ @ 2.8GHz)             | 2 (Intel Xeon-P 8462Y+ @ 2.8GHz)             |
-| Cores per Socket              | 64                                           | 64                                           |
-| Threads per Core              | 2 (128 Logical Cores)                        | 2 (128 Logical Cores)                        |
-| Memory                        | 512 GiB DDR5 RAM                             | 512 GiB DDR5 RAM                             |
-| GPU                           | 2 NVIDIA H100 80GB GPUs (NVAIE subscription) | 2 NVIDIA H100 80GB GPUs (NVAIE subscription) |
-| Network                       | 4-port GbE, 1-port HDR200 InfiniBand         | 4-port GbE, 1-port HDR200 InfiniBand         |
-| Local Storage (Scratch Space) | 1TB SSD                                      | 1TB SSD                                      |
+| Attribute\Node Name           | gpu3 and gpu4                             |
+| ----------------------------- | -------------------------------------------- |
+| Model Name                    | HPE DL380a Gen11                             |
+| Processors              | 64 Physical cores / 128 Logical Cores (2 x Intel Xeon-P 8462Y+ @ 2.8GHz)  |
+| Memory                        | 512 GiB DDR5 RAM                             |
+| GPU                           | 2 NVIDIA H100 80GB GPUs (NVAIE subscription) |
+| Network                       | 4-port GbE, 1-port HDR200 InfiniBand         |
+| Local Storage (Scratch Space) | None                                    |
 
 #### Cray XD665 Nodes
 
-| Attribute\Node Name           | cray01                                 | cray02                                 |
-| ----------------------------- | -------------------------------------- | -------------------------------------- |
-| Model Name                    | Cray XD665                             | Cray XD665                             |
-| Sockets                       | 2 (AMD EPYC Genoa 9334 @ 2.7GHz)       | 2 (AMD EPYC Genoa 9334 @ 2.7GHz)       |
-| Cores per Socket              | 64                                     | 64                                     |
-| Threads per Core              | 2 (128 Logical Cores)                  | 2 (128 Logical Cores)                  |
-| Memory                        | 768 GiB DDR5 RAM                       | 768 GiB DDR5 RAM                       |
-| GPU                           | 4 NVIDIA HGX H100 80GB SXM GPUs        | 4 NVIDIA HGX H100 80GB SXM GPUs        |
-| Network                       | 2-port 10GbE, 1-port HDR200 InfiniBand | 2-port 10GbE, 1-port HDR200 InfiniBand |
-| Local Storage (Scratch Space) | 1TB SSD                                | 1TB SSD                                |
+| Attribute\Node Name           | gpu5 and gpu6                      |
+| ----------------------------- | -------------------------------------- |
+| Model Name                    | Cray XD665                             |
+| Processors  | 64 Physical cores / 128 Logical Cores (2 x AMD EPYC Genoa 9334 @ 2.7GHz)                  |
+| Memory                        | 768 GiB DDR5 RAM                       |
+| GPU                           | 4 NVIDIA HGX H100 80GB SXM GPUs        |
+| Network                       | 2-port 10GbE, 1-port HDR200 InfiniBand |
+| Local Storage (Scratch Space) | None                          |
 
 #### Cray XD670 Node
 
-| Attribute\Node Name           | cray03                                 |
+| Attribute\Node Name           | gpu7                                |
 | ----------------------------- | -------------------------------------- |
 | Model Name                    | Cray XD670                             |
-| Sockets                       | 2 (Intel Xeon-P 8462Y+ @ 2.8GHz)       |
-| Cores per Socket              | 64 Physical Cores                      |
-| Threads per Core              | 2 (128 Logical Cores)                  |
+| Processors  | 64 Physical cores / 128 Logical Cores (2 x Intel Xeon-P 8462Y+ @ 2.8GHz)                  |
 | Memory                        | 2048 GiB DDR5 RAM                      |
 | GPU                           | 8 NVIDIA HGX H100 80GB SXM GPUs        |
 | Network                       | 2-port 10GbE, 1-port HDR200 InfiniBand |
-| Local Storage (Scratch Space) | 2TB SSD                                |
+| Local Storage (Scratch Space) | None                                |
 
 ### Storage System
 
