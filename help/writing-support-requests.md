@@ -12,7 +12,7 @@ practices.
 
 ## Never send support requests directly to staff members
 
-Please do not contact your cluster administrator directly. Please visit the [GitHub Issue Tracker](https://github.com/StarHPC/Issues) first, as there are different issue templates provided for various queries.
+Please do not contact your cluster administrator directly. Please visit the [Issue Tracker](https://github.com/StarHPC/Issues) first, as there are different forms provided for various queries.
 
 ## Please do not treat us as "Let me Google that for you" assistants
 
