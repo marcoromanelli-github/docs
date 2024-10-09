@@ -78,7 +78,7 @@ Lines 2-7 are your `SBTACH` directives. These lines are where you specify differ
 - `#SBATCH --error=test_job.err`: Functions similar to `--output` except it contains error messages generated during the execution of your job, if any. **The `.err` file is always going to be generated even if your job execution is successful; however, it's going to be empty if there are no errors.**
 - `#SBATCH --nodes=1`: Specifies your job to run on one available node. This directive basically tells the scheduler "Run my job on any available node you find, and I don't care which one". **It's also possible to specify the name of the node(s) you'd like to use which we will cover in future examples.**
 - `#SBATCH --time=10:00`: This line specifies how long you want your job to run, after it's out the queue and starts execution. In this case, the job will be **terminated** after 10 minutes. Acceptable time formats include `mm`, `mm:ss`, `hh:mm:ss`, `days-hh`, `days-hh:mm` and `days-hh:mm:ss`.
-- `#SBATCH --mem=1G` Specifies the maximum main memory required _per_ node. In this case we set the cap to 1 gigabyte. If you don't use a memory unit, Slurm automatically uses MegaBytes: `#SBATCH --mem=4096` requests 4096MB of RAM. **If you want to request all the memory on a node, you can use `--mem=0`.**
+- `#SBATCH --mem=1G` Specifies the maximum main memory required _per_ node. In this case we set the cap to 1 gigabyte. If you don't use a memory unit, Slurm automatically uses MegaBytes: `#SBATCH --mem=4096` requests 4096MB of RAM. **If you want to request all the memory on a node, you can use** `--mem=0`.
 
 After the last `#SBATCH` directive, commands are ran like any other regular shell script.
 
