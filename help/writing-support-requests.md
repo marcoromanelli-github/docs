@@ -12,13 +12,7 @@ practices.
 
 ## Never send support requests directly to staff members
 
-Please do not contact your cluster administrator directly. Always send
-requests and inquiries to <support@starhpc.hofstra.io> for the quickest
-response. On <support@starhpc.hofstra.io>, requests get tracked and have
-higher visibility. Some of our staff members only work part time.
-Sending the request to <support@starhpc.hofstra.io> makes sure that
-somebody will pick it up. Please note in the request that it is for Star,
-as there are other systems that are managed by us.
+Please do not contact your cluster administrator directly. Please visit the [GitHub Issue Tracker](https://github.com/StarHPC/Issues) first, as there are different issue templates provided for various queries.
 
 ## Please do not treat us as "Let me Google that for you" assistants
 
@@ -47,7 +41,7 @@ png, tiff, etc) of what you saw on your monitor. From these, we would be
 unable to copy and paste commands or error messages, unnecessarily slowing
 down our research on your problem.
 
-## New problem == new E-mail
+## New problem == new ticket
 
 Do not send support requests by replying to unrelated issues. Every
 issue gets a number and this is the number that you see in the subject
@@ -61,16 +55,16 @@ know the solution but sometimes we don't know the problem.
 
 In short (quoting from <http://xyproblem.info>):
 
--   User wants to do X.
--   User doesn't know how to do X, but thinks they can fumble their way
-    to a solution if they can just manage to do Y.
--   User doesn't know how to do Y either.
--   User asks for help with Y.
--   Others try to help user with Y, but are confused because Y seems
-    like a strange problem to want to solve.
--   After much interaction and wasted time, it finally becomes clear
-    that the user really wants help with X, and that Y wasn't even a
-    suitable solution for X.
+- User wants to do X.
+- User doesn't know how to do X, but thinks they can fumble their way
+  to a solution if they can just manage to do Y.
+- User doesn't know how to do Y either.
+- User asks for help with Y.
+- Others try to help user with Y, but are confused because Y seems
+  like a strange problem to want to solve.
+- After much interaction and wasted time, it finally becomes clear
+  that the user really wants help with X, and that Y wasn't even a
+  suitable solution for X.
 
 To avoid the XY problem, if you struggle with Y but really what you are
 after is X, please also tell us about X. Tell us what you really want to
@@ -106,7 +100,7 @@ The better you describe the problem the less we have to guess and ask.
 
 Sometimes, just seeing the actual error message is enough to give an
 useful answer. For all but the simplest cases, you will need to make the
-problem reproducible, which you should *always* try anyway. See the
+problem reproducible, which you should _always_ try anyway. See the
 following points.
 
 ## Complex cases: Create an example which reproduces the problem
