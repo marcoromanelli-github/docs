@@ -241,6 +241,171 @@ begin test...
 313/313 - 0s - loss: X.XXXX - accuracy: 0.XXXX
 ```
 
+### Using an NGC container with Apptainer
+
+As previously mentioned, Nvidia GPU Cloud (NGC) containers are basically pre-configured and optimized Docker containers that include GPU-accelerated software for AI, machine learning, and high-performance computing (HPC) applications. These containers provide a ready-to-use environment with NVIDIA drivers, CUDA toolkit, and popular deep learning frameworks, that are also scanned for security vulnerabilities and exposures.
+
+If you just pull an NGC container for the HPC software suite you have in mind, you don't need to spend time configuring complex software stacks or worry about compatibility issues between different libraries and frameworks.
+
+You can take a look at the containers available on NGC [here](https://catalog.ngc.nvidia.com/containers?filters=&orderBy=weightPopularDESC&query=&page=&pageSize=)
+
+Now here's how you can pull and use a container from NGC:
+
+#### Create and setup an NGC account
+
+1. Visit [this link](https://ngc.nvidia.com/signin) and enter the email you'd like to sign up with (or sign in if you have an account already and skip to step 3).
+
+**Note:** Don't get misguided by the "login" page. If the email you enter is not found as an already-existing account, you will automatically be redirected to the sign up page.
+
+2. Fill out all the required fields and verify your E-mail afterwards, as prompted.
+
+3. Login to your account, and later follow the steps at [this link](https://docs.nvidia.com/ngc/gpu-cloud/ngc-user-guide/index.html#generating-api-key) to setup an API key with which you will pull your containers.
+
+**Note:** You need to make sure you save your API key once it's revealed after its generation. You later need to save it on the login node.
+
+4. Once you have your API key ready, go ahead and login to the login node (Binary).
+
+Run the following command:
+```bash
+ngc config set
+```
+
+You will be prompted to enter your API key. Go ahead and paste it, and then hit Enter.
+
+For the rest of the prompts, just enter the default available option, and hit Enter.
+
+Upon a successful set, you will be shown the path at which the configuration has been saved to.
+
+#### Pull and run Pytorch
+
+If you don't find Pytorch useful, you can pull any other container found at [this link](https://catalog.ngc.nvidia.com/containers?filters=&orderBy=weightPopularDESC&query=&page=&pageSize=)
+
+Once you find your desired container, click on it, and look for the "**Get Container v**" button at the top right of the screen.
+
+In this example's case, our container's link is `nvcr.io/nvidia/pytorch:23.05-py3`.
+
+Run the following command, which both pulls your container, and converts it to an `.sif` file which Apptainer can work with.
+```bash
+apptainer pull pytorch_23.05.sif docker://nvcr.io/nvidia/pytorch:23.05-py3
+```
+
+**Remember:** Apptainer is very similar to Docker, with the most crucial difference that it runs under user privileges rather than root.
+
+Note the `nvcr.io/nvidia/pytorch:23.05-py3` section of the command. If you are pulling another container, make sure you replace it with the proper link.
+
+In Pytorch's case, this command is going to take a while, as the container is quite large.
+
+Wait and let everything download and unpack as necessary. And remember this operation's time varies from container to container, based on the container size.
+
+Once the operation is completed successfully, you will be able to see the `pytorch_23.05.sif` file at the path you ran the command in.
+
+Now be careful! Don't get tempted to execute the container on the login node (you can't even if you try to), but the whole purpose of the cluster is to use the compute nodes and just use the login node as the entry/access point.
+
+You can now write a script which uses the container we just installed (`pytorch_23.05.sif`) to execute some Python program. Here's how:
+
+First, let's make our sample Pytorch program and save it inside a file called `pytorch_test.py`:
+```python
+import torch
+
+def main():
+    # Create a random tensor
+    x = torch.rand(5, 3)
+    print("Random Tensor:")
+    print(x)
+
+    # Perform a simple operation
+    y = x + 2
+    print("\nTensor after adding 2:")
+    print(y)
+
+    # Check if CUDA is available and use it
+    if torch.cuda.is_available():
+        device = torch.device("cuda")
+        x = x.to(device)
+        y = y.to(device)
+        print("\nUsing CUDA")
+    else:
+        print("\nCUDA not available")
+
+    print(f"\nCurrent device: {torch.cuda.current_device()}")
+    print(f"Device count: {torch.cuda.device_count()}")
+    print(f"Device name: {torch.cuda.get_device_name(0)}")
+
+if __name__ == "__main__":
+    main()
+```
+
+Now, make a script called `run_pytorch.sbatch` and save it with the following content:
+```bash
+#!/bin/bash
+#SBATCH --job-name=pytorch_test
+#SBATCH --output=/home/mani/dev/pytorch_test.out
+#SBATCH --error=/home/mani/dev/pytorch_test.err
+#SBATCH --nodelist=gpu1
+
+start_time=$(date)
+
+# Run the PyTorch script
+echo "starting: $start_time"; echo ""
+
+apptainer exec --nv /home/mani/dev/pytorch_23.05.sif python /home/mani/dev/pytorch_test.py
+
+end_time=$(date)
+echo ""
+echo "ended: $end_time"
+```
+
+This `.sbatch` script simply tells Slurm to run this script on node `gpu1` which has 8x A100 GPUs, and save the output in a file called `/home/mani/dev/pytorch_test.out`. 
+
+**Note:** You need to change the path for both the `.out` and `.err` file to _your_ desired/accessible path.
+
+You can see at line ` apptainer exec --nv /home/mani/dev/pytorch_23.05.sif python /home/mani/dev/pytorch_test.py` we have provided _our_ working path to both the container `.sif` file as well as the python program. 
+
+You need to make sure you change these to where _you_ have saved those files.
+
+After everything is ready to go, submit your `run_pytorch.sbatch` to SLURM:
+```bash
+sbatch run_pytorch.sbatch
+```
+
+This job takes somewhere from 10-15 seconds to complete.
+
+If you run `squeue -u $USER` before it's completed, you will be able to see your job listed in the queue.
+
+Once you don't see your job in the queue any more, it means it has completed. It's now time to check the `.out` file! 
+
+You should expect something like:
+```text
+[mani@binary dev]$ cat pytorch_test.out
+starting: Tue Oct 15 17:15:42 EDT 2024
+
+Random Tensor:
+tensor([[0.6414, 0.6855, 0.5599],
+        [0.5254, 0.2902, 0.0842],
+        [0.0418, 0.1184, 0.9758],
+        [0.7644, 0.6543, 0.0109],
+        [0.9723, 0.4741, 0.8250]])
+
+Tensor after adding 2:
+tensor([[2.6414, 2.6855, 2.5599],
+        [2.5254, 2.2902, 2.0842],
+        [2.0418, 2.1184, 2.9758],
+        [2.7644, 2.6543, 2.0109],
+        [2.9723, 2.4741, 2.8250]])
+
+Using CUDA
+
+Current device: 0
+Device count: 8
+Device name: NVIDIA A100-SXM4-80GB
+
+ended: Tue Oct 15 17:15:53 EDT 2024
+```
+
+**Note:** Even if your script's execution is successful, you will see the `.err` file; however, it will be empty.
+
+If your output file is empty, try seeing if there is anything informational in the `.err` file to diagnose the issue.
+
 ## Interactive jobs
 
 ### Starting an Interactive job
