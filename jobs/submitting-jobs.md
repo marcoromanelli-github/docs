@@ -308,7 +308,7 @@ This option requests 4 GB of memory per allocated CPU.
 --mail-user=your_email@example.com
 ```
 
-This configuration sends an email to the specified address at the start, completion, and failure of the job.
+This configuration sends an Email to the specified address at the start, completion, and failure of the job.
 
 ### Interactive Job Submission
 

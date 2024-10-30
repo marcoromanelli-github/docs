@@ -35,7 +35,7 @@ To get an account on Star, you need to complete out the registration form at [St
     visitor/guest).
 -   Your mobile phone number. This is necessary for recovery of
     passwords.
--   Your institutional mail address (i.e. your work email at the
+-   Your institutional mail address (i.e. your work Email at the
     research institution to which you belong)
 -   The name and address of the instruction you belong to; also
     including name of the center, institute etc.
