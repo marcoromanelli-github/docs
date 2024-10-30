@@ -48,6 +48,20 @@ Rsync is a particularly useful tool and is recommended for transferring files to
 
 When transferring very large files or datasets, it is advised to use rsync and to calculate and confirm checksums to ensure data integrity.
 
+## Cyberduck
+
+Cyberduck is a file transfer application with an intuitive graphical interface for transfering files to or from a remote machine. Cyberduck is available for both Windows and Mac. Download it from [cyberduck.io](https://cyberduck.io/).
+
+Click "Open Connection" and a new window will be displayed like below. Select "SFTP (SSH File Transfer Protocol)" from the top dropdown menu. Enter the server, port number, your username, and Linux Lab password. Then click "Connect".
+
+   ![3-connection.png]({{ site.baseurl }}/images/cyberduck_setup_images/3-connection.png "3-connection.png")
+
+If you see a window asking about an "Unknown fingerprint", click "Always" and then "Allow".
+
+   ![4-fingerprint.png]({{ site.baseurl }}/images/cyberduck_setup_images/4-fingerprint.png "4-fingerprint.png")
+
+You should now be able to see your user's home directory on the cluster. You can transfer files to and from it by dragging and dropping files between this window and your "Finder" windows.
+
 ## Network Interfaces and Bandwidth
 
 All file transfer access to the Star HPC Cluster is currently through the login node's 1GbE interface. Users should be aware of potential bandwidth limitations, especially when transferring large amounts of data.
@@ -55,3 +69,4 @@ All file transfer access to the Star HPC Cluster is currently through the login 
 ## User Authentication and Permissions
 
 File transfers are authenticated in the same way as SSH access. SSH keys are the preferred method for secure authentication, although password authentication is currently allowed. Plans for implementing Multi-Factor Authentication (MFA) are being considered for future security enhancements.
+
