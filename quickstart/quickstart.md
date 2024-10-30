@@ -79,7 +79,7 @@ Storage quotas and usage limits are put in place to ensure fair use and equitabl
 
 It is important to know where to store different types of data (such as large datasets or temporary files).
 
-Your home directory (`/home/your_username`)provides a limited amount of storage for scripts, source code, and small datasets.
+Your home directory (`/home/your_username`) provides a limited amount of storage for scripts, source code, and small datasets.
 
 Project-specific directories may be created upon request for shared storage among multiple accounts.
 
