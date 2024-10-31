@@ -1,8 +1,8 @@
 ---
-sort: 3
+sort: 4
 ---
 
-# Job Scheduling and Resource Optimization Guide
+# Job Scheduling and Resource Optimization
 
 This guide aims to help users optimize their job submissions on the Star HPC cluster by providing an understanding of the scheduling system and resource allocation policies. By tailoring your job scripts and resource requests effectively, you can enhance job efficiency, reduce wait times, and make the most of the cluster’s capabilities.
 
