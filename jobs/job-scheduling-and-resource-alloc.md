@@ -91,13 +91,13 @@ The required resources may not be available at the moment. Jobs might have to wa
 
 ---
 
-### What Are Accounts?
+## What Are Accounts?
 
 Users can belong to multiple Slurm accounts and multiple users can belong to a single Slurm account. Slurm accounts typically correspond with a group of users and we generally create them on a project basis. Slurm accounts are used for tracking usage and enforcing resource limits. When new project accounts are created, they will consume a portion of the shares allocated for the parent account, which is typically associated with a broader administrative entity, such as an institution, department, or research group.
 
 ---
 
-### What QOS Should I Choose for My Job?
+## What QOS Should I Choose for My Job?
 
 QoS (Quality of Service) define job with different priorities and resource limits. Selecting the appropriate QoS can influence your job’s priority in the queue. Be mindful of the tradeoff that comes with a higher QOS: while higher QoS levels allow longer runtimes, they may result in longer wait times due to lower scheduling priority.
 
@@ -107,7 +107,7 @@ QoS (Quality of Service) define job with different priorities and resource limit
 
 ---
 
-### When Will My Job Start?
+## When Will My Job Start?
 
 While exact start times can't be guaranteed due to the dynamic nature of the cluster workload, you can get an estimate:
 
@@ -131,7 +131,7 @@ Review your fairshare score using sshare to understand how your recent resource 
 
 ---
 
-### Can I Have More Resources?
+## Can I Have More Resources?
 
 It depends. We don’t have unlimited resources, so please try to make the most of the resources available. Moreover, it is quite possible that you are not using the resources that you have completely. Using your current resources completely may suffice your needs.
 
@@ -139,7 +139,7 @@ Before requesting additional resources, make sure you are optimally using the re
 
 ---
 
-### How Can I Make Sure That I Am Using My Resources Optimally?
+## How Can I Make Sure That I Am Using My Resources Optimally?
 
 You can tailor your job according to its duration and the resources it needs.
 
@@ -160,7 +160,7 @@ python3 quick_task.py
 ```
 ---
 
-### **How Can I Submit a Long Job?**
+## **How Can I Submit a Long Job?**
 
 For long jobs, select the **long QoS**, which allows for extended runtimes but may have lower scheduling priority. It’s advisable to implement **checkpointing** in your application if possible. Checkpointing allows your job to save progress at intervals, so you can resume from the last checkpoint in case of interruptions, mitigating the risk of resource wastage due to unexpected failures.
 
@@ -184,7 +184,7 @@ This script requests sufficient time and resources for an extended computation, 
 
 ---
 
-### **What Can I Do to Get My Job Started More Quickly? Any Other PRO Tips?**
+## **What Can I Do to Get My Job Started More Quickly? Any Other PRO Tips?**
 
 1. **Shorten the time limit** on your job, if possible. This may allow the scheduler to fit your job into a time window while it is trying to make room for a larger job (using Slurm's **backfill functionality**).
 
