@@ -16,7 +16,7 @@ To help identity issues with your job or strategize your job submissions to opti
 
 If your job is sitting in the queue for a while, its priority could be lower than other jobs due to one or more factors such as high fairshare usage from previous jobs, a high number of in-demand resources being requested, or a long wall time being requested. This is because the Star cluster leverages Slurm's Backfill scheduler and Multifactor Priority plugin, which considers several factors in determining a job's priority, unlike simple First In, First Out (FIFO) scheduling. The backfill scheduler with the priority/multifactor plugin provide a more balanced and performant approach than FIFO.
 
-There are nine factors that influence job priority, which affects the order in which the jobs are scheduled. The job priority is calculated from a weighted sum of all the following factors:
+There are nine factors that influence job priority, which affects the order in which the jobs are scheduled to run. The job priority is calculated from a weighted sum of all the following factors:
 
 - **Age**: the length of time a job has been waiting in the queue and eligible to be scheduled  
 - **Association**: a factor associated with each association  
@@ -30,13 +30,11 @@ There are nine factors that influence job priority, which affects the order in w
 
 #### i) Fairshare
 
-The fair-share factor reflects the recent resource usage of an account relative to its allotted share.
+The fair-share factor reflects the recent resource usage of an account relative to its allotted share. An account's allotted share is determined by values set at multiple levels in the account hierarchy that represent the relative amount of the computing resources assigned to each account relative to others.
 
-An accounts's allotted share of resources is given by the FairShare value, which is set at multiple different levels in the account hierarchy, that represents the relative amount of the computing resources that are allocated to different projects.
+The fair-share factor influences the priority of jobs based on the amount of resources that have been previously consumed in relation to the share of resources allocated for the given account, so as to ensure all accounts have a "fair-share" of the resources.
 
-The fair-share factor influences the overall priority of jobs, which affects the order in which queued jobs are scheduled to run, based on the amount of computing resources that have already been consumed in relation to the share of resources allocated for the given account, so as to ensure all accounts have a "fair-share" of the resources.
-
-As a result, the more resources your recent jobs have used out of your account's allocation, the lower the priority will be for future jobs submitted through your account in comparison other accounts that have used fewer resources. This allows underutilized accounts to gain higher priority over heavily utilized accounts that have been allocated the same or similar amount of resources. As the fairshare value is typically set at the account level and multiple users may belong to the same account, the usage of one user can negatively affect other users in that same account. So, if there are two members of a given account, and one user runs many jobs under that account, the priority of any future jobs submitted by the other user (who may never even have run any jobs at all) would also be negatively affected. This ensures that the combined usage of an account matches the portion of resources that has been allocated to to it.
+As a result, the more resources your recent jobs have used relative to your account's allocation, the lower the priority will be for future jobs submitted through your account in comparison other accounts that have used fewer resources. This allows underutilized accounts to gain higher priority over heavily utilized accounts that have been allocated the same or similar amount of resources. As the fairshare value is typically set at the account level and multiple users may belong to the same account, the usage of one user can negatively affect other users in that same account. So, if there are two members of a given account, and one user runs many jobs under that account, the priority of any future jobs submitted by the other user (who may never even have run any jobs at all) would also be negatively affected. This ensures that the combined usage of an account matches the portion of resources that has been allocated to to it.
 
 
 ##### Command line examples:
