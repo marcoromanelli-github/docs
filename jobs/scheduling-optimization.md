@@ -21,7 +21,7 @@ There are nine factors that influence job priority, which affects the order in w
 - **Age**: the length of time a job has been waiting in the queue and eligible to be scheduled  
 - **Association**: a factor associated with each association  
 - **Fair-share**: the difference between the portion of the computing resource that has been promised and the amount of resources that has been consumed  
-- **Nice**: a factor that can be set by users to prioritize their own jobs
+- **Nice**: a factor that can be set by users to prioritize their own jobs. This factor is currently not enabled for our cluster.
 - **Job size**: the number of nodes or CPUs a job is allocated  
 - **Partition**: a factor associated with each node partition  
 - **QOS**: a factor based on the priority of the Quality Of Service (QOS) associated with the job
