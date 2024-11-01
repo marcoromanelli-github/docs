@@ -14,7 +14,7 @@ To help identity issues with your job or strategize your job submissions to opti
 
 ### Scheduling Priority Factors
 
-If your job is sitting in the queue for a while, its priority could be lower than other jobs due to one or more factors such as high fairshare usage from previous jobs, a high number of in-demand resources being requested, or a long wall time being requested. This is because the Star cluster leverages Slurm's Backfill scheduler and Multifactor Priority plugin, which considers several factors in determining a job's priority, unlike simple First In, First Out (FIFO) scheduling. The backfill scheduler with the priority/multifactor plugin provide a more balanced and performant approach than FIFO.
+If your job is sitting in the queue for a while, its priority could be lower than other jobs due to one or more factors such as high fairshare usage from previous jobs, a high number of in-demand resources being requested, or a long wall time being requested. This is because the Star cluster leverages Slurm's Backfill scheduler and Multifactor Priority plugin, which considers several factors in determining a job's priority, unlike simple First In, First Out (FIFO) scheduling. The backfill scheduler with the priority/multifactor plugin provides a more balanced and performant approach than FIFO.
 
 There are nine factors that influence job priority, which affects the order in which the jobs are scheduled to run. The job priority is calculated from a weighted sum of all the following factors:
 
@@ -124,9 +124,15 @@ Review your fairshare score using sshare to understand how your recent resource 
 
 ## Can I Have More Resources?
 
+Non-technical explanation:
+
 It depends. We don’t have unlimited resources, so please try to make the most of the resources available. Moreover, it is quite possible that you are not using the resources that you have completely. Using your current resources completely may suffice your needs.
 
 Before requesting additional resources, make sure you are optimally using the resources you have already been allocated. To request an additional allocation, provide a brief justification, which may include how you are using your current allocation.
+
+Technical explanation:
+
+The fair-share mechanism used to ensure fair usage between accounts does not actually limit the amount of resources that can be requested or consumed. It only adjusts each job's scheduling priority based on resource usage history and the account's fair-share entitlement. Resource limits may be imposed on an account, user, partition, or job by association or QOS policy though. These usage limits will be reevaluated periodically and may be adjusted based on legitimate need or usage patterns.
 
 ## How Can I Make Sure That I Am Using My Resources Optimally?
 
