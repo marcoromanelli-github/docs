@@ -258,7 +258,7 @@ script:
 The overhead in the job start and cleanup makes it unpractical to run
 thousands of short tasks as individual jobs on Star.
 
-The queueing setup on star, or rather, the accounting system generates
+The queueing setup on Star, or rather, the accounting system generates
 overhead in the start and finish of a job of about 1 second at each end
 of the job. This overhead is insignificant when running large parallel
 jobs, but creates scaling issues when running a massive amount of
@@ -268,6 +268,86 @@ unparallelizable part of the job. This is because the queuing system can
 only start and account one job at a time. This scaling problem is
 described by [Amdahls Law](https://en.wikipedia.org/wiki/Amdahl's_law).
 
-If the tasks are extremly short, you can use the example below. If you
-want to spawn many jobs without polluting the queueing system, please
-have a look at `Job arrays` at [Submitting jobs]({{site.baseurl}}{% link jobs/submitting-jobs.md %}).
+If the tasks are extremly short (e.g. less than 1 second), you can use the example below.
+
+If you want to spawn many jobs without polluting the queueing system, please
+have a look at [array jobs]({{site.baseurl}}{% link jobs/submitting-jobs.md %}#array-jobs).
+
+By using some shell trickery one can spawn and load-balance multiple
+independent task running in parallel within one node, just background
+the tasks and poll to see when some task is finished until you spawn the
+next:
+
+```bash
+#!/usr/bin/env bash
+
+# Jobscript example that can run several tasks in parallel.
+# All features used here are standard in bash so it should work on
+# any sane UNIX/LINUX system.
+# Author: roy.dragseth@uit.no
+#
+# This example will only work within one compute node so let's run
+# on one node using all the cpu-cores:
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=20
+
+# We assume we will (in total) be done in 10 minutes:
+#SBATCH --time=0-00:10:00
+
+# Let us use all CPUs:
+maxpartasks=$SLURM_TASKS_PER_NODE
+
+# Let's assume we have a bunch of tasks we want to perform.
+# Each task is done in the form of a shell script with a numerical argument:
+# dowork.sh N
+# Let's just create some fake arguments with a sequence of numbers
+# from 1 to 100, edit this to your liking:
+tasks=$(seq 100)
+
+cd $SLURM_SUBMIT_DIR
+
+for t in $tasks; do
+  # Do the real work, edit this section to your liking.
+  # remember to background the task or else we will
+  # run serially
+  ./dowork.sh $t &
+
+  # You should leave the rest alone...
+
+  # count the number of background tasks we have spawned
+  # the jobs command print one line per task running so we only need
+  # to count the number of lines.
+  activetasks=$(jobs | wc -l)
+
+  # if we have filled all the available cpu-cores with work we poll
+  # every second to wait for tasks to exit.
+  while [ $activetasks -ge $maxpartasks ]; do
+    sleep 1
+    activetasks=$(jobs | wc -l)
+  done
+done
+
+# Ok, all tasks spawned. Now we need to wait for the last ones to
+# be finished before we exit.
+echo "Waiting for tasks to complete"
+wait
+echo "done"
+```
+
+And here is the `dowork.sh` script:
+
+```bash
+#!/usr/bin/env bash
+
+# Fake some work, $1 is the task number.
+# Change this to whatever you want to have done.
+
+# sleep between 0 and 10 secs
+let sleeptime=10*$RANDOM/32768
+
+echo "Task $1 is sleeping for $sleeptime seconds"
+sleep $sleeptime
+echo "Task $1 has slept for $sleeptime seconds"
+```
+
+Source: [HPC-UiT FAQ](https://hpc-uit.readthedocs.io/en/latest/help/faq.html)
