@@ -8,25 +8,36 @@ This guide aims to help users optimize their job submissions on the Star HPC clu
 
 ## Why Is My Job Not Running Yet?
 
-You can use the `squeue -j <jobid>` command to see the status and the reason why your job is not running. There are several factors which affect this such as your job’s priority, which is a function of fairshare, job age, partition, job size, etc. It may also be possible that your job is asking for more resources than allocated, in which case it will never even start. To pinpoint the exact issue with your job, let’s get more clarity on the factors at play here:
+You can use the `squeue -j <jobid>` command to see the status and the reason why your job is not running. There are a number of possible reasons why your job could have a long queue time or could be prevented from ever running. The queue time could be impacted by the job's priority (see priority factors), the availability of high-demand or scare resources, or dependency constraints. It may also be possible that your job is asking for more resources than exists or has been allotted, in which case it will never even start.
 
-### 1. Scheduling Policies
+To help identity issues with your jobs or strategize your job submissions to optimize them for faster execution, you should understand how the scheduler works and the factors that are at play. Key scheduling concepts to understand include **job priority**, priority factors such as **fairshare** and **QOS**, and **backfilling**. More advanced concepts include **reservations**, **oversubscription**, **preemption**, and **gang scheduling**.
 
-Your job's priority might be lower due to factors like recent high resource usage (fairshare), the QoS selected, or the partition used.  
+### 1. Scheduling Priority Factors
 
-Let’s understand slurm scheduling in more detail:  
-The cluster operates on a **Basic Multifactor Priority**, based on **First-In and First-Out scheduling**. Where the **fair-share hierarchy** represents the portion of the computing resources that have been allocated to different projects, these allocations are assigned to an account. Understanding the factors that influence job priority can help you strategize your job submissions for faster execution. Two key features of slurm are **Fairshare** and **Backfill**.
+If your job is sitting in the queue for a while, its priority could be lower than other jobs due to one or more factors such as high fairshare usage from previous jobs, a high number of in-demand resources being requested, or a long wall time being requested. This is because the Star cluster leverages Slurm's Backfill scheduler and Multifactor Priority plugin, which considers several factors in determining a job's priority, unlike simple First In, First Out (FIFO) scheduling. The backfill scheduler with the priority/multifactor plugin provide a more balanced and performant approach than FIFO.
 
+There are nine factors that influence job priority, which affects the order in which the jobs are scheduled. The job priority is calculated from a weighted sum of all the following factors:
+
+- **Age**: the length of time a job has been waiting in the queue and eligible to be scheduled  
+- **Association**: a factor associated with each association  
+- **Fair-share**: the difference between the portion of the computing resource that has been promised and the amount of resources that has been consumed  
+- **Nice**: a factor that can be set by users to prioritize their own jobs
+- **Job size**: the number of nodes or CPUs a job is allocated  
+- **Partition**: a factor associated with each node partition  
+- **QOS**: a factor based on the priority of the Quality Of Service (QOS) associated with the job
+- **Site**: a factor dictated by an administrator or a site-developed job_submit or site_factor plugin  
+- **TRES**: A TRES is a resource that can be tracked for usage or used to enforce limits against. Each TRES Type has its own factor for a job which represents the number of requested/allocated TRES Type in a given partition 
 
 #### i) Fairshare
 
-The fair-share component to a job's priority influences the order in which a user's queued jobs are scheduled to run based on the portion of the computing resources they have been allocated and the resources their jobs have already consumed.
+Fair-share values, which are set at the different accounts levels in the account hierarchy, represent the relative amount of the computing resources that have been allocated to different projects.
 
- Additionally, if there are two members of a given account, and if one of those users has run many jobs under that account, the job priority of a job submitted by the user who has not run any jobs will be negatively affected. This ensures that the combined usage charged to an account matches the portion of the machine that is allocated to that account.
+The fair-share factor influences the overall priority of jobs, which affects the order in which queued jobs are scheduled to run, based on the amount of computing resources that have already been consumed in relation to the share of resources allocated for the given account, so as to ensure all accounts have a "fair-share" of the resources.
 
- 
+As a result, the more resources your recent jobs have used out of your account's allocation, the lower the priority will be for future jobs submitted through your account in comparison other accounts that have used fewer resources. This allows underutilized accounts to gain higher priority over heavily utilized accounts that have been allocated the same or similar amount of resources. As the fairshare value is typically set at the account level and multiple users may belong to the same account, the usage of one user can negatively affect other users in that same account. So, if there are two members of a given account, and one user runs many jobs under that account, the priority of any future jobs submitted by the other user (who may never even have run any jobs at all) would also be negatively affected. This ensures that the combined usage of an account matches the portion of resources that has been allocated to to it.
 
-#### Command line examples:
+
+##### Command line examples:
 
 1. **Displaying the sharing and Fair-Share information of your user in your account.**
    ```bash
@@ -69,32 +80,17 @@ The sprio -w option displays the weights (PriorityWeightAge, PriorityWeightFairs
    Weights                                                1               10000          1000              1000    1000
    ```
 
-
 #### ii) Backfilling
 
 Backfilling is a technique to optimize resource utilization. If a large job is waiting for specific resources, the scheduler allows smaller jobs to run in the meantime, provided they don't delay the start of the higher-priority job. This approach keeps the cluster busy and reduces idle time.
-
 
 ### 2. Resource Availability
 
 The required resources may not be available at the moment. Jobs might have to wait longer for sufficient resources to free up. Resources are allocated to accounts through the fairshare mechanism. I.e., accounts have a number of shares that determine their entitled resources. The number of resources that a given job may consume is also constrained by the job's QOS policy.
 
-The job's priority at any given time will be a weighted sum of all the factors that have been enabled in the cluster.  
+## Are Slurm accounts the same as Star HPC user accounts?
 
-- **Age**: the length of time a job has been waiting in the queue, eligible to be scheduled  
-- **Association**: a factor associated with each association  
-- **Fair-share**: the difference between the portion of the computing resource that has been promised and the amount of resources that has been consumed  
-- **Job size**: the number of nodes or CPUs a job is allocated  
-- **Partition**: a factor associated with each node partition  
-- **Quality of Service (QOS)**: a factor associated with each Quality Of Service  
-- **Site**: a factor dictated by an administrator or a site-developed job_submit or site_factor plugin  
-- **TRES**: A TRES is a resource that can be tracked for usage or used to enforce limits against. Each TRES Type has its own factor for a job which represents the number of requested/allocated TRES Type in a given partition 
-
-
-## Are Slurm accounts the same thing as HPC accounts or Star user accounts?
-
-No, Slurm accounts typically correspond with a group of users and we generally create them on a project basis. Users can belong to multiple Slurm accounts and multiple users can belong to a single Slurm account. Slurm accounts are used for tracking usage and enforcing resource limits. When new project accounts are created, they will consume a portion of the shares allocated for the parent account, which is typically associated with a broader administrative entity, such as an institution, department, or research group.
-
+No, a Slurm account is something entirely different. Users can belong to multiple Slurm accounts and multiple users can belong to a single Slurm account. Slurm accounts typically correspond with a group of users and we generally create them on a project basis. Slurm accounts are used for tracking usage and enforcing resource limits. When new project accounts are created, they will consume a portion of the shares allocated for the parent account, which is typically associated with a broader administrative entity, such as an institution, department, or research group.
 
 ## What QOS Should I Choose for My Job?
 
@@ -103,7 +99,6 @@ QoS (Quality of Service) define job with different priorities and resource limit
 - **short**: For jobs up to 1 hour, with higher priority, suitable for testing and quick tasks.  
 - **medium**: For jobs up to 48 hours, balanced priority for standard workloads.  
 - **long**: For jobs up to 120 hours, lower priority due to resource demands, suitable for extensive computations.  
-
 
 ## When Will My Job Start?
 
@@ -127,13 +122,11 @@ squeue -A <account>
 Review your fairshare score using sshare to understand how your recent resource usage might be affecting your job's priority.
 
 
-
 ## Can I Have More Resources?
 
 It depends. We don’t have unlimited resources, so please try to make the most of the resources available. Moreover, it is quite possible that you are not using the resources that you have completely. Using your current resources completely may suffice your needs.
 
 Before requesting additional resources, make sure you are optimally using the resources you have already been allocated. To request an additional allocation, provide a brief justification, which may include how you are using your current allocation.
-
 
 ## How Can I Make Sure That I Am Using My Resources Optimally?
 
@@ -176,7 +169,6 @@ srun python train_model.py
 ```
 
 This script requests sufficient time and resources for an extended computation, using the **long QoS**.
-
 
 ## **What Can I Do to Get My Job Started More Quickly? Any Other PRO Tips?**
 
