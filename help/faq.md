@@ -44,8 +44,7 @@ key:
 ### I need Python package X but the one on Star is too old or I cannot find it
 
 You can choose different Python versions with either the module system
-or using Anaconda/Miniconda. See here: `/software/modules` and
-`/software/python_r_perl`.
+or using Anaconda/Miniconda. See [Environment modules]({{site.baseurl}}{% link software/env-modules.md %}).
 
 In cases where this still doesn't solve your problem or you would like
 to install a package yourself, please read the next section below about
@@ -56,7 +55,7 @@ solution for you, please contact us and we will do our best to help you.
 
 ### Can I install Python software as a normal user without sudo rights?
 
-Yes. Please see `/software/python_r_perl`.
+Yes. Please see [Virtual environments]({{site.baseurl}}{% link software/virtual-env.md %}).
 
 ## Compute and storage quota
 
@@ -81,7 +80,7 @@ File limits (inodes) -> These limit the number of files a user can create, regar
 
 
 
-To check the quota of the main project storage (parallel file system - /fs1/proj/<project>), you can use this command:
+To check the quota of the main project storage (parallel file system - `/fs1/proj/<project>`), you can use this command:
 
     $ mmlsquota -j <fileset_name> <filesystem_name>
 
@@ -123,7 +122,7 @@ your local PC.
 
 ### How can I access a compute node from the login node?
 
-Please read about Interactive jobs at `/jobs/creating-jobs.md/`.
+Please read about Interactive jobs at [Submitting jobs]({{site.baseurl}}{% link jobs/submitting-jobs.md %}).
 
 ### My ssh connections are dying / freezing
 
@@ -145,18 +144,9 @@ you can take a look at this page explaining
 [keepalives](https://the.earth.li/~sgtatham/putty/0.60/htmldoc/Chapter4.html#config-keepalive)
 for a similar solution.
 
-## Jobs and queue system
-
-### I am not able to submit jobs longer than two days
-
-Please read about `label_partitions`.
-
 ### Where can I find an example of job script?
 
-You can find job script examples at `/jobs/creating-jobs.md/`.
-
-Relevant application specific examples (also for beginning users) for a
-few applications can be found in `sw_guides`.
+You can find job script examples at [Submitting jobs]({{site.baseurl}}{% link jobs/submitting-jobs.md %}).
 
 ### When will my job start?
 
@@ -178,6 +168,8 @@ new jobs are submitted that get higher priority.
 
 In the command line, see the job queue by using `squeue`.
 
+For a more comprehensive list of commands to monitor/manage your jobs, please see [Monitoring jobs]({{site.baseurl}}{% link jobs/monitoring-jobs.md %}).
+
 ### Why does my job not start or give me error feedback when submitting?
 
 Most often the reason a job is not starting is that Star is full at
@@ -186,8 +178,7 @@ there is an error in the job script and you are asking for a
 configuration that is not possible on Star. In such a case the job
 will not start.
 
-To find out how to monitor your jobs and check their status see
-`monitoring_jobs`.
+To find out how to monitor your jobs and check their status see [Monitoring jobs]({{site.baseurl}}{% link jobs/monitoring-jobs.md %}).
 
 Below are a few cases of why jobs don't start or error messages you
 might get:
@@ -204,7 +195,7 @@ core nodes - with both a total of 32 GB of memory/node. If you ask for
 full nodes by specifying both number of nodes and cores/node together
 with 2 GB of memory/core, you will ask for 20 cores/node and 40 GB of
 memory. This configuration does not exist on Star. If you ask for 16
-cores, still with 2GB/core, there is a sort of buffer within SLURM no
+cores, still with 2GB/core, there is a sort of buffer within Slurm no
 allowing you to consume absolutely all memory available (system needs
 some to work). 2000MB/core works fine, but not 2 GB for 16 cores/node.
 
@@ -219,8 +210,7 @@ mem-per-cpu 4000MB will cost you twice as much as mem-per-cpu 2000MB.
 
 Please also note that if you want to use the whole memory on a node, do
 not ask for 32GB, but for 31GB or 31000MB as the node needs some memory
-for the system itself. For an example, see here:
-`allocated_entire_memory`
+for the system itself.
 
 **Step memory limit**
 
@@ -245,21 +235,13 @@ For instance:
 
 QOSMaxWallDurationPerJobLimit means that MaxWallDurationPerJobLimit has
 been exceeded. Basically, you have asked for more time than allowed for
-the given QOS/Partition. Please have a look at `label_partitions`
+the given QOS/Partition.
 
 **Priority vs. Resources**
 
 Priority means that resources are in principle available, but someone
 else has higher priority in the queue. Resources means the at the moment
 the requested resources are not available.
-
-### Why is my job not starting on highmem nodes although the highmem queue is empty?
-
-To prevent the highmem nodes from standing around idle, normal jobs may
-use them as well, using only 32 GB of the available memory. Hence, it is
-possible that the highmem nodes are busy, although you do not see any
-jobs queuing or running on <span class="title-ref">squeue -p
-highmem</span>.
 
 ### How can I customize emails that I get after a job has completed?
 
@@ -276,7 +258,7 @@ script:
 The overhead in the job start and cleanup makes it unpractical to run
 thousands of short tasks as individual jobs on Star.
 
-The queueing setup on star, or rather, the accounting system generates
+The queueing setup on Star, or rather, the accounting system generates
 overhead in the start and finish of a job of about 1 second at each end
 of the job. This overhead is insignificant when running large parallel
 jobs, but creates scaling issues when running a massive amount of
@@ -286,25 +268,86 @@ unparallelizable part of the job. This is because the queuing system can
 only start and account one job at a time. This scaling problem is
 described by [Amdahls Law](https://en.wikipedia.org/wiki/Amdahl's_law).
 
-If the tasks are extremly short, you can use the example below. If you
-want to spawn many jobs without polluting the queueing system, please
-have a look at `job_arrays`.
+If the tasks are extremly short (e.g. less than 1 second), you can use the example below.
+
+If you want to spawn many jobs without polluting the queueing system, please
+have a look at [array jobs]({{site.baseurl}}{% link jobs/submitting-jobs.md %}#array-jobs).
 
 By using some shell trickery one can spawn and load-balance multiple
 independent task running in parallel within one node, just background
 the tasks and poll to see when some task is finished until you spawn the
 next:
 
-<div class="literalinclude" language="bash">
+```bash
+#!/usr/bin/env bash
 
-files/multiple.sh
+# Jobscript example that can run several tasks in parallel.
+# All features used here are standard in bash so it should work on
+# any sane UNIX/LINUX system.
+# Author: roy.dragseth@uit.no
+#
+# This example will only work within one compute node so let's run
+# on one node using all the cpu-cores:
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=20
 
-</div>
+# We assume we will (in total) be done in 10 minutes:
+#SBATCH --time=0-00:10:00
+
+# Let us use all CPUs:
+maxpartasks=$SLURM_TASKS_PER_NODE
+
+# Let's assume we have a bunch of tasks we want to perform.
+# Each task is done in the form of a shell script with a numerical argument:
+# dowork.sh N
+# Let's just create some fake arguments with a sequence of numbers
+# from 1 to 100, edit this to your liking:
+tasks=$(seq 100)
+
+cd $SLURM_SUBMIT_DIR
+
+for t in $tasks; do
+  # Do the real work, edit this section to your liking.
+  # remember to background the task or else we will
+  # run serially
+  ./dowork.sh $t &
+
+  # You should leave the rest alone...
+
+  # count the number of background tasks we have spawned
+  # the jobs command print one line per task running so we only need
+  # to count the number of lines.
+  activetasks=$(jobs | wc -l)
+
+  # if we have filled all the available cpu-cores with work we poll
+  # every second to wait for tasks to exit.
+  while [ $activetasks -ge $maxpartasks ]; do
+    sleep 1
+    activetasks=$(jobs | wc -l)
+  done
+done
+
+# Ok, all tasks spawned. Now we need to wait for the last ones to
+# be finished before we exit.
+echo "Waiting for tasks to complete"
+wait
+echo "done"
+```
 
 And here is the `dowork.sh` script:
 
-<div class="literalinclude" language="bash">
+```bash
+#!/usr/bin/env bash
 
-files/dowork.sh
+# Fake some work, $1 is the task number.
+# Change this to whatever you want to have done.
 
-</div>
+# sleep between 0 and 10 secs
+let sleeptime=10*$RANDOM/32768
+
+echo "Task $1 is sleeping for $sleeptime seconds"
+sleep $sleeptime
+echo "Task $1 has slept for $sleeptime seconds"
+```
+
+Source: [HPC-UiT FAQ](https://hpc-uit.readthedocs.io/en/latest/help/faq.html)
