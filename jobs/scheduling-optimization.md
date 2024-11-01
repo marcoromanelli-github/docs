@@ -8,11 +8,11 @@ This guide aims to help users optimize their job submissions on the Star HPC clu
 
 ## Why Is My Job Not Running Yet?
 
-You can use the `squeue -j <jobid>` command to see the status and the reason why your job is not running. There are a number of possible reasons why your job could have a long queue time or could be prevented from ever running. The queue time could be impacted by the job's priority (see priority factors), the availability of high-demand or scare resources, or dependency constraints. It may also be possible that your job is asking for more resources than exists or has been allotted, in which case it will never even start.
+You can use the `squeue -j <jobid>` command to see the status and the reason why your job is not running. There are a number of possible reasons why your job could have a long queue time or could be prevented from ever running. The queue time could be impacted by the job's priority (see priority factors), the availability of high-demand or scare resources, or dependency constraints. It is also possible that your job is asking for more resources than exists or has been allotted, in which case it will never even start.
 
-To help identity issues with your jobs or strategize your job submissions to optimize them for faster execution, you should understand how the scheduler works and the factors that are at play. Key scheduling concepts to understand include **job priority**, priority factors such as **fairshare** and **QOS**, and **backfilling**. More advanced concepts include **reservations**, **oversubscription**, **preemption**, and **gang scheduling**.
+To help identity issues with your job or strategize your job submissions to optimize them for faster execution, you should understand how the scheduler works and the factors that are at play. Key scheduling concepts to understand include **job priority**, priority factors such as **fairshare** and **QOS**, and **backfilling**. More advanced concepts include **reservations**, **oversubscription**, **preemption**, and **gang scheduling**.
 
-### 1. Scheduling Priority Factors
+### Scheduling Priority Factors
 
 If your job is sitting in the queue for a while, its priority could be lower than other jobs due to one or more factors such as high fairshare usage from previous jobs, a high number of in-demand resources being requested, or a long wall time being requested. This is because the Star cluster leverages Slurm's Backfill scheduler and Multifactor Priority plugin, which considers several factors in determining a job's priority, unlike simple First In, First Out (FIFO) scheduling. The backfill scheduler with the priority/multifactor plugin provide a more balanced and performant approach than FIFO.
 
@@ -26,11 +26,13 @@ There are nine factors that influence job priority, which affects the order in w
 - **Partition**: a factor associated with each node partition  
 - **QOS**: a factor based on the priority of the Quality Of Service (QOS) associated with the job
 - **Site**: a factor dictated by an administrator or a site-developed job_submit or site_factor plugin  
-- **TRES**: A TRES is a resource that can be tracked for usage or used to enforce limits against. Each TRES Type has its own factor for a job which represents the number of requested/allocated TRES Type in a given partition 
+- **TRES**: A TRES is a resource that can be tracked for usage or used to enforce limits against. Each TRES type has its own factor for a job which represents the number of requested/allocated TRES type in a given partition.
 
 #### i) Fairshare
 
-Fair-share values, which are set at the different accounts levels in the account hierarchy, represent the relative amount of the computing resources that have been allocated to different projects.
+The fair-share factor reflects the recent resource usage of an account relative to its allotted share.
+
+An accounts's allotted share of resources is given by the FairShare value, which is set at multiple different levels in the account hierarchy, that represents the relative amount of the computing resources that are allocated to different projects.
 
 The fair-share factor influences the overall priority of jobs, which affects the order in which queued jobs are scheduled to run, based on the amount of computing resources that have already been consumed in relation to the share of resources allocated for the given account, so as to ensure all accounts have a "fair-share" of the resources.
 
@@ -67,7 +69,7 @@ As a result, the more resources your recent jobs have used out of your account's
 
 3. **Displaying a summary of the six factors configured that comprise each job’s scheduling priority**
 
-The sprio -w option displays the weights (PriorityWeightAge, PriorityWeightFairshare, etc.) for each factor as it is currently configured.
+   The sprio -w option displays the weights (PriorityWeightAge, PriorityWeightFairshare, etc.) for each factor as it is currently configured.
 
    ```bash
    $ sprio -w
@@ -84,7 +86,7 @@ The sprio -w option displays the weights (PriorityWeightAge, PriorityWeightFairs
 
 Backfilling is a technique to optimize resource utilization. If a large job is waiting for specific resources, the scheduler allows smaller jobs to run in the meantime, provided they don't delay the start of the higher-priority job. This approach keeps the cluster busy and reduces idle time.
 
-### 2. Resource Availability
+### Resource Availability
 
 The required resources may not be available at the moment. Jobs might have to wait longer for sufficient resources to free up. Resources are allocated to accounts through the fairshare mechanism. I.e., accounts have a number of shares that determine their entitled resources. The number of resources that a given job may consume is also constrained by the job's QOS policy.
 
