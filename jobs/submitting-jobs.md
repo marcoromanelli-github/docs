@@ -93,6 +93,8 @@ You can find more job examples where we run TensorFlow and PyTorch containers at
 
 ## Interactive jobs
 
+For setting up interactive Jupyter Notebook sessions, see our [Jupyter Notebooks Guide]({{site.baseurl}}{% link software/jupyter-notebooks.md %}).
+
 ### Starting an Interactive job
 
 To start an interactive job, you use the `srun` command with specific parameters that define your job's resource requirements. Here's an example:
