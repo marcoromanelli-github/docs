@@ -93,7 +93,7 @@ You can find more job examples where we run TensorFlow and PyTorch containers at
 
 ## Interactive jobs
 
-For setting up interactive Jupyter Notebook sessions, see our [Jupyter Notebooks Guide]({{site.baseurl}}{% link software/jupyter-notebook.md %}).
+Interactive jobs are those were the user needs to provide input to the application through an interactive pseudo-terminal. For example, this includes the shell and Ncurses-based TUI utilities.
 
 ### Starting an Interactive job
 
