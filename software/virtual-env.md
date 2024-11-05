@@ -1,3 +1,7 @@
+---
+sort: 2
+---
+
 # Virtual Environment Guide
 
 Managing software dependencies and configurations can be challenging in an HPC environment. Users often need different versions of the same software or libraries, leading to conflicts and complex setups. [Environment modules]({{site.baseurl}}{% link software/env-modules.md %}) provide a solution by allowing users to dynamically modify their shell environment using simple commands. This simplifies the setup process, ensures that users have the correct software environment for their applications, and reduces conflicts and errors caused by incompatible software versions. Environment modules work on the same principle as virtual environments, i.e. the manipulation of environment variables. If an environment module is not available for a given version you need, you can instead create a virtual environment using the standard version manager tools provided with many common languages. Virtual environments allow for managing different versions of lanugages and dependencies independent of the system version or other virtual environments, so they are often used by developers to isolate dependencies for different projects.

@@ -1,3 +1,7 @@
+---
+sort: 3
+---
+
 # Apptainer
 
 Before we talk about [Apptainer](https://apptainer.org/), we need to know what containerization is.

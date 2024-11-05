@@ -1,3 +1,7 @@
+---
+sort: 4
+---
+
 # Jupyter Notebook
 
 Jupyter Notebook is an interactive web application that provides an environment where you can create and share documents with live code, equations, visualizations, and narrative text. It is great for data analysis, scientific computing, and machine learning tasks - you can run Python code in cells, see results right away, and document your work all in one place.
