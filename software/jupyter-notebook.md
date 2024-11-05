@@ -1,6 +1,6 @@
-# Jupyter Notebooks
+# Jupyter Notebook
 
-Jupyter notebooks are interactive web-based environments where you can create and share documents with live code, equations, visualizations, and narrative text. They're great for data analysis, scientific computing, and machine learning tasks - you can run Python code in cells, see results right away, and document your work all in one place.
+Jupyter Notebook is an interactive web application that provides an environment where you can create and share documents with live code, equations, visualizations, and narrative text. It is great for data analysis, scientific computing, and machine learning tasks - you can run Python code in cells, see results right away, and document your work all in one place.
 
 ## Storage Space and Performance
 
@@ -8,9 +8,9 @@ While you can use `/home/<username>/` for quick experiments and individual proje
 
 ## SSH Port Forwarding
 
-Since the cluster's compute nodes don't have a graphical interface, we'll need to use SSH port forwarding to access Jupyter's web portal. Since the login node is accessible from the Linux lab machines, originally hosted in Adams Hall, we'll create a tunnel through these machines to reach our Jupyter session.
+As the compute nodes where workloads run on the cluster are not directly reachable from the campus network, you'll need to use SSH port forwarding through the login node to access your Jupyter Notebook instances on the cluster. Also, as the login node itself is not currently reachable off campus, either SSH port forwarding through the Linux lab machines or VPN access is needed to access the login node when off campus.
 
-1. The job script (shown in the next section) will generate a tunneling command in your output file
+1. The job script (shown in the next section) will generate an SSH command in your output file
 2. Run this command from your local machine to establish the connection through the Linux lab machine
 3. Access Jupyter through your local web browser
 
@@ -74,4 +74,4 @@ Check out [Interactive jobs]({{site.baseurl}}{% link jobs/submitting-jobs.md %}#
 ## Adding More Packages
 
 ### Container Images
-You can also use Docker images through Apptainer (formerly Singularity). This is great when you want an environment with everything pre-installed. Check out the [Apptainer Guide]({{site.baseurl}}{% link software/apptainer.md %}) to learn more.
+You can also run Docker images on the cluster through Apptainer (a variant of Singularity). This is great when you want an environment with everything pre-installed. Check out the [Apptainer Guide]({{site.baseurl}}{% link software/apptainer.md %}) to learn more.
