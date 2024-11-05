@@ -6,11 +6,19 @@ sort: 4
 
 Jupyter Notebook is an interactive web application that provides an environment where you can create and share documents with live code, equations, visualizations, and narrative text. It is great for data analysis, scientific computing, and machine learning tasks - you can run Python code in cells, see results right away, and document your work all in one place.
 
-## Storage Space and Performance
+## Using Jupyter Notebook
 
-While you can use `/home/<username>/` for quick experiments and individual projects, keep in mind that this path has limited storage space and performance. For most of your work, use `/fs1/projects/<project-name>/` which lives on the parallel file-system storage. It's faster and has much more space for your notebooks and data.
+To start Jupyter Notebook on the cluster, you would use either the `sbatch` or `srun` commands. `sbatch` is typically used to run scripts or commands that can execute without user intervention. `srun` is used to launch applications in an interactive pseudo-terminal session. As the Jupyter Notebook server process does not require any interactivity itself, `sbatch` is sufficient. `sbatch` has the added benefit that you can set the options at the top of the job script to make its reuse more convenient.
 
-## SSH Port Forwarding
+Once Jupyter Notebook is running, you will need to run an SSH command to be able to access it.
+
+```note
+### Using Your Storage Effectively
+
+Usually, for most of your work you should store your files at `/fs1/projects/{project-name}/`, which lives on the parallel file-system storage. You can also use your home directory (`/home/{username}/`) for quick experiments and convenient  access to scripts, but keep in mind that your home directory has limited storage space and performance. The parallel file-system storable is much faster and has way more space for your notebooks and data.
+```
+
+### SSH Port Forwarding
 
 As the compute nodes where workloads run on the cluster are not directly reachable from the campus network, you'll need to use SSH port forwarding through the login node to access your Jupyter Notebook instances on the cluster. Also, as the login node itself is not currently reachable off campus, either SSH port forwarding through the Linux lab machines or VPN access is needed to access the login node when off campus.
 
@@ -75,7 +83,5 @@ srun --jobid=<your_jupyter_job_id> --pty bash
 
 Check out [Interactive jobs]({{site.baseurl}}{% link jobs/submitting-jobs.md %}#interactive-jobs) for more details about interactive sessions.
 
-## Adding More Packages
-
-### Container Images
+## Using Existing Container Images
 You can also run Docker images on the cluster through Apptainer (a variant of Singularity). This is great when you want an environment with everything pre-installed. Check out the [Apptainer Guide]({{site.baseurl}}{% link software/apptainer.md %}) to learn more.
