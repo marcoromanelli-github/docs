@@ -93,7 +93,7 @@ You can find more job examples where we run TensorFlow and PyTorch containers at
 
 ## Interactive jobs
 
-For setting up interactive Jupyter Notebook sessions, see our [Jupyter Notebooks Guide]({{site.baseurl}}{% link software/jupyter-notebooks.md %}).
+For setting up interactive Jupyter Notebook sessions, see our [Jupyter Notebooks Guide]({{site.baseurl}}{% link software/jupyter-notebook.md %}).
 
 ### Starting an Interactive job
 
