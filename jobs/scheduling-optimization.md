@@ -16,7 +16,7 @@ To help identify issues with your job or strategize your job submissions to opti
 
 ### Scheduling Priority Factors
 
-If your job is sitting in the queue for a while, its priority could be lower than other jobs due to one or more factors such as high fairshare usage from previous jobs, a high number of in-demand resources being requested, or a long wall time being requested. This is because the Star cluster leverages Slurm's Backfill scheduler and Multifactor Priority plugin, which considers several factors in determining a job's priority, unlike simple First In, First Out (FIFO) scheduling. The backfill scheduler with the priority/multifactor plugin provides a more balanced and performant approach than FIFO.
+If your job is sitting in the queue for a while, its priority could be lower than other jobs due to one or more factors such as high fairshare usage from previous jobs, a high number of in-demand resources being requested, or a long wall time being requested. This is because the Star cluster leverages Slurm's Backfill scheduler and Multifactor Priority plugin, which considers several factors in determining a job's priority, unlike First-In, First-Out (FIFO) scheduling. The backfill scheduler with the priority/multifactor plugin provides a more balanced and performant approach than FIFO.
 
 There are nine factors that influence job priority, which affects the order in which the jobs are scheduled to run. The job priority is calculated from a weighted sum of all the following factors:
 
@@ -36,7 +36,7 @@ The fairshare factor reflects the recent resource usage of an account relative t
 
 The fairshare factor influences the priority of jobs based on the amount of resources that have been previously consumed in relation to the share of resources allocated for the given account, so as to ensure all accounts have a "fair-share" of the resources.
 
-As a result, the more resources your recent jobs have used relative to your account's allocation, the lower the priority will be for future jobs submitted through your account in comparison other accounts that have used fewer resources. This allows underutilized accounts to gain higher priority over heavily utilized accounts that have been allocated the same or similar amount of resources. As the fairshare value is typically set at the account level and multiple users may belong to the same account, the usage of one user can negatively affect other users in that same account. So, if there are two members of a given account, and one user runs many jobs under that account, the priority of any future jobs submitted by the other user (who may never even have run any jobs at all) would also be negatively affected. This ensures that the combined usage of an account matches the portion of resources that has been allocated to to it.
+As a result, the more resources your recent jobs have used relative to your account's allocation, the lower the priority will be for future jobs submitted through your account in comparison other accounts that have used fewer resources. This allows underutilized accounts to gain higher priority over heavily utilized accounts that have been allocated the same or similar amount of resources. As the fairshare value is typically set at the account level and multiple users may belong to the same account, the usage of one user can negatively affect other users in that same account. So, if there are two members of a given account, and one user runs many jobs under that account, the priority of any future jobs submitted by the other user (who may never even have run any jobs at all) would also be negatively affected. This ensures that the combined usage of an account matches the portion of resources that has been allocated to it.
 
 
 ##### Command line examples:
@@ -88,7 +88,7 @@ Backfilling is a technique to optimize resource utilization. If a large job is w
 
 ### Resource Availability
 
-The required resources may not be available at the moment. Jobs might have to wait longer for sufficient resources to free up. Resources are allocated to accounts through the fairshare mechanism. I.e., accounts have a number of shares that determine their entitled resources. The number of resources that a given job may consume is also constrained by the job's QoS policy.
+The required resources may not be available at the moment. Jobs might have to wait longer for sufficient resources to free up. Resources are allocated to accounts through the fairshare mechanism. I.e., accounts have a number of shares that determine their entitled resource allocation. The number of resources that a given job may consume is also constrained by the job's QoS policy.
 
 ## Are Slurm accounts the same as Star HPC user accounts?
 
