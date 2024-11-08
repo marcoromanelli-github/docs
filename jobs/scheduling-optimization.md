@@ -154,6 +154,8 @@ module load python3
 python3 quick_task.py
 ```
 
+Note that `quick_task.py`'s name and location needs to be changed relative to _your_ file(s).
+
 ## **How Can I Submit a Long Job?**
 
 For long jobs, select the **long QoS**, which allows for extended runtimes but may have lower scheduling priority. It’s advisable to implement **checkpointing** in your application if possible. Checkpointing allows your job to save progress at intervals, so you can resume from the last checkpoint in case of interruptions, mitigating the risk of resource wastage due to unexpected failures.
