@@ -24,7 +24,7 @@ There are nine factors that influence job priority, which affects the order in w
 - **Nice**: a factor that can be set by users to prioritize their own jobs. This factor is currently not enabled for our cluster.
 - **Job size**: the number of nodes or CPUs a job is allocated  
 - **Partition**: a factor associated with each node partition  
-- **QOS**: a factor based on the priority of the Quality Of Service (QOS) associated with the job
+- **QoS**: a factor based on the priority of the Quality of Service (QoS) associated with the job
 - **Site**: a factor dictated by an administrator or a site-developed job_submit or site_factor plugin  
 - **TRES**: A TRES is a resource that can be tracked for usage or used to enforce limits against. Each TRES type has its own factor for a job which represents the number of requested/allocated TRES type in a given partition.
 
@@ -92,7 +92,7 @@ The required resources may not be available at the moment. Jobs might have to wa
 
 No, a Slurm account is something entirely different. Users can belong to multiple Slurm accounts and multiple users can belong to a single Slurm account. Slurm accounts typically correspond with a group of users and we generally create them on a project basis. Slurm accounts are used for tracking usage and enforcing resource limits. When new project accounts are created, they will consume a portion of the shares allocated for the parent account, which is typically associated with a broader administrative entity, such as an institution, department, or research group.
 
-## What QOS Should I Choose for My Job?
+## What QoS Should I Choose for My Job?
 
 QoS (Quality of Service) define job with different priorities and resource limits. Selecting the appropriate QoS can influence your job’s priority in the queue. Be mindful of the tradeoff that comes with the long QoS. While long QoS allows more runtime for your jobs, they may result in longer wait times due to lower scheduling priority.
 
