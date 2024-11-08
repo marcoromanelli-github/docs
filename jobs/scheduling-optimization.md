@@ -22,7 +22,7 @@ There are nine factors that influence job priority, which affects the order in w
 
 - **Age**: the length of time a job has been waiting in the queue and eligible to be scheduled  
 - **Association**: a factor associated with each association  
-- **Fair-share**: the difference between the portion of the computing resource that has been promised and the amount of resources that has been consumed  
+- **Fairshare**: the difference between the portion of the computing resource that has been promised and the amount of resources that has been consumed  
 - **Nice**: a factor that can be set by users to prioritize their own jobs. This factor is currently not enabled for our cluster.
 - **Job size**: the number of nodes or CPUs a job is allocated  
 - **Partition**: a factor associated with each node partition  
@@ -32,16 +32,16 @@ There are nine factors that influence job priority, which affects the order in w
 
 #### i) Fairshare
 
-The fair-share factor reflects the recent resource usage of an account relative to its allotted share. An account's allotted share is determined by values set at multiple levels in the account hierarchy that represent the relative amount of the computing resources assigned to each account relative to others.
+The fairshare factor reflects the recent resource usage of an account relative to its allotted share. An account's allotted share is determined by values set at multiple levels in the account hierarchy that represent the relative amount of the computing resources assigned to each account relative to others.
 
-The fair-share factor influences the priority of jobs based on the amount of resources that have been previously consumed in relation to the share of resources allocated for the given account, so as to ensure all accounts have a "fair-share" of the resources.
+The fairshare factor influences the priority of jobs based on the amount of resources that have been previously consumed in relation to the share of resources allocated for the given account, so as to ensure all accounts have a "fair-share" of the resources.
 
 As a result, the more resources your recent jobs have used relative to your account's allocation, the lower the priority will be for future jobs submitted through your account in comparison other accounts that have used fewer resources. This allows underutilized accounts to gain higher priority over heavily utilized accounts that have been allocated the same or similar amount of resources. As the fairshare value is typically set at the account level and multiple users may belong to the same account, the usage of one user can negatively affect other users in that same account. So, if there are two members of a given account, and one user runs many jobs under that account, the priority of any future jobs submitted by the other user (who may never even have run any jobs at all) would also be negatively affected. This ensures that the combined usage of an account matches the portion of resources that has been allocated to to it.
 
 
 ##### Command line examples:
 
-1. **Displaying the sharing and Fair-Share information of your user in your account.**
+1. **Displaying the sharing and fairshare information of your user in your account.**
    ```bash
    $ sshare -l -U -o Account,User,NormShares,RawUsage,NormUsage,EffectvUsage,FairShare,TRESRunMins%100
    ```
@@ -134,7 +134,7 @@ Before requesting additional resources, make sure you are optimally using the re
 
 Technical explanation:
 
-The fair-share mechanism used to ensure fair usage between accounts does not actually limit the amount of resources that can be requested or consumed. It only adjusts each job's scheduling priority based on resource usage history and the account's fair-share entitlement. Resource limits may be imposed on an account, user, partition, or job by association or QoS policy though. These usage limits will be reevaluated periodically and may be adjusted based on legitimate need or usage patterns.
+The fairshare mechanism used to ensure fair usage between accounts does not actually limit the amount of resources that can be requested or consumed. It only adjusts each job's scheduling priority based on resource usage history and the account's fair-share entitlement. Resource limits may be imposed on an account, user, partition, or job by association or QoS policy though. These usage limits will be reevaluated periodically and may be adjusted based on legitimate need or usage patterns.
 
 ## How Can I Make Sure That I Am Using My Resources Optimally?
 
