@@ -8,9 +8,11 @@ This guide aims to help users optimize their job submissions on the Star HPC clu
 
 ## Why Is My Job Not Running Yet?
 
-You can use the `squeue -j <jobid>` command to see the status and the reason why your job is not running. There are a number of possible reasons why your job could have a long queue time or could be prevented from ever running. The queue time could be impacted by the job's priority (see priority factors), the availability of high-demand or scare resources, or dependency constraints. It is also possible that your job is asking for more resources than exists or has been allotted, in which case it will never even start.
+**Note**: The hyperlinks point to the official [SchedMD documentation](https://slurm.schedmd.com/documentation.html) for a more comprehensive read for interested readers.
 
-To help identity issues with your job or strategize your job submissions to optimize them for faster execution, you should understand how the scheduler works and the factors that are at play. Key scheduling concepts to understand include **job priority**, priority factors such as **fairshare** and **QOS**, and **backfilling**. More advanced concepts include **reservations**, **oversubscription**, **preemption**, and **gang scheduling**.
+You can use the `squeue -j <jobid>` command to see the status and the reason why your job is not running. There are a number of possible reasons why your job could have a long queue time or could be prevented from ever running. The queue time could be impacted by the [job's priority](https://slurm.schedmd.com/priority_multifactor.html#general), the availability of high-demand or scarce resources, or dependency constraints. It is also possible that your job is asking for more resources than exist or have been allotted, in which case it will never even start.
+
+To help identify issues with your job or strategize your job submissions to optimize them for faster execution, you should understand how the scheduler works and the factors that are at play. Key scheduling concepts to understand include [job priority](https://slurm.schedmd.com/priority_multifactor.html#general), priority factors such as [fairshare](https://slurm.schedmd.com/priority_multifactor.html#fairshare) and [QoS](https://slurm.schedmd.com/qos.html), and [backfilling](https://slurm.schedmd.com/sched_config.html#backfill). More advanced concepts include [reservations](https://slurm.schedmd.com/reservations.html), [oversubscription](https://slurm.schedmd.com/cons_tres_share.html), [preemption](https://slurm.schedmd.com/preempt.html), and [gang scheduling](https://slurm.schedmd.com/gang_scheduling.html).
 
 ### Scheduling Priority Factors
 
@@ -86,7 +88,7 @@ Backfilling is a technique to optimize resource utilization. If a large job is w
 
 ### Resource Availability
 
-The required resources may not be available at the moment. Jobs might have to wait longer for sufficient resources to free up. Resources are allocated to accounts through the fairshare mechanism. I.e., accounts have a number of shares that determine their entitled resources. The number of resources that a given job may consume is also constrained by the job's QOS policy.
+The required resources may not be available at the moment. Jobs might have to wait longer for sufficient resources to free up. Resources are allocated to accounts through the fairshare mechanism. I.e., accounts have a number of shares that determine their entitled resources. The number of resources that a given job may consume is also constrained by the job's QoS policy.
 
 ## Are Slurm accounts the same as Star HPC user accounts?
 
@@ -132,7 +134,7 @@ Before requesting additional resources, make sure you are optimally using the re
 
 Technical explanation:
 
-The fair-share mechanism used to ensure fair usage between accounts does not actually limit the amount of resources that can be requested or consumed. It only adjusts each job's scheduling priority based on resource usage history and the account's fair-share entitlement. Resource limits may be imposed on an account, user, partition, or job by association or QOS policy though. These usage limits will be reevaluated periodically and may be adjusted based on legitimate need or usage patterns.
+The fair-share mechanism used to ensure fair usage between accounts does not actually limit the amount of resources that can be requested or consumed. It only adjusts each job's scheduling priority based on resource usage history and the account's fair-share entitlement. Resource limits may be imposed on an account, user, partition, or job by association or QoS policy though. These usage limits will be reevaluated periodically and may be adjusted based on legitimate need or usage patterns.
 
 ## How Can I Make Sure That I Am Using My Resources Optimally?
 
