@@ -4,7 +4,7 @@ sort: 3
 
 # Apptainer
 
-Before we talk about [Apptainer](https://apptainer.org/), we need to know what containerization is.
+Before we talk about [Apptainer](https://apptainer.org/), you should know what containers are.
 
 ## What is Containerization?
 
@@ -22,9 +22,9 @@ This is where Apptainer comes in. Formerly known as Singularity, Apptainer is si
 
 It runs containers under **user privileges**.
 
-Apptainer is designed with scientific and application virtualization in mind which makes it a go-to choice for many researchers and institutions.
+Apptainer is designed with scientific and application virtualization in mind which makes it the go-to choice for many researchers and institutions.
 
-## Where to find containers?
+## Where can you get container images?
 
 Apptainer uses `.sif` (Singularity Image Format) files, which are different from the image files that Docker uses. If you're already familiar with `.sif` files and Apptainer/Singularity, you can skip to the examples section. Otherwise, here are two ways to get containers for Apptainer:
 
