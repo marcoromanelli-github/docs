@@ -156,11 +156,13 @@ module load python3
 python3 quick_task.py
 ```
 
-Note that `quick_task.py`'s name and location needs to be changed relative to _your_ file(s).
+Note that `quick_task.py`'s name and location needs to be changed relative to _your_ file(s). quick_task.py is the actual job script that you want to run.
 
 ## **How Can I Submit a Long Job?**
 
-For long jobs, select the **long QoS**, which allows for extended runtimes but may have lower scheduling priority. It’s advisable to implement **checkpointing** in your application if possible. Checkpointing allows your job to save progress at intervals, so you can resume from the last checkpoint in case of interruptions, mitigating the risk of resource wastage due to unexpected failures.
+For long jobs, select the **long QoS**, which allows for extended runtimes but may have lower scheduling priority. Note that while specifying the qos you still need to specify the walltime (\--time=). The difference between walltime and cpu time from this simple example: If a job is running for one hour using two CPU cores, the walltime is one hour while the cpu-time is 1hr x 2CPUs = 2 hours.
+
+It’s advisable to implement **checkpointing** in your application if possible. Checkpointing allows your job to save progress at intervals, so you can resume from the last checkpoint in case of interruptions, mitigating the risk of resource wastage due to unexpected failures.
 
 Be aware of **fairshare implications**; consistently running long jobs can reduce your priority over time. Plan your submissions accordingly to balance resource usage.
 
@@ -175,10 +177,11 @@ Be aware of **fairshare implications**; consistently running long jobs can reduc
 #SBATCH --nodes=2
 #SBATCH --mem=64G
 
-srun python train_model.py
+module load python3
+python3 my_long_job.py
 ```
 
-This script requests sufficient time and resources for an extended computation, using the **long QoS**.
+This .sbatch script requests sufficient time and resources for an extended computation, using the **long QoS**. my_long_job.py is the python file which is the job that you want to run
 
 ## **What Can I Do to Get My Job Started More Quickly? Any Other PRO Tips?**
 
