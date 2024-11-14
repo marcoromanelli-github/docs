@@ -4,25 +4,26 @@ sort: 3
 
 # Apptainer
 
-Before we talk about [Apptainer](https://apptainer.org/), you should know what containers are.
+## Why use Apptainer?
 
-## What is Containerization?
+Apptainer is a tool available on the Star cluster for running containers.
 
-Containerization is a smart way to package applications with all their dependencies, to make sure they run consistently across different environments. Unlike full virtualization, which creates entire virtual machines, containerization shares the host operating system's kernel. This makes containers lighter and faster to spin up.
+Containers are isolated software environments that run applications packaged in an image format, which bundles the application and its dependencies. Similar to with virtual machine images, the applications are already installed and are typically pre-configured. However, containers are lighter than virtual machines as containers run directly on the host operating system, while virtual machines include a full operating system of their own.
 
-### Docker: The Popular Choice
+The use of containers not only allows for quicker and easier deployment of pre-configured applications, but since it isolates the application from the host system, it also simplifies dependency management, prevents potential version or dependency conflicts, and ensures consistency and reproducibility. This is especially critical with scientific applications, applications that have complex dependencies, and systems where multiple versions of the same software is needed, which is common in an HPC environment. Without the use of containers, ensuring that applications run consistently across different systems can be quite challenging due to varying software dependencies and configurations.
 
-[Docker](https://www.docker.com/) is probably the containerization platform you've heard of most. It's widely used, but it has one potential drawback: 
+This approach allows you to bring already-built applications and workflows from other Linux environments to the Star cluster, and run them without any reconfiguration or additional installation. You can build a container image on your own local system and then run it on the cluster without any other setup, knowing that the application will be installed and configured the same way on both systems. An extensive ecosystem of container images is also available, so this allows you to run containerized applications without any of the hastle of setting them up or installing their dependencies in the first place.
 
-It runs containers as **root**, which can be a security concern in some settings.
 
-### Apptainer: Security for HPC
+Containers allow you to package applications with all their dependencies, to make sure they run consistently across different environments.
 
-This is where Apptainer comes in. Formerly known as Singularity, Apptainer is similar to Docker but with a key difference:
+## Why not use Docker?
 
-It runs containers under **user privileges**.
+Docker is probably the container platform you're most familiar with. It is widely used for development, but it was not built for HPC enviornments and is not compatible with HPC resource management or the security model of HPC clusters.
 
-Apptainer is designed with scientific and application virtualization in mind which makes it the go-to choice for many researchers and institutions.
+This is where Apptainer comes in. Apptainer is a Linux Foundation-supported fork of Singularity, a purpose built container platform for use in HPC environments. Like Docker, Apptainer/Singularity provides a solution for encapsulating applications and their dependencies within lightweight portable container images. Unlike Docker, Apptainer is designed with the needs of high-performance computing in mind, which makes it the go-to choice for researchers and institutions with data-intensive applications.
+
+Apptainer has some differences from Docker. Don't worry though. It is designed to be fully compatible with Docker, so it can pull and run Docker images. So, you can still run Docker locally and then bring over the same images onto Star.
 
 ## Where can you get container images?
 
