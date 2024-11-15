@@ -27,6 +27,8 @@ Apptainer has some differences from Docker. Don't worry though. It is designed t
 
 ## Where can you get container images?
 
+From either converting pre-existing images, Docker compatible repositories (e.g. DockerHub), or HPC-tailored container repositories (e.g. NGC), all explained in more detail below.
+
 Apptainer uses `.sif` (Singularity Image Format) files, which are different from the image files that Docker uses. If you're already familiar with `.sif` files and Apptainer/Singularity, you can skip to the examples section. Otherwise, here are two ways to get containers for Apptainer:
 
 ### Converting Existing Containers or Images
