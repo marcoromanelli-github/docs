@@ -35,7 +35,7 @@ To get an account on Star, you need to complete out the registration form at [St
     visitor/guest).
 -   Your mobile phone number. This is necessary for recovery of
     passwords.
--   Your institutional mail address (i.e. your work email at the
+-   Your institutional mail address (i.e. your work Email at the
     research institution to which you belong)
 -   The name and address of the instruction you belong to; also
     including name of the center, institute etc.
@@ -65,7 +65,17 @@ Submit the above information through the online registration form.
 
 ## Login node
 
-Access to the cluster is provided through SSH access to the login node. The login node serves as the gateway or entry point to the cluster. Note that most software tools are not available on the login node and it is not for prototyping, building software, or running computationally intensive tasks itself. Instead, the login node is specifically for accessing the cluster and performing only very basic tasks, such as copying and moving files, submitting jobs, and checking the status of existing jobs. For development tasks, you would use one of the development nodes, which are accessed the same way as the large compute nodes. The compute nodes are where all the actual computational work is performed. They are accessed by launching jobs through Slurm with `sbatch` or `srun`.
+### About the login node (named Binary)
+
+The login node serves as the gateway or entry point to the cluster. Note that most software tools are not available on the login node and it is not for prototyping, building software, or running computationally intensive tasks itself. Instead, the login node is specifically for accessing the cluster and performing only very basic tasks, such as copying and moving files, submitting jobs, and checking the status of existing jobs. For development tasks, you would use one of the development nodes, which are accessed the same way as the large compute nodes. The compute nodes are where all the actual computational work is performed. They are accessed by launching jobs through Slurm with `sbatch` or `srun`.
+
+### Connection and credentials
+
+Access to the cluster is provided through SSH to the login node. Upon your account's creation, you can access the login node using the address provided in your welcome Email.
+
+If you have existing Linux lab credentials, use them to log in. Otherwise, login credentials will be provided to you.
+
+Additionally, Binary provides access to your Linux lab files, **But not that** Binary is **not** just another Linux lab machine. It simply provides mutual features (e.g., credentials) for convenience.
 
 ## Scheduler policies
 
@@ -79,7 +89,7 @@ Storage quotas and usage limits are put in place to ensure fair use and equitabl
 
 It is important to know where to store different types of data (such as large datasets or temporary files).
 
-Your home directory provides a limited amount of storage for scripts, source code, and small datasets.
+Your home directory (`/home/your_username`) provides a limited amount of storage for scripts, source code, and small datasets.
 
 Project-specific directories may be created upon request for shared storage among multiple accounts.
 
