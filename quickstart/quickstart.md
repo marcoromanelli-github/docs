@@ -65,7 +65,7 @@ Submit the above information through the online registration form.
 
 ## Login node
 
-### About the login node (named Binary)
+### About the login node
 
 The login node serves as the gateway or entry point to the cluster. Note that most software tools are not available on the login node and it is not for prototyping, building software, or running computationally intensive tasks itself. Instead, the login node is specifically for accessing the cluster and performing only very basic tasks, such as copying and moving files, submitting jobs, and checking the status of existing jobs. For development tasks, you would use one of the development nodes, which are accessed the same way as the large compute nodes. The compute nodes are where all the actual computational work is performed. They are accessed by launching jobs through Slurm with `sbatch` or `srun`.
 
@@ -75,7 +75,7 @@ Access to the cluster is provided through SSH to the login node. Upon your accou
 
 If you have existing Linux lab credentials, use them to log in. Otherwise, login credentials will be provided to you.
 
-Additionally, Binary provides access to your Linux lab files, **But not that** Binary is **not** just another Linux lab machine. It simply provides mutual features (e.g., credentials) for convenience.
+Additionally, the login node provides access to your Linux lab files, **But note that** the login node is **not** just another Linux lab machine. It simply provides mutual features (e.g., credentials) for convenience.
 
 ## Scheduler policies
 

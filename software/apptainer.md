@@ -8,14 +8,11 @@ sort: 3
 
 Apptainer is a tool available on the Star cluster for running containers.
 
-Containers are isolated software environments that run applications packaged in an image format, which bundles the application and its dependencies. Similar to with virtual machine images, the applications are already installed and are typically pre-configured. However, containers are lighter than virtual machines as containers run directly on the host operating system, while virtual machines include a full operating system of their own.
+Containers are isolated software environments that run applications packaged in an image format, which bundles the application and its dependencies. Similar to virtual machine images, the applications are already installed and are typically pre-configured. However, containers are lighter than virtual machines as containers run directly on the host operating system, while virtual machines include a full operating system of their own.
 
-The use of containers not only allows for quicker and easier deployment of pre-configured applications, but since it isolates the application from the host system, it also simplifies dependency management, prevents potential version or dependency conflicts, and ensures consistency and reproducibility. This is especially critical with scientific applications, applications that have complex dependencies, and systems where multiple versions of the same software is needed, which is common in an HPC environment. Without the use of containers, ensuring that applications run consistently across different systems can be quite challenging due to varying software dependencies and configurations.
+The use of containers not only allows for quicker and easier deployment of pre-configured applications, but since it isolates the application from the host system, it also simplifies dependency management, prevents potential version or dependency conflicts, and ensures consistency and reproducibility. This is especially critical with scientific applications, applications that have complex dependencies, and systems where multiple versions of the same software are needed, which is common in an HPC environment. Without the use of containers, ensuring that applications run consistently across different systems can be quite challenging due to varying software dependencies and configurations.
 
-This approach allows you to bring already-built applications and workflows from other Linux environments to the Star cluster, and run them without any reconfiguration or additional installation. You can build a container image on your own local system and then run it on the cluster without any other setup, knowing that the application will be installed and configured the same way on both systems. An extensive ecosystem of container images is also available, so this allows you to run containerized applications without any of the hastle of setting them up or installing their dependencies in the first place.
-
-
-Containers allow you to package applications with all their dependencies, to make sure they run consistently across different environments.
+This approach allows you to bring already-built applications and workflows from other Linux environments to the Star cluster, and run them without any reconfiguration or additional installation. You can build a container image on your own local system and then run it on the cluster without any other setup, knowing that the application will be installed and configured the same way on both systems. An extensive ecosystem of container images is also available, so this allows you to run containerized applications without any of the hassle of setting them up or installing their dependencies in the first place.
 
 ## Why not use Docker?
 
@@ -23,13 +20,13 @@ Docker is probably the container platform you're most familiar with. It is widel
 
 This is where Apptainer comes in. Apptainer is a Linux Foundation-supported fork of Singularity, a purpose built container platform for use in HPC environments. Like Docker, Apptainer/Singularity provides a solution for encapsulating applications and their dependencies within lightweight portable container images. Unlike Docker, Apptainer is designed with the needs of high-performance computing in mind, which makes it the go-to choice for researchers and institutions with data-intensive applications.
 
-Apptainer has some differences from Docker. Don't worry though. It is designed to be fully compatible with Docker, so it can pull and run Docker images. So, you can still run Docker locally and then bring over the same images onto Star.
+Apptainer has some differences from Docker. Don't worry though. It is designed to be fully compatible with Docker and it can pull and run Docker images. So, you can still run Docker locally and then bring over the same images onto Star.
 
 ## Where can you get container images?
 
-From either converting pre-existing images, Docker compatible repositories (e.g. DockerHub), or HPC-tailored container repositories (e.g. NGC), all explained in more detail below.
+Apptainer can run containers from any Docker compatible image repository (e.g. DockerHub). Users of the Star cluster can also leverage the large collection of HPC-tailored container images from the NVIDIA GPU Cloud (NGC) repository.
 
-Apptainer uses `.sif` (Singularity Image Format) files, which are different from the image files that Docker uses. If you're already familiar with `.sif` files and Apptainer/Singularity, you can skip to the examples section. Otherwise, here are two ways to get containers for Apptainer:
+Apptainer runs `.sif` files in the Singularity Image Format, which is different from the image files that Docker uses. If you're already familiar with `.sif` files and Apptainer/Singularity, you can skip to the examples section. Otherwise, here are two ways to get containers for Apptainer:
 
 ### Converting Existing Containers or Images
 
