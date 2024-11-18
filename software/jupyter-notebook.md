@@ -60,10 +60,11 @@ port=9001
 
 # Print tunneling instructions
 echo -e "
+NOTE: You need to replace the `xx` with a number from 01-30.
 Command to create SSH tunnel:
 ssh -N -f -L ${port}:${node}:${port} -J ${user}@adams204xx.hofstra.edu:5010,${user}@binary.star.hofstra.edu:5010 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${user}@${node}
 
-NOTE: After establishing the tunnel, look for the URL you need to open in your local browser, printed in the .err file.
+After running the command successfully, look for the URL you need to open in your local browser, printed in the .err file.
 "
 
 jupyter notebook --no-browser --port=${port} --ip=${node}
