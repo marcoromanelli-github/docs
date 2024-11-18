@@ -25,8 +25,17 @@ Please see our guide on using conda and [how to transfer files]({{site.baseurl}}
 Usually, for most of your work you should store your files at `/fs1/projects/{project-name}/`, which lives on the parallel file-system storage. You can also use your home directory (`/home/{username}/`) for quick experiments and convenient  access to scripts, but keep in mind that your home directory has limited storage space and performance. The parallel file-system storable is much faster and has way more space for your notebooks and data.
 ```
 
+### SSH Port Forwarding
+
+As the compute nodes where workloads run on the cluster are not directly reachable from the campus network, you'll need to use SSH port forwarding through the login node to access your Jupyter Notebook instances on the cluster. Also, as the login node itself is not currently reachable off campus, either SSH port forwarding through the Linux lab machines or VPN access is needed to access the login node when off campus.
+
+1. The job script (shown in the next section) will generate an SSH command in your output file
+2. Run this command from your local machine to establish the connection through the Linux lab machine
+3. Access Jupyter through your local web browser
+
 ### Job Script
 
+First, SSH to the login node 
 You'll typically use a job script to launch Jupyter Notebook and most other applications after performing any initial setup. Below is an example that you can just copy and paste to get started. Save it as `jupyter.sbatch`:
 
 ```bash
@@ -37,22 +46,24 @@ You'll typically use a job script to launch Jupyter Notebook and most other appl
 #SBATCH --cpus-per-task=1
 #SBATCH --time=00:30:00
 #SBATCH --job-name=jupyter_notebook
-#SBATCH --output=/fs1/projects/<project-name>/jupyter_%j.out
-#SBATCH --error=/fs1/projects/<project-name>/jupyter_%j.err
+#SBATCH --output=/home/<username>/<project-name>/jupyter_%j.out
+#SBATCH --error=/home/<username>/<project-name>/jupyter_%j.err
 
+module load jupyter
+
+# Get tunneling information
 XDG_RUNTIME_DIR=""
-node=$(hostname -s)
+node=$(hostname -f)
 user=$(whoami)
 port=9001
 
+# Print tunneling instructions
 echo -e "
-Run this command from your local machine to set up the tunnel:
-ssh -L ${port}:localhost:${port} -p 5010 ${user}@adams204xx.hofstra.edu ssh -L ${port}:${node}:${port} ${user}@<login-node>
+Command to create SSH tunnel:
+ssh -N -f -L ${port}:${node}:${port} -J ${user}@adams204xx.hofstra.edu:5010,${user}@binary.star.hofstra.edu:5010 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${user}@${node}
 
-Replace 'xx' with a number between 01-30 to select a Linux lab machine.
+NOTE: After establishing the tunnel, look for the URL you need to open in your local browser, printed in the .err file.
 "
-
-module load jupyter
 
 jupyter notebook --no-browser --port=${port} --ip=${node}
 ```
@@ -61,32 +72,23 @@ jupyter notebook --no-browser --port=${port} --ip=${node}
 #### Don't forget to replace the placeholders!
 
 The words between <...> need to be replaced with what _you_ need. For instance:
+- <login-node> needs to be replaced with the address of the login node provided to you in the welcome Email.
 - <compute-node> needs to be replaced with the node(s) available [here]({{site.baseurl}}{% link quickstart/about-star.md %}).
-- <project-name>, or the entire output path, needs to be replaced with the directory _you_'d like to save the output/error files to.
+- <project-name>, <username>, and/or the entire output path, needs to be replaced with your relevant information.
 ```
 
-The script uses these SLURM settings:
-- `--nodelist`: Picks which compute node to use
+The script uses these Slurm settings:
+- `--nodelist`: Picks which compute node to use (you need to replace with e.g., `gpu1`)
 - `--ntasks=1`: Runs one instance of Jupyter
 - `--cpus-per-task=1`: Uses one CPU
 - `--time=00:30:00`: Runs for up to 30 minutes
 
-To get started:
+Once you have everything in place:
 1. Submit the job: `sbatch jupyter.sbatch`
 2. Look in your output file (`jupyter_<jobid>.out`) for the SSH tunnel command
-3. Run that command from your local machine, replacing the `xx` placeholder with a number between 01-30
-4. Find the Jupyter URL with token in your error file (`jupyter_<jobid>.err`)
+3. Run that command on your **local machine**, replacing the `xx` placeholder with a number between 01-30
+4. Find the Jupyter URL in the `.err` file (`jupyter_<jobid>.err`). Look for a line containing `http://127.0.0.1:9001/?token=...`
 5. Open that URL in your local computer's browser
-
-Once Jupyter Notebook is running, you'll need to run one or more SSH commands to setup SSH port forwarding so you can access it.
-
-### SSH Port Forwarding
-
-As the compute nodes where workloads run on the cluster are not directly reachable from the campus network, you'll need to use SSH port forwarding through the login node to access your Jupyter Notebook instances on the cluster. Also, as the login node itself is not currently reachable off campus, either SSH port forwarding through the Linux lab machines or VPN access is needed to access the login node when off campus.
-
-1. The job script (shown in the next section) will generate an SSH command in your output file
-2. Run this command from your local machine to establish the connection through the Linux lab machine
-3. Access Jupyter through your local web browser
 
 ## Working on the Same Node
 
@@ -99,4 +101,5 @@ srun --jobid=<your_jupyter_job_id> --pty bash
 Check out [Interactive jobs]({{site.baseurl}}{% link jobs/submitting-jobs.md %}#interactive-jobs) for more details about interactive sessions.
 
 ## Using Existing Container Images
+
 You can also run Docker images on the cluster through Apptainer (a variant of Singularity). This is great when you want an environment with everything pre-installed. Check out the [Apptainer Guide]({{site.baseurl}}{% link software/apptainer.md %}) to learn more.
