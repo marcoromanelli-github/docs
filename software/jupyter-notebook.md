@@ -35,7 +35,8 @@ As the compute nodes where workloads run on the cluster are not directly reachab
 
 ### Job Script
 
-To get started, SSH to the login node.
+To get started, SSH to the login node. Instructions on how to connect are provided in the welcome Email.
+
 You'll typically use a job script to launch Jupyter Notebook and most other applications after performing any initial setup. Below is an example that you can just copy and paste to get started. Save it as `jupyter.sbatch`:
 
 ```bash
