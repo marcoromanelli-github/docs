@@ -87,8 +87,9 @@ Once you have everything in place:
 1. Submit the job: `sbatch jupyter.sbatch`
 2. Look in your output file (`jupyter_<jobid>.out`) for the SSH tunnel command
 3. Run that command on your **local machine**, replacing the `xx` placeholder with a number between 01-30
-4. Find the Jupyter URL in the `.err` file (`jupyter_<jobid>.err`). Look for a line containing `http://127.0.0.1:9001/?token=...`
-5. Open that URL in your local computer's browser
+4. If asked "Are you sure you want to continue connecting?(yes/no)" type `yes` and hit Enter)
+5. Find the Jupyter URL in the `.err` file (`jupyter_<jobid>.err`). Look for a line containing `http://127.0.0.1:9001/?token=...`
+6. Open that URL in your local computer's browser
 
 ## Working on the Same Node
 
