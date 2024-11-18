@@ -57,6 +57,14 @@ module load jupyter
 jupyter notebook --no-browser --port=${port} --ip=${node}
 ```
 
+```warning
+#### Don't forget to replace the placeholders!
+
+The words between <...> need to be replaced with what _you_ need. For instance:
+- <compute-node> needs to be replaced with the node(s) available [here]({{site.baseurl}}{% link quickstart/about-star.md %}).
+- <project-name>, or the entire output path, needs to be replaced with the directory _you_'d like to save the output/error files to.
+```
+
 The script uses these SLURM settings:
 - `--nodelist`: Picks which compute node to use
 - `--ntasks=1`: Runs one instance of Jupyter
