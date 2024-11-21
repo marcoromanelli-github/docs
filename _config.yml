@@ -5,8 +5,10 @@ homeurl: https://starhpc.hofstra.io
 
 #debug: true
 
-theme: jekyll-rtd-theme
-#remote_theme: StarHPC/jekyll-rtd-theme
+#theme: jekyll-rtd-theme
+
+# needed to build via GH actions
+remote_theme: StarHPC/jekyll-rtd-theme
 
 readme_index:
   with_frontmatter: true
