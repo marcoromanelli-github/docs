@@ -32,8 +32,8 @@ Save the following script as `jupyter.sbatch`:
 #SBATCH --cpus-per-task=1
 #SBATCH --time=00:30:00
 #SBATCH --job-name=jupyter_notebook
-#SBATCH --output=%x_%j.out
-#SBATCH --error=%x_%j.err
+#SBATCH --output=/home/%u/%x_%j.out
+#SBATCH --error=/home/%u/%x_%j.err
 
 # Connection variables
 LOGIN_NODE="<login-node-address>"  # Replace between the " " with the login node's address from the welcome Email
@@ -83,8 +83,9 @@ jupyter notebook --no-browser --port=${port} --ip=0.0.0.0
 The <...> placeholders need to be replaced with what _you_ need. For instance:
 - <login-node-address> needs to be replaced with the address of the login node provided in your welcome Email
 - <login-port> needs to be replaced with the port number from your welcome Email
-- <xx> needs to be replaced with a number between 01-30
+- <xx> needs to be replaced with a number between 01-30 (inclusive)
 - <compute-node> needs to be replaced with an available compute node from the cluster nodes list. You can find the full list of nodes on the [About Star page]({{site.baseurl}}{% link quickstart/about-star.md %}).
+- Make sure you change the path for both the `--output` and `--error` directives to where _you_ would like the files to be saved at.
 ```
 
 The script uses these Slurm settings:
@@ -111,7 +112,7 @@ cat jupyter_notebook_<jobid>.out  # Run this command in the directory the .out f
 
 4. Open a new terminal on your local machine and run the SSH command provided in the output file. If prompted for a password, use your Linux lab password if you haven't set up SSH keys. Note that the command will appear to hang after successful connection - this is the expected behavior. Do not terminate the command (Ctrl + C) as this will disconnect your Jupyter notebook session (unless you intend to do so).
 
-5. Check the error file for the Jupyter URL (it will be in the last line):
+5. Check the error file on the login node for the Jupyter URL:
 ```bash
 cat jupyter_notebook_<jobid>.err  | grep '127.0.0.1' # Run this command in the directory the .err file is located.
 ```
@@ -120,12 +121,13 @@ cat jupyter_notebook_<jobid>.err  | grep '127.0.0.1' # Run this command in the d
 Make sure you wait about 30 seconds after executing the SSH portforwarding command on your local machine. It takes the `.err` file a little time to be updated and include your link.
 ```
 
-6. Copy the URL from the error file and paste it into your browser.
+6. Copy the URL from the error file and paste it into your **local machine's browser**.
 
-7. When finished, clean up your session by running this command on the login node:
+7. If you're done prior to the job's termination due to the walltime, clean up your session by running this command on the login node:
 ```bash
 scancel <jobid>
 ```
+Afterwards, press `Ctrl + C` on your local computer's terminal session that you set up port forwarding.
 
 ## Using Existing Container Images
 
