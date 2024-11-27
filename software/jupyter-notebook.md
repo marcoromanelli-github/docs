@@ -14,7 +14,7 @@ This example uses local storage as we are not dealing with large amounts of data
 
 To begin, SSH to the login node. Instructions on how to connect are provided in the welcome Email.
 
-As the compute nodes where workloads run on the cluster are not directly reachable from the campus network, we need to set up a chain of SSH port forwards to access Jupyter Notebook instances. The job script will:
+As the compute nodes (where workloads run on the cluster) are not directly reachable from the campus network, we need to set up a chain of SSH port forwards to access Jupyter Notebook instances. The job script will:
 1. Start a Jupyter notebook server on an available port on the compute node
 2. Provide you with the necessary SSH command to establish connection through:
   - The Linux lab machine (adams)
