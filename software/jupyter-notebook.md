@@ -12,7 +12,7 @@ This example uses local storage as we are not dealing with large amounts of data
 
 ## Running Jupyter Notebook
 
-To begin, SSH to the login node. Instructions on how to connect are provided in the welcome email.
+Jupyter Notebook is started on the cluster like any other workload, by submitting a job through Slurm.
 
 As the compute nodes (where workloads run on the cluster) are not directly reachable from the campus network, we need to set up a chain of SSH port forwards to access Jupyter Notebook instances. The job script will:
 1. Start a Jupyter notebook server on an available port on the compute node
@@ -21,7 +21,7 @@ As the compute nodes (where workloads run on the cluster) are not directly reach
   - The login node
   - Finally reaching your compute node
 
-Save the following script as `jupyter.sbatch`:
+On the login node, save the following script as `jupyter.sbatch`:
 
 ```bash
 #!/bin/bash
