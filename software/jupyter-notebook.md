@@ -21,8 +21,9 @@ As the compute nodes (where workloads run on the cluster) are not directly reach
   - The login node
   - Finally reaching your compute node
 
-On the login node, save the following script as `jupyter.sbatch`:
+### Step 1
 
+On the login node, save the following script as `jupyter.sbatch`:
 ```bash
 #!/bin/bash
 
@@ -76,18 +77,6 @@ echo "==================================================================="
 # Start Jupyter notebook
 jupyter notebook --no-browser --port=${port} --ip=0.0.0.0
 ```
-
-```warning
-### Don't forget to replace the placeholders!
-
-The <...> placeholders need to be replaced with what _you_ need. See below.
-```
-- `<login-node-address>` needs to be replaced with the address of the login node provided in your welcome email
-- `<login-port>` needs to be replaced with the port number from your welcome email
-- `<xx>` needs to be replaced with a number between 01-30 (inclusive)
-- `<compute-node>` needs to be replaced with an available compute node from the cluster nodes list. You can find the full list of nodes on the [About Star page]({{site.baseurl}}{% link quickstart/about-star.md %}).
-- Make sure you change the path for both the `--output` and `--error` directives to where _you_ would like the files to be saved at. If you are fine with the script saving them to your home directory, leave them as is.
-
 The script uses these Slurm settings:
 - `--nodelist`: Specifies which compute node to use (e.g., `gpu1` or `cn01`)
 - `--gpus=2`: This enables us to use 2 of the GPUs on the specified node. See each node's GPU information [here]({{site.baseurl}}{% link quickstart/about-star.md %}). Without this specification, you cannot see or use the GPUs on the compute node. Feel free to replace this number with another **valid option**.
@@ -95,39 +84,65 @@ The script uses these Slurm settings:
 - `--cpus-per-task=1`: Uses one CPU thread (Hyperthreading is enabled on the compute nodes)
 - `--time=00:30:00`: Sets a 30-minute time limit for the job (The format is `hh:mm:ss`)
 
-To use the script:
+### Step 2: Replace the placeholders
 
-1. Replace all placeholders in the script as indicated in the warning above.
+The `<...>` placeholders need to be replaced with what _you_ need:
 
-2. Submit the job:
+- `<login-node-address>` needs to be replaced with the address of the login node provided in your welcome email
+- `<login-port>` needs to be replaced with the port number from your welcome email
+- `<xx>` needs to be replaced with a number between 01-30 (inclusive)
+- `<compute-node>` needs to be replaced with an available compute node from the cluster nodes list. You can find the full list of nodes on the [About Star page]({{site.baseurl}}{% link quickstart/about-star.md %}).
+- Make sure you change the path for both the `--output` and `--error` directives to where _you_ would like the files to be saved at. If you are fine with the script saving them to your home directory, leave them as is.
+
+### Step 3: Submit the job
+
 ```bash
 sbatch jupyter.sbatch
 ```
 Upon your job's submission to the queue, you will see the output indicating your job's ID. You need to replace _your_ job ID value with the `<jobid>` placeholder throughout this documentation.
 
-3. Check your output file (`jupyter_notebook_<jobid>.out`) for the SSH command:
+```warning
+### Your job may not start right away!
+If you run `squeue` after submitting your job, you might see a message such as `Node Unavailable` next to your job. Another job may be actively using those resources, and your job will be held in the queue until your request could be satisfied by the available resources.
+```
+
+In such case, you cannot see the `.out` or `.err` files, as your job hasn't been submitted yet.
+
+Before proceeding to **Step 4**, make sure your job's status is set to `RUNNING` when checking with `squeue`.
+
+### Step 4: Check your output file (`jupyter_notebook_<jobid>.out`) for the SSH command:
+
 ```bash
 cat jupyter_notebook_<jobid>.out  # Run this command in the directory the .out file is located.
 ```
 
-4. Open a new terminal on your local machine and run the SSH command provided in the output file. If prompted for a password, use your Linux lab password if you haven't set up SSH keys. Note that the command will appear to hang after successful connection - this is the expected behavior. Do not terminate the command (`Ctrl + C`) as this will disconnect your Jupyter notebook session (unless you intend to do so).
+### Step 4: Run the SSH Port-forwarding command
 
-5. Check the error file on the login node for the Jupyter URL:
+Open a new terminal on your local machine and run the SSH command provided in the output file. If prompted for a password, use your Linux lab password if you haven't set up SSH keys. You might be requested to enter your password multiple times. **Note** that the command will appear to hang after successful connection - this is the expected behavior. Do not terminate the command (`Ctrl + C`) as this will disconnect your Jupyter notebook session (unless you intend to do so).
+
+### Step 5: Find and open the link in your browser
+
+Check the error file on the login node for your Jupyter notebook's URL:
 ```bash
 cat jupyter_notebook_<jobid>.err  | grep '127.0.0.1' # Run this command in the directory the .err file is located.
 ```
+
 ```warning
 ### Wait a moment!
 Make sure you wait about 30 seconds after executing the SSH portforwarding command on your local machine. It takes the `.err` file a little time to be updated and include your link.
 ```
 
-6. Copy the URL from the error file and paste it into your **local machine's browser**.
+You might see two lines being printed. Either link works.
 
-7. If you're done prior to the job's termination due to the walltime, clean up your session by running this command on the login node:
+Copy the URL from the error file and paste it into your **local machine's browser**.
+
+### Step 7
+
+If you're done prior to the job's termination due to the walltime, clean up your session by running this command on the login node:
 ```bash
 scancel <jobid>
 ```
-Afterwards, press `Ctrl + C` on your local computer's terminal session that you set up port forwarding.
+Afterwards, press `Ctrl + C` on your local computer's terminal session that you ran the port forwarding command on.
 
 ## Using Existing Container Images
 
