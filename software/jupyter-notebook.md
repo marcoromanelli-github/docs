@@ -12,7 +12,7 @@ This example uses local storage as we are not dealing with large amounts of data
 
 ## Running Jupyter Notebook
 
-To begin, SSH to the login node. Instructions on how to connect are provided in the welcome Email.
+To begin, SSH to the login node. Instructions on how to connect are provided in the welcome email.
 
 As the compute nodes (where workloads run on the cluster) are not directly reachable from the campus network, we need to set up a chain of SSH port forwards to access Jupyter Notebook instances. The job script will:
 1. Start a Jupyter notebook server on an available port on the compute node
@@ -36,8 +36,8 @@ Save the following script as `jupyter.sbatch`:
 #SBATCH --error=/home/%u/%x_%j.err
 
 # Connection variables
-LOGIN_NODE="<login-node-address>"  # Replace between the " " with the login node's address from the welcome Email
-LOGIN_PORT="<login-port>"          # Replace between the " " with port number from welcome Email
+LOGIN_NODE="<login-node-address>"  # Replace between the " " with the login node's address from the welcome email
+LOGIN_PORT="<login-port>"          # Replace between the " " with port number from welcome email
 XX="<xx>"                          # Replace between the " " with a number from 01-30
 
 module load jupyter
@@ -82,8 +82,8 @@ jupyter notebook --no-browser --port=${port} --ip=0.0.0.0
 
 The <...> placeholders need to be replaced with what _you_ need. See below.
 ```
-- `<login-node-address>` needs to be replaced with the address of the login node provided in your welcome Email
-- `<login-port>` needs to be replaced with the port number from your welcome Email
+- `<login-node-address>` needs to be replaced with the address of the login node provided in your welcome email
+- `<login-port>` needs to be replaced with the port number from your welcome email
 - `<xx>` needs to be replaced with a number between 01-30 (inclusive)
 - `<compute-node>` needs to be replaced with an available compute node from the cluster nodes list. You can find the full list of nodes on the [About Star page]({{site.baseurl}}{% link quickstart/about-star.md %}).
 - Make sure you change the path for both the `--output` and `--error` directives to where _you_ would like the files to be saved at. If you are fine with the script saving them to your home directory, leave them as is.
