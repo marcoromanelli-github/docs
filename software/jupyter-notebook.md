@@ -14,14 +14,9 @@ This example uses local storage as we are not dealing with large amounts of data
 
 Jupyter Notebook is started on the cluster like any other workload, by submitting a job through Slurm.
 
-As the compute nodes (where workloads run on the cluster) are not directly reachable from the campus network, we need to set up a chain of SSH port forwards to access Jupyter Notebook instances. The job script will:
-1. Start a Jupyter notebook server on an available port on the compute node
-2. Provide you with the necessary SSH command to establish connection through:
-  - The Linux lab machine (adams)
-  - The login node
-  - Finally reaching your compute node
+As the compute nodes (where workloads run on the cluster) are not directly reachable from the campus network, we need to setup SSH port forwarding to access the Jupyter Notebook instance. The following script starts Jupyter Notebook on an available port and then provides you the necessary SSH command to reach it.
 
-On the login node, save the following script as `jupyter.sbatch`:
+From the login node, save the following as `jupyter.sbatch`:
 
 ```bash
 #!/bin/bash
