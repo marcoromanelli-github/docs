@@ -110,7 +110,7 @@ Upon your job's submission to the queue, you will see the output indicating your
 cat jupyter_notebook_<jobid>.out  # Run this command in the directory the .out file is located.
 ```
 
-4. Open a new terminal on your local machine and run the SSH command provided in the output file. If prompted for a password, use your Linux lab password if you haven't set up SSH keys. Note that the command will appear to hang after successful connection - this is the expected behavior. Do not terminate the command (Ctrl + C) as this will disconnect your Jupyter notebook session (unless you intend to do so).
+4. Open a new terminal on your local machine and run the SSH command provided in the output file. If prompted for a password, use your Linux lab password if you haven't set up SSH keys. Note that the command will appear to hang after successful connection - this is the expected behavior. Do not terminate the command (`Ctrl + C`) as this will disconnect your Jupyter notebook session (unless you intend to do so).
 
 5. Check the error file on the login node for the Jupyter URL:
 ```bash
