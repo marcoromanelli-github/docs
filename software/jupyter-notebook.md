@@ -80,13 +80,13 @@ jupyter notebook --no-browser --port=${port} --ip=0.0.0.0
 ```warning
 ### Don't forget to replace the placeholders!
 
-The <...> placeholders need to be replaced with what _you_ need. For instance:
-- <login-node-address> needs to be replaced with the address of the login node provided in your welcome Email
-- <login-port> needs to be replaced with the port number from your welcome Email
-- <xx> needs to be replaced with a number between 01-30 (inclusive)
-- <compute-node> needs to be replaced with an available compute node from the cluster nodes list. You can find the full list of nodes on the [About Star page]({{site.baseurl}}{% link quickstart/about-star.md %}).
-- Make sure you change the path for both the `--output` and `--error` directives to where _you_ would like the files to be saved at.
+The <...> placeholders need to be replaced with what _you_ need. See below.
 ```
+- `<login-node-address>` needs to be replaced with the address of the login node provided in your welcome Email
+- `<login-port>` needs to be replaced with the port number from your welcome Email
+- `<xx>` needs to be replaced with a number between 01-30 (inclusive)
+- `<compute-node>` needs to be replaced with an available compute node from the cluster nodes list. You can find the full list of nodes on the [About Star page]({{site.baseurl}}{% link quickstart/about-star.md %}).
+- Make sure you change the path for both the `--output` and `--error` directives to where _you_ would like the files to be saved at. If you are fine with the script saving them to your home directory, leave them as is.
 
 The script uses these Slurm settings:
 - `--nodelist`: Specifies which compute node to use (e.g., `gpu1` or `cn01`)
