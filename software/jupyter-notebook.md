@@ -4,105 +4,129 @@ sort: 4
 
 # Jupyter Notebook
 
-Jupyter Notebook is an interactive web application that provides an environment where you can create and share documents with live code, equations, visualizations, and narrative text. It is great for data analysis, scientific computing, and machine learning tasks - you can run Python code in cells, see results right away, and document your work all in one place.
+Jupyter Notebook is an interactive web application that provides an environment where you can create and share documents with live code, equations, visualizations, and narrative text. It is great for data analysis, scientific computing, and machine learning tasks. You can run Python code in cells, see results right away, and document your work all in one place.
+
+```note
+This example uses local storage as we are not dealing with large amounts of data. If you need to import and use large datasets, make sure to use `/fs1/projects/{project-name}/` which lives on the parallel file-system storage, and ensure your scripts and notebooks use the correct paths to manage your data.
+```
 
 ## Running Jupyter Notebook
 
-To start Jupyter Notebook on the cluster, you would use either the `sbatch` or `srun` commands. `sbatch` is typically used to run scripts or commands that can execute without user intervention. `srun` is used to launch applications in an interactive pseudo-terminal session. As the Jupyter Notebook server process does not require any interactivity itself, `sbatch` is sufficient. `sbatch` has the added benefit that you can set the options at the top of the job script to make its reuse more convenient.
+To begin, SSH to the login node. Instructions on how to connect are provided in the welcome Email.
 
+As the compute nodes where workloads run on the cluster are not directly reachable from the campus network, we need to set up a chain of SSH port forwards to access Jupyter Notebook instances. The job script will:
+1. Start a Jupyter notebook server on an available port on the compute node
+2. Provide you with the necessary SSH command to establish connection through:
+  - The Linux lab machine (adams)
+  - The login node
+  - Finally reaching your compute node
 
-### Setup
-
-Before jumping in and running Jupyter Notebook, you may need to install required packages and stage your data.
-
-Remember: The compute nodes do not have access the Internet themselves, so you need to transfer any files you need through the login node first.
-
-Please see our guide on using conda and [how to transfer files]({{site.baseurl}}{% link storage/file_transfer.md %}).
-
-```note
-#### Using Your Storage Effectively
-
-Usually, for most of your work you should store your files at `/fs1/projects/{project-name}/`, which lives on the parallel file-system storage. You can also use your home directory (`/home/{username}/`) for quick experiments and convenient  access to scripts, but keep in mind that your home directory has limited storage space and performance. The parallel file-system storable is much faster and has way more space for your notebooks and data.
-```
-
-### SSH Port Forwarding
-
-As the compute nodes where workloads run on the cluster are not directly reachable from the campus network, you'll need to use SSH port forwarding through the login node to access your Jupyter Notebook instances on the cluster. Also, as the login node itself is not currently reachable off campus, either SSH port forwarding through the Linux lab machines or VPN access is needed to access the login node when off campus.
-
-1. The job script (shown in the next section) will generate an SSH command in your output file
-2. Run this command from your local machine to establish the connection through the Linux lab machine
-3. Access Jupyter through your local web browser
-
-### Job Script
-
-To get started, SSH to the login node. Instructions on how to connect are provided in the welcome Email.
-
-You'll typically use a job script to launch Jupyter Notebook and most other applications after performing any initial setup. Below is an example that you can just copy and paste to get started. Save it as `jupyter.sbatch`:
+Save the following script as `jupyter.sbatch`:
 
 ```bash
 #!/bin/bash
 
 #SBATCH --nodelist=<compute-node>
+#SBATCH --gpus=2
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
 #SBATCH --time=00:30:00
 #SBATCH --job-name=jupyter_notebook
-#SBATCH --output=/home/<username>/<project-name>/jupyter_%j.out
-#SBATCH --error=/home/<username>/<project-name>/jupyter_%j.err
+#SBATCH --output=%x_%j.out
+#SBATCH --error=%x_%j.err
+
+# Connection variables
+LOGIN_NODE="<login-node-address>"  # Replace between the " " with the login node's address from the welcome Email
+LOGIN_PORT="<login-port>"          # Replace between the " " with port number from welcome Email
+XX="<xx>"                          # Replace between the " " with a number from 01-30
 
 module load jupyter
 
-# Get tunneling information
-XDG_RUNTIME_DIR=""
-node=$(hostname -f)
+# Check for a port's availability
+check_port() {
+   local port=$1
+   nc -z localhost $port
+   if [ $? -eq 0 ]; then
+       return 1
+   else
+       return 0
+   fi
+}
+
+# Find an available port
+port=8888
+while ! check_port $port; do
+   port=$((port + 1))
+done
+
+# Get node information
+compute_node=$(hostname -f)
 user=$(whoami)
-port=9001
 
-# Print tunneling instructions
-echo -e "
-NOTE: You need to replace the `xx` with a number from 01-30.
-Command to create SSH tunnel:
-ssh -N -f -L ${port}:${node}:${port} -J ${user}@adams204xx.hofstra.edu:5010,${user}@binary.star.hofstra.edu:5010 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${user}@${node}
+# Print connection instructions
+echo "==================================================================="
+echo "To connect to your Jupyter notebook, run this command on your local machine:"
+echo ""
+echo "ssh -N -L ${port}:${compute_node}:${port} -J ${user}@adams204${XX}.hofstra.edu:${LOGIN_PORT},${user}@${LOGIN_NODE}:${LOGIN_PORT} ${user}@${LOGIN_NODE}"
+echo ""
+echo "When finished, clean up by running this command on the login node:"
+echo "scancel ${SLURM_JOB_ID}"
+echo "==================================================================="
 
-After running the command successfully, look for the URL you need to open in your local browser, printed in the .err file.
-"
-
-jupyter notebook --no-browser --port=${port} --ip=${node}
+# Start Jupyter notebook
+jupyter notebook --no-browser --port=${port} --ip=0.0.0.0
 ```
 
 ```warning
-#### Don't forget to replace the placeholders!
+### Don't forget to replace the placeholders!
 
-The words between <...> need to be replaced with what _you_ need. For instance:
-- <login-node> needs to be replaced with the address of the login node provided to you in the welcome Email.
-- <compute-node> needs to be replaced with the node(s) available [here]({{site.baseurl}}{% link quickstart/about-star.md %}).
-- <project-name>, <username>, and/or the entire output path, needs to be replaced with your relevant information.
+The <...> placeholders need to be replaced with what _you_ need. For instance:
+- <login-node-address> needs to be replaced with the address of the login node provided in your welcome Email
+- <login-port> needs to be replaced with the port number from your welcome Email
+- <xx> needs to be replaced with a number between 01-30
+- <compute-node> needs to be replaced with an available compute node from the cluster nodes list. You can find the full list of nodes on the [About Star page]({{site.baseurl}}{% link quickstart/about-star.md %}).
 ```
 
 The script uses these Slurm settings:
-- `--nodelist`: Picks which compute node to use (you need to replace with e.g., `gpu1`)
+- `--nodelist`: Specifies which compute node to use (e.g., `gpu1` or `cn01`)
+- `--gpus=2`: This enables us to use 2 of the GPUs on the specified node. See each node's GPU information [here]({{site.baseurl}}{% link quickstart/about-star.md %}). Without this specification, you cannot see or use the GPUs on the compute node. Feel free to replace this number with another **valid option**.
 - `--ntasks=1`: Runs one instance of Jupyter
-- `--cpus-per-task=1`: Uses one CPU
-- `--time=00:30:00`: Runs for up to 30 minutes
+- `--cpus-per-task=1`: Uses one CPU thread (Hyperthreading is enabled on the compute nodes)
+- `--time=00:30:00`: Sets a 30-minute time limit for the job (The format is `hh:mm:ss`)
 
-Once you have everything in place:
-1. Submit the job: `sbatch jupyter.sbatch`
-2. Look in your output file (`jupyter_<jobid>.out`) for the SSH tunnel command
-3. Run that command on your **local machine**, replacing the `xx` placeholder with a number between 01-30
-4. If asked "Are you sure you want to continue connecting?(yes/no)" type `yes` and hit Enter)
-5. Find the Jupyter URL in the `.err` file (`jupyter_<jobid>.err`). Look for a line containing `http://127.0.0.1:9001/?token=...`
-6. Open that URL in your local computer's browser
+To use the script:
 
-## Working on the Same Node
+1. Replace all placeholders in the script as indicated in the warning above.
 
-Need to run commands on the node where Jupyter is running? Use `srun` to get an interactive shell:
-
+2. Submit the job:
 ```bash
-srun --jobid=<your_jupyter_job_id> --pty bash
+sbatch jupyter.sbatch
+```
+Upon your job's submission to the queue, you will see the output indicating your job's ID. You need to replace _your_ job ID value with the `<jobid>` placeholder throughout this documentation.
+
+3. Check your output file (`jupyter_notebook_<jobid>.out`) for the SSH command:
+```bash
+cat jupyter_notebook_<jobid>.out  # Run this command in the directory the .out file is located.
 ```
 
-Check out [Interactive jobs]({{site.baseurl}}{% link jobs/submitting-jobs.md %}#interactive-jobs) for more details about interactive sessions.
+4. Open a new terminal on your local machine and run the SSH command provided in the output file. If prompted for a password, use your Linux lab password if you haven't set up SSH keys. Note that the command will appear to hang after successful connection - this is the expected behavior. Do not terminate the command (Ctrl + C) as this will disconnect your Jupyter notebook session (unless you intend to do so).
+
+5. Check the error file for the Jupyter URL (it will be in the last line):
+```bash
+cat jupyter_notebook_<jobid>.err  | grep '127.0.0.1' # Run this command in the directory the .err file is located.
+```
+```warning
+### Wait a moment!
+Make sure you wait about 30 seconds after executing the SSH portforwarding command on your local machine. It takes the `.err` file a little time to be updated and include your link.
+```
+
+6. Copy the URL from the error file and paste it into your browser.
+
+7. When finished, clean up your session by running this command on the login node:
+```bash
+scancel <jobid>
+```
 
 ## Using Existing Container Images
 
-You can also run Docker images on the cluster through Apptainer (a variant of Singularity). This is great when you want an environment with everything pre-installed. Check out the [Apptainer Guide]({{site.baseurl}}{% link software/apptainer.md %}) to learn more.
+You can also run Docker images on the cluster through [Apptainer](https://apptainer.org/) (a variant of Singularity). This is great when you want an environment with everything pre-installed. Check out [the Apptainer Guide]({{site.baseurl}}{% link software/apptainer.md %}) to learn more.
