@@ -14,14 +14,9 @@ This example uses local storage as we are not dealing with large amounts of data
 
 Jupyter Notebook is started on the cluster like any other workload, by submitting a job through Slurm.
 
-As the compute nodes (where workloads run on the cluster) are not directly reachable from the campus network, we need to set up a chain of SSH port forwards to access Jupyter Notebook instances. The job script will:
-1. Start a Jupyter notebook server on an available port on the compute node
-2. Provide you with the necessary SSH command to establish connection through:
-  - The Linux lab machine (adams)
-  - The login node
-  - Finally reaching your compute node
+As the compute nodes (where workloads run on the cluster) are not directly reachable from the campus network, we need to setup SSH port forwarding to access the Jupyter Notebook instance. The following script starts Jupyter Notebook on an available port and then provides you the necessary SSH command to reach it.
 
-### Step 1
+### Step 1: Create the Slurm script
 
 On the login node, save the following script as `jupyter.sbatch`:
 ```bash
@@ -107,25 +102,26 @@ If you run `squeue` after submitting your job, you might see a message such as `
 ```
 
 In such case, you cannot see the `.out` or `.err` files, as your job hasn't been submitted yet.
-
 Before proceeding to **Step 4**, make sure your job's status is set to `RUNNING` when checking with `squeue`.
 
-### Step 4: Check your output file (`jupyter_notebook_<jobid>.out`) for the SSH command:
+### Step 4: Check your output file for the SSH command
 
 ```bash
 cat jupyter_notebook_<jobid>.out  # Run this command in the directory the .out file is located.
 ```
+Replace `<jobid>` with the job ID you received after submitting the job.
 
-### Step 4: Run the SSH Port-forwarding command
+### Step 5: Run the SSH Port-forwarding command
 
 Open a new terminal on your local machine and run the SSH command provided in the output file. If prompted for a password, use your Linux lab password if you haven't set up SSH keys. You might be requested to enter your password multiple times. **Note** that the command will appear to hang after successful connection - this is the expected behavior. Do not terminate the command (`Ctrl + C`) as this will disconnect your Jupyter notebook session (unless you intend to do so).
 
-### Step 5: Find and open the link in your browser
+### Step 6: Find and open the link in your browser
 
 Check the error file on the login node for your Jupyter notebook's URL:
 ```bash
 cat jupyter_notebook_<jobid>.err  | grep '127.0.0.1' # Run this command in the directory the .err file is located.
 ```
+Replace `<jobid>` with the job ID you received after submitting the job.
 
 ```warning
 ### Wait a moment!
@@ -133,16 +129,23 @@ Make sure you wait about 30 seconds after executing the SSH portforwarding comma
 ```
 
 You might see two lines being printed. Either link works.
-
 Copy the URL from the error file and paste it into your **local machine's browser**.
 
-### Step 7
+### Step 7: Clean up
 
 If you're done prior to the job's termination due to the walltime, clean up your session by running this command on the login node:
 ```bash
 scancel <jobid>
 ```
-Afterwards, press `Ctrl + C` on your local computer's terminal session that you ran the port forwarding command on.
+Replace `<jobid>` with the job ID you received after submitting the job.
+
+Afterwards, press `Ctrl + C` on your local computer's terminal session, where you ran the port forwarding command. This would terminate the SSH connection.
+
+## Working on the Same Node
+
+Need to run commands directly on the compute node(s)? Use `srun` to get an interactive shell.
+
+Check out the Interactive jobs section on [this page]({{site.baseurl}}{% link jobs/submitting-jobs.md %}) for more information.
 
 ## Using Existing Container Images
 
