@@ -6,19 +6,20 @@ sort: 4
 
 Jupyter Notebook is an interactive web application that provides an environment where you can create and share documents with live code, equations, visualizations, and narrative text. It is great for data analysis, scientific computing, and machine learning tasks. You can run Python code in cells, see results right away, and document your work all in one place.
 
-```note
-This example uses local storage as we are not dealing with large amounts of data. If you need to import and use large datasets, make sure to use `/fs1/projects/{project-name}/` which lives on the parallel file-system storage, and ensure your scripts and notebooks use the correct paths to manage your data.
-```
-
 ## Running Jupyter Notebook
 
-Jupyter Notebook is started on the cluster like any other workload, by submitting a job through Slurm.
+Jupyter Notebook is started on the cluster like any other workload, by submitting it through Slurm.
 
-As the compute nodes (where workloads run on the cluster) are not directly reachable from the campus network, we need to setup SSH port forwarding to access the Jupyter Notebook instance. The following script starts Jupyter Notebook on an available port and then provides you the necessary SSH command to reach it.
+```note
+### Use Your Storage Effectively
 
-### Step 1: Create the Slurm script
+The directory `/fs1/projects/{project-name}/` lives on the parallel file-system storage, where most of your work should reside. While your home directory (`/home/{username}/`) can be used for quick experiments and convenient access to scripts, keep in mind that it has limited capacity and worse performance. The parallel file-system storable is much faster and has way more space for your notebooks and data.
+```
 
-On the login node, save the following script as `jupyter.sbatch`:
+### Step 1: Create the Job Script
+
+You'll typically use a job script to launch Jupyter Notebook and most other applications on the cluster. As the compute nodes (where workloads run on the cluster) are not directly reachable from the campus network, you will need to perform SSH port forwarding to access your Jupyter Notebook instance. The following script starts Jupyter Notebook on an available port and provides you the SSH command needed to then reach it. You can just copy and paste this example to get started. From the login node, save this as `jupyter.sbatch`:
+
 ```bash
 #!/bin/bash
 
@@ -28,25 +29,19 @@ On the login node, save the following script as `jupyter.sbatch`:
 #SBATCH --cpus-per-task=1
 #SBATCH --time=00:30:00
 #SBATCH --job-name=jupyter_notebook
-#SBATCH --output=/home/%u/%x_%j.out
-#SBATCH --error=/home/%u/%x_%j.err
+#SBATCH --output=/fs1/projects/<project-name>/%x_%j.out
+#SBATCH --error=/fs1/projects/<project-name>/%x_%j.err
 
 # Connection variables
-LOGIN_NODE="<login-node-address>"  # Replace between the " " with the login node's address from the welcome email
-LOGIN_PORT="<login-port>"          # Replace between the " " with port number from welcome email
-XX="<xx>"                          # Replace between the " " with a number from 01-30
+LOGIN_NODE="<login-node-address>"  # Set this to the login node's address from the welcome email
+LOGIN_PORT="<login-port>"          # Set this to the port number from the welcome email
+XX="<xx>"                          # Set this to a number from 01-30
 
 module load jupyter
 
-# Check for a port's availability
 check_port() {
-   local port=$1
-   nc -z localhost $port
-   if [ $? -eq 0 ]; then
-       return 1
-   else
-       return 0
-   fi
+   nc -z localhost $1
+   return $(( ! $? ))
 }
 
 # Find an available port
@@ -55,11 +50,9 @@ while ! check_port $port; do
    port=$((port + 1))
 done
 
-# Get node information
 compute_node=$(hostname -f)
 user=$(whoami)
 
-# Print connection instructions
 echo "==================================================================="
 echo "To connect to your Jupyter notebook, run this command on your local machine:"
 echo ""
@@ -72,11 +65,11 @@ echo "==================================================================="
 # Start Jupyter notebook
 jupyter notebook --no-browser --port=${port} --ip=0.0.0.0
 ```
-The script uses these Slurm settings:
+The script uses these Slurm parameters:
 - `--nodelist`: Specifies which compute node to use (e.g., `gpu1` or `cn01`)
 - `--gpus=2`: This enables us to use 2 of the GPUs on the specified node. See each node's GPU information [here]({{site.baseurl}}{% link quickstart/about-star.md %}). Without this specification, you cannot see or use the GPUs on the compute node. Feel free to replace this number with another **valid option**.
 - `--ntasks=1`: Runs one instance of Jupyter
-- `--cpus-per-task=1`: Uses one CPU thread (Hyperthreading is enabled on the compute nodes)
+- `--cpus-per-task=1`: Use one CPU thread. Note hyperthreading may be enabled on the compute nodes.
 - `--time=00:30:00`: Sets a 30-minute time limit for the job (The format is `hh:mm:ss`)
 
 ### Step 2: Replace the placeholders
@@ -87,7 +80,7 @@ The `<...>` placeholders need to be replaced with what _you_ need:
 - `<login-port>` needs to be replaced with the port number from your welcome email
 - `<xx>` needs to be replaced with a number between 01-30 (inclusive)
 - `<compute-node>` needs to be replaced with an available compute node from the cluster nodes list. You can find the full list of nodes on the [About Star page]({{site.baseurl}}{% link quickstart/about-star.md %}).
-- Make sure you change the path for both the `--output` and `--error` directives to where _you_ would like the files to be saved at. If you are fine with the script saving them to your home directory, leave them as is.
+- Change the path for the `--output` and `--error` directives to where _you_ would like these files to be saved.
 
 ### Step 3: Submit the job
 
@@ -96,13 +89,11 @@ sbatch jupyter.sbatch
 ```
 Upon your job's submission to the queue, you will see the output indicating your job's ID. You need to replace _your_ job ID value with the `<jobid>` placeholder throughout this documentation.
 
-```warning
-### Your job may not start right away!
-If you run `squeue` after submitting your job, you might see a message such as `Node Unavailable` next to your job. Another job may be actively using those resources, and your job will be held in the queue until your request could be satisfied by the available resources.
-```
+### _Your job may not start right away!_
+If you run `squeue` immediately after submitting your job, you might see a message such as `Node Unavailable` next to your job. Another job may be actively using those resources, and your job will be held in the queue until your request can be satisfied by the available resources.
 
-In such case, you cannot see the `.out` or `.err` files, as your job hasn't been submitted yet.
-Before proceeding to **Step 4**, make sure your job's status is set to `RUNNING` when checking with `squeue`.
+In such case, the `.out` or `.err` files will not be created yet, as your job hasn't run yet.
+Before proceeding to **Step 4**, wait until your job has changed to the `RUNNING` state as reported by the `squeue` command.
 
 ### Step 4: Check your output file for the SSH command
 
