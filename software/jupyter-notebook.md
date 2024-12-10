@@ -8,17 +8,20 @@ Jupyter Notebook is an interactive web application that provides an environment 
 
 ## Running Jupyter Notebook
 
-Jupyter Notebook is started on the cluster like any other workload, by submitting it through Slurm.
+Jupiter Notebook is installed on the cluster and can be started like any other workload, by launching it through Slurm. Jupiter is available as an [environment module]({{site.baseurl}}{% link software/env-modules.md %}), so it would be loaded into the environment with the `module` command. The example script that follows shows you this.
+
+Alternatively, you could run Jupyter in a container. That would make it easy to load the environment you need when there is a container image available with your desired toolset pre-installed. Check out [Apptainer]({{site.baseurl}}{% link software/apptainer.md %}) to learn more.
 
 ```note
-### Use Your Storage Effectively
+Use Your Storage Effectively
+{:.h4.mb-2}
 
 The directory `/fs1/projects/{project-name}/` lives on the parallel file-system storage, where most of your work should reside. While your home directory (`/home/{username}/`) can be used for quick experiments and convenient access to scripts, keep in mind that it has limited capacity and worse performance. The parallel file-system storable is much faster and has way more space for your notebooks and data.
 ```
 
 ### Step 1: Create the Job Script
 
-You'll typically use a job script to launch Jupyter Notebook and most other applications on the cluster. As the compute nodes (where workloads run on the cluster) are not directly reachable from the campus network, you will need to perform SSH port forwarding to access your Jupyter Notebook instance. The following script starts Jupyter Notebook on an available port and provides you the SSH command needed to then reach it. You can just copy and paste this example to get started. From the login node, save this as `jupyter.sbatch`:
+You would create a job script to launch Jupyter Notebook and most other applications on the cluster. As the compute nodes (where workloads run on the cluster) are not directly reachable from the campus network, you will need to perform SSH port forwarding to access your Jupyter Notebook instance. The following script starts Jupyter Notebook on an available port and provides you the SSH command needed to then reach it. You can copy and paste this example to get started. From the login node, save this as `jupyter.sbatch`:
 
 ```bash
 #!/bin/bash
@@ -79,7 +82,7 @@ The `<...>` placeholders need to be replaced with what _you_ need:
 - `<login-node-address>` needs to be replaced with the address of the login node provided in your welcome email
 - `<login-port>` needs to be replaced with the port number from your welcome email
 - `<xx>` needs to be replaced with a number between 01-30 (inclusive)
-- `<compute-node>` needs to be replaced with an available compute node from the cluster nodes list. You can find the full list of nodes on the [About Star page]({{site.baseurl}}{% link quickstart/about-star.md %}).
+- `<compute-node>` needs to be replaced with an available compute node from the cluster nodes list. You can find the full list of nodes on the [About Star]({{site.baseurl}}{% link quickstart/about-star.md %}) page.
 - Change the path for the `--output` and `--error` directives to where _you_ would like these files to be saved.
 
 ### Step 3: Submit the job
@@ -89,7 +92,9 @@ sbatch jupyter.sbatch
 ```
 Upon your job's submission to the queue, you will see the output indicating your job's ID. You need to replace _your_ job ID value with the `<jobid>` placeholder throughout this documentation.
 
-### _Your job may not start right away!_
+_**Your job may not start right away!**_
+{:.bg-yellow-light.color-orange-9.p-2}
+
 If you run `squeue` immediately after submitting your job, you might see a message such as `Node Unavailable` next to your job. Another job may be actively using those resources, and your job will be held in the queue until your request can be satisfied by the available resources.
 
 In such case, the `.out` or `.err` files will not be created yet, as your job hasn't run yet.
@@ -102,7 +107,7 @@ cat jupyter_notebook_<jobid>.out  # Run this command in the directory the .out f
 ```
 Replace `<jobid>` with the job ID you received after submitting the job.
 
-### Step 5: Run the SSH Port-forwarding command
+### Step 5: Run the SSH port-forwarding command
 
 Open a new terminal on your local machine and run the SSH command provided in the output file. If prompted for a password, use your Linux lab password if you haven't set up SSH keys. You might be requested to enter your password multiple times. **Note** that the command will appear to hang after successful connection - this is the expected behavior. Do not terminate the command (`Ctrl + C`) as this will disconnect your Jupyter notebook session (unless you intend to do so).
 
@@ -114,10 +119,10 @@ cat jupyter_notebook_<jobid>.err  | grep '127.0.0.1' # Run this command in the d
 ```
 Replace `<jobid>` with the job ID you received after submitting the job.
 
-```warning
-### Wait a moment!
-Make sure you wait about 30 seconds after executing the SSH portforwarding command on your local machine. It takes the `.err` file a little time to be updated and include your link.
-```
+_**Be patient!**_
+{:.bg-yellow-light.color-orange-9.p-2}
+
+Make sure you wait about 30 seconds after executing the SSH port-forwarding command on your local machine. It takes the `.err` file a little time to be updated and include your link.
 
 You might see two lines being printed. Either link works.
 Copy the URL from the error file and paste it into your **local machine's browser**.
@@ -132,12 +137,7 @@ Replace `<jobid>` with the job ID you received after submitting the job.
 
 Afterwards, press `Ctrl + C` on your local computer's terminal session, where you ran the port forwarding command. This would terminate the SSH connection.
 
-## Working on the Same Node
+## Working on the Compute Node
 
-Need to run commands directly on the compute node(s)? Use `srun` to get an interactive shell.
+Do you need to access the node running Jupyter Notebook? You can use `srun` to launch an interactive shell. Check out [interactive jobs]({{site.baseurl}}{% link jobs/submitting-jobs.md %}#interactive-jobs) for more information.
 
-Check out the Interactive jobs section on [this page]({{site.baseurl}}{% link jobs/submitting-jobs.md %}) for more information.
-
-## Using Existing Container Images
-
-You can also run Docker images on the cluster through [Apptainer](https://apptainer.org/) (a variant of Singularity). This is great when you want an environment with everything pre-installed. Check out [the Apptainer Guide]({{site.baseurl}}{% link software/apptainer.md %}) to learn more.
