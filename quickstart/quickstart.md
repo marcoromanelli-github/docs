@@ -28,7 +28,7 @@ Members of Hofstra University, Nassau Community College, or Adelphi University, 
 
 ### Requesting an account
 
-To get an account on Star, you need to complete out the registration form at [Star Account Management Web Application](http://localhost:3000). There, you will need to provide us the following information:
+To get an account on Star, you need to complete out the [request form](https://access.starhpc.hofstra.io/apply). There, you will need to provide us the following information:
 
 -   Your full name, date of birth, and nationality.
 -   Your position (master student, PhD, PostDoc, staff member,

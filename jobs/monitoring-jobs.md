@@ -19,10 +19,10 @@ squeue
 Sample output:
 
 ```bash
-JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
-   1234     batch  my_job    jsmith  R       5:23      1 cn01
-   1235     batch array_job  jdoe    R       2:45      1 cn02
-   1236       gpu  gpu_task  asmith  PD       0:00      1 (Resources)
+  JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+   1234     batch   my_job   jsmith  R       5:23      1 cn01
+   1235     batch  arr_job     jdoe  R       2:45      1 cn02
+   1236       gpu gpu_task   asmith PD       0:00      1 (Resources)
 ```
 
 To see **only** your job:
@@ -216,7 +216,25 @@ JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
 If a job fails, try checking the following:
 
 1. Look at the job's output and error files.
-2. Check the job's resource usage with `sacct`
-3. Verify that you requested sufficient resources, and your job did not get terminated due to needing more resources than requested.
+2. Check the job state and exit code:
+   ```
+sacct --brief
+```
+   Sample output:
+   ```
+JobID             State ExitCode
+------------ ---------- --------
+1040            TIMEOUT      0:0
+1041             FAILED      6:0
+1042            TIMEOUT      0:0
+1043             FAILED      1:0
+1046          COMPLETED      0:0
+1047            RUNNING      0:0
+```
+   `FAILED` indicates the process terminated with with a non-zero exit code.
+   The first number in the ExitCode column is the exit code and the number after the colon is the signal that caused the process to terminate if it was terminated by a signal.
 
-Remember, if you're having persistent issues, don't hesitate to reach out to the support team.
+3. Check the job's resource usage with `sacct`
+4. Verify that you requested sufficient resources, and your job did not get terminated due to needing more resources than requested.
+
+If you face persistent issues, please do not hesitate to reach out to us for help.
