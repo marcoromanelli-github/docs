@@ -18,14 +18,14 @@ If your job is sitting in the queue for a while, its priority could be lower tha
 
 There are nine factors that influence job priority, which affects the order in which the jobs are scheduled to run. The job priority is calculated from a weighted sum of all the following factors:
 
-- **Age**: the length of time a job has been waiting in the queue and eligible to be scheduled  
-- **Association**: a factor associated with each association  
-- **Fairshare**: the difference between the portion of the computing resource that has been promised and the amount of resources that has been consumed  
+- **Age**: the length of time a job has been waiting in the queue and eligible to be scheduled
+- **Association**: a factor associated with each association
+- **Fairshare**: the difference between the portion of the computing resource that has been promised and the amount of resources that has been consumed
 - **Nice**: a factor that can be set by users to prioritize their own jobs. This factor is currently not enabled for our cluster.
-- **Job size**: the number of nodes or CPUs a job is allocated  
-- **Partition**: a factor associated with each node partition  
+- **Job size**: the number of nodes or CPUs a job is allocated
+- **Partition**: a factor associated with each node partition
 - **QoS**: a factor based on the priority of the Quality of Service (QoS) associated with the job
-- **Site**: a factor dictated by an administrator or a site-developed job_submit or site_factor plugin  
+- **Site**: a factor dictated by an administrator or a site-developed job_submit or site_factor plugin
 - **TRES**: A TRES is a resource that can be tracked for usage or used to enforce limits against. Each TRES type has its own factor for a job which represents the number of requested/allocated TRES type in a given partition.
 
 #### i) Fairshare
@@ -46,7 +46,7 @@ As a result, the more resources your recent jobs have used relative to your acco
 
    **Sample Output:**
    ```text
-   Account              User     NormShares  RawUsage NormUsage  EffectvUsage   FairShare                                        TRESRunMins 
+   Account              User     NormShares  RawUsage NormUsage  EffectvUsage   FairShare                                        TRESRunMins
    -----------------------------------------------------------------------------------------------------------------
    ResearchGroup1 <user>       0.000705       100942    0.000081       0.000003     0.997186   cpu=127851,mem=465054140,gres/gpu=27134
    ```
@@ -58,10 +58,10 @@ As a result, the more resources your recent jobs have used relative to your acco
 
    **Sample Output:**
    ```text
-   Account                        User      RawShares     NormShares    RawUsage  EffectvUsage    FairShare 
+   Account                        User      RawShares     NormShares    RawUsage  EffectvUsage    FairShare
    ------------------------------------------------------------------------------------------------------------------------------------
-   ResearchGroup1                                           1              0.023256           117684        0.000094      0.997199 
-     ResearchGroup1    <user1>                        1              0.000705             16765       0.000003      0.997193 
+   ResearchGroup1                                           1              0.023256           117684        0.000094      0.997199
+     ResearchGroup1    <user1>                        1              0.000705             16765       0.000003      0.997193
      ResearchGroup1    <user2>                        1              0.000705           100918       0.000003      0.997187
    ```
 
@@ -96,9 +96,9 @@ No, a Slurm account is something entirely different. Users can belong to multipl
 
 QoS (Quality of Service) define job with different priorities and resource limits. Selecting the appropriate QoS can influence your job’s priority in the queue. Be mindful of the tradeoff that comes with the long QoS. While long QoS allows more runtime for your jobs, they may result in longer wait times due to lower scheduling priority.
 
-- **short**: For jobs up to 1 hour, with higher priority, suitable for testing and quick tasks.  
-- **medium**: For jobs up to 48 hours, balanced priority for standard workloads.  
-- **long**: For jobs up to 120 hours, lower priority due to resource demands, suitable for extensive computations.  
+- **short**: For jobs up to 1 hour, with higher priority, suitable for testing and quick tasks.
+- **medium**: For jobs up to 48 hours, balanced priority for standard workloads.
+- **long**: For jobs up to 120 hours, lower priority due to resource demands, suitable for extensive computations.
 
 ## When Will My Job Start?
 
@@ -187,22 +187,22 @@ This .sbatch script requests sufficient time and resources for an extended compu
 
 2. **Request fewer nodes** (or fewer cores on partitions scheduled by core), if possible. This may also allow the scheduler to fit your job into a time window while it is waiting to make room for larger jobs.
 
-3. **Resource Estimation**:  
+3. **Resource Estimation**:
    Monitor the resource usage of your previous jobs to inform future resource requests. Use tools like `sacct` to review past job statistics.
 
 
-4. **Efficient Job Scripts**:  
+4. **Efficient Job Scripts**:
    Simplify your job scripts by removing unnecessary module loads and commands. This reduces overhead and potential points of failure.
 
-5. **Implement Checkpointing**:  
+5. **Implement Checkpointing**:
    For long-running jobs, incorporate checkpointing to save progress at intervals. This allows you to resume computations without starting over in case of interruptions.
 
-6. **Avoid Over-Requesting Resources**:  
+6. **Avoid Over-Requesting Resources**:
    Requesting more CPUs, memory, or time than needed can increase your job’s wait time and negatively impact **fairshare calculations**.
 
-7. **Understand Scheduling Policies**:  
+7. **Understand Scheduling Policies**:
    Familiarize yourself with the cluster’s **scheduling policies**, including **fairshare** and **backfilling**. This knowledge can help you strategize your job submissions for better priority.
 
-8. **Communicate with Your Group**:  
+8. **Communicate with Your Group**:
    If you’re part of a research group, coordinate resource usage to avoid collectively lowering your group’s **fairshare priority**.
 
