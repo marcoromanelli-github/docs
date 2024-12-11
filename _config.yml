@@ -3,6 +3,11 @@ lang: en
 description: Star HPC – at Hofstra University
 homeurl: https://starhpc.hofstra.io
 
+#debug: true
+
+#theme: jekyll-rtd-theme
+
+# needed to build via GH actions
 remote_theme: StarHPC/jekyll-rtd-theme
 
 readme_index:
