@@ -8,8 +8,6 @@ This guide aims to help users optimize their job submissions on the Star HPC clu
 
 ## Why Is My Job Not Running Yet?
 
-**Note**: The hyperlinks point to the official [SchedMD documentation](https://slurm.schedmd.com/documentation.html) for a more comprehensive read for interested readers.
-
 You can use the `squeue -j <jobid>` command to see the status and the reason why your job is not running. There are a number of possible reasons why your job could have a long queue time or could be prevented from ever running. The queue time could be impacted by the [job's priority](https://slurm.schedmd.com/priority_multifactor.html#general), the availability of high-demand or scarce resources, or dependency constraints. It is also possible that your job is asking for more resources than exist or have been allotted, in which case it will never even start.
 
 To help identify issues with your job or strategize your job submissions to optimize them for faster execution, you should understand how the scheduler works and the factors that are at play. Key scheduling concepts to understand include [job priority](https://slurm.schedmd.com/priority_multifactor.html#general), priority factors such as [fairshare](https://slurm.schedmd.com/priority_multifactor.html#fairshare) and [QoS](https://slurm.schedmd.com/qos.html), and [backfilling](https://slurm.schedmd.com/sched_config.html#backfill). More advanced concepts include [reservations](https://slurm.schedmd.com/reservations.html), [oversubscription](https://slurm.schedmd.com/cons_tres_share.html), [preemption](https://slurm.schedmd.com/preempt.html), and [gang scheduling](https://slurm.schedmd.com/gang_scheduling.html).
