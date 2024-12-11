@@ -60,6 +60,12 @@ content of `Gemfile`. If you run into any issues with gem depencencies, you may
 want to try running `bundle update` or removing `Gemfile.lock` and then running
 `bundle install` again.
 
+If you run into trouble building `nokogiri`, try building it with the system libraries instead:
+
+```
+gem install nokogiri -v '1.17.1' --verbose -- --use-system-libraries
+```
+
 ### Building the site
 
 ```
