@@ -2,21 +2,44 @@
 sort: 4
 ---
 
-# Job Scheduling and Resource Optimization
+# Scheduler Policies
 
-This guide aims to help users optimize their job submissions on the Star HPC cluster by providing an understanding of the scheduling system and resource allocation policies. By tailoring your job scripts and resource requests effectively, you can enhance job efficiency, reduce wait times, and make the most of the cluster’s capabilities.
+This guide aims to help users understand the scheduling system and resource allocation policies of the Star HPC cluster to allow users to strategize their job submissions and optimize their usage of the cluster. By submitting job and requesting resources effectively, you can enhance job efficiency, reduce wait times, and make the most of the cluster’s capabilities.
 
 ## Why Is My Job Not Running Yet?
 
-You can use the `squeue -j <jobid>` command to see the status and the reason why your job is not running. There are a number of possible reasons why your job could have a long queue time or could be prevented from ever running. The queue time could be impacted by the [job's priority](https://slurm.schedmd.com/priority_multifactor.html#general), the availability of high-demand or scarce resources, or dependency constraints. It is also possible that your job is asking for more resources than exist or have been allotted, in which case it will never even start.
+You can use the `squeue -j <jobid>` command to see the status of your job and the reason why it is not running. There are a number of possible reasons why your job could have a long queue time or could even be prevented from running indefinately. The queue time is based on several [scheduling priority factors](#scheduling-priority-factors) and may be impacted by the availability of high-demand or scarce resources, or dependency constraints. It is also possible that your job is asking for more resources than exist or have been allotted, in which case it will never start.
 
-To help identify issues with your job or strategize your job submissions to optimize them for faster execution, you should understand how the scheduler works and the factors that are at play. Key scheduling concepts to understand include [job priority](https://slurm.schedmd.com/priority_multifactor.html#general), priority factors such as [fairshare](https://slurm.schedmd.com/priority_multifactor.html#fairshare) and [QoS](https://slurm.schedmd.com/qos.html), and [backfilling](https://slurm.schedmd.com/sched_config.html#backfill). More advanced concepts include [reservations](https://slurm.schedmd.com/reservations.html), [oversubscription](https://slurm.schedmd.com/cons_tres_share.html), [preemption](https://slurm.schedmd.com/preempt.html), and [gang scheduling](https://slurm.schedmd.com/gang_scheduling.html).
+To help identify issues with a job and to optimize your job submissions for faster execution, you should understand how the scheduler works and the factors that are at play. Key scheduling concepts to understand include priority factors such as [fairshare](https://slurm.schedmd.com/priority_multifactor.html#fairshare){:target="_blank"} and [QoS](https://slurm.schedmd.com/qos.html){:target="_blank"}, and [backfilling](https://slurm.schedmd.com/sched_config.html#backfill){:target="_blank"}. More advanced concepts include [reservations](https://slurm.schedmd.com/reservations.html){:target="_blank"}, [oversubscription](https://slurm.schedmd.com/cons_tres_share.html){:target="_blank"}, [preemption](https://slurm.schedmd.com/preempt.html){:target="_blank"}, and [gang scheduling](https://slurm.schedmd.com/gang_scheduling.html){:target="_blank"}.
+
+### When Will My Job Start?
+
+While exact start times cannot be guaranteed due to the dynamic nature of the cluster's workloads, you can get an estimate:
+
+```bash
+squeue -j <jobid> --start
+```
+
+This command will give you information about how many CPUs your job requires, for how long, as well as when approximately it will start and complete. It must be emphasized that this is just a best guess, queued jobs may start earlier because of running jobs that finishes before they hit the walltime limit and jobs may start later than projected because new jobs are submitted that get higher priority.
+
+You can also look at the Slurm queue to get a sense of how many other jobs are pending and where your job stands in the queue:
+
+```bash
+squeue -p <partition_name> --state=PD -l
+```
+
+To see the jobs run by other users in your group, specify the account name:
+
+```bash
+squeue -A <account>
+```
+Review your fairshare score using sshare to understand how your recent resource usage might be affecting your job's priority.
 
 ### Scheduling Priority Factors
 
-If your job is sitting in the queue for a while, its priority could be lower than other jobs due to one or more factors such as high fairshare usage from previous jobs, a high number of in-demand resources being requested, or a long wall time being requested. This is because the Star cluster leverages Slurm's Backfill scheduler and Multifactor Priority plugin, which considers several factors in determining a job's priority, unlike First-In, First-Out (FIFO) scheduling. The backfill scheduler with the priority/multifactor plugin provides a more balanced and performant approach than FIFO.
+If your job is sitting in the queue for a while, its priority could be lower than other jobs due to one or more factors such as high fairshare usage from previous jobs, a high number of in-demand resources being requested, or a long wall time being requested. This is because the Star cluster leverages Slurm's Backfill scheduler and Multifactor Priority plugin, which considers several factors in determining a job's priority, unlike simple First-In, First-Out (FIFO) scheduling. The backfill scheduler with the priority/multifactor plugin provides a more balanced and performant approach than FIFO.
 
-There are nine factors that influence job priority, which affects the order in which the jobs are scheduled to run. The job priority is calculated from a weighted sum of all the following factors:
+There are nine factors that influence the overall [job priority](https://slurm.schedmd.com/priority_multifactor.html#general), which affects the order in which the jobs are scheduled to run. The job priority is calculated from a weighted sum of all the following factors:
 
 - **Age**: the length of time a job has been waiting in the queue and eligible to be scheduled
 - **Association**: a factor associated with each association
@@ -99,27 +122,6 @@ QoS (Quality of Service) define job with different priorities and resource limit
 - **short**: For jobs up to 1 hour, with higher priority, suitable for testing and quick tasks.
 - **medium**: For jobs up to 48 hours, balanced priority for standard workloads.
 - **long**: For jobs up to 120 hours, lower priority due to resource demands, suitable for extensive computations.
-
-## When Will My Job Start?
-
-While exact start times can't be guaranteed due to the dynamic nature of the cluster workload, you can get an estimate:
-
-```bash
-squeue -j <jobid> --start
-```
-
-You can look at the Slurm queue to get a sense for how many other jobs are pending in the relevant partition and where your job is in the queue:
-
-```bash
-squeue -p <partition_name> --state=PD -l
-```
-
-To see the jobs run by other users in your group, specify the account name:
-
-```bash
-squeue -A <account>
-```
-Review your fairshare score using sshare to understand how your recent resource usage might be affecting your job's priority.
 
 
 ## Can I Have More Resources?
