@@ -1,8 +1,8 @@
 ---
-sort: 4
+sort: 3
 ---
 
-# Scheduler Policies
+# Job Scheduling
 
 This guide serves to provide users an understanding of the scheduling system and resource allocation policies of the Star HPC cluster to help users strategize their job submissions and optimize their usage of the cluster. By submitting job and requesting resources effectively, you can enhance job efficiency, reduce wait times, and make the most of the cluster’s capabilities.
 
@@ -51,7 +51,7 @@ There are nine factors that influence the overall [job priority](https://slurm.s
 - **Site**: a factor dictated by an administrator or a site-developed job_submit or site_factor plugin
 - **TRES**: A TRES is a resource that can be tracked for usage or used to enforce limits against. Each TRES type has its own factor for a job which represents the number of requested/allocated TRES type in a given partition.
 
-#### i) Fairshare
+#### Fairshare
 
 The fairshare factor reflects the recent resource usage of an account relative to its allotted share. An account's allotted share is determined by values set at multiple levels in the account hierarchy that represent the relative amount of the computing resources assigned to each account relative to others.
 
@@ -103,7 +103,7 @@ As a result, the more resources your recent jobs have used relative to your acco
    Weights                                                1               10000          1000              1000    1000
    ```
 
-#### ii) Backfilling
+### Backfilling
 
 Backfilling is a technique to optimize resource utilization. If a large job is waiting for specific resources, the scheduler allows smaller jobs to run in the meantime, provided they don't delay the start of the higher-priority job. This approach keeps the cluster busy and reduces idle time.
 
@@ -134,7 +134,7 @@ Before requesting additional resources, make sure you are optimally using the re
 
 Technical explanation:
 
-The fairshare mechanism used to ensure fair usage between accounts does not actually limit the amount of resources that can be requested or consumed. It only adjusts each job's scheduling priority based on resource usage history and the account's fair-share entitlement. Resource limits may be imposed on an account, user, partition, or job by association or QoS policy though. These usage limits will be reevaluated periodically and may be adjusted based on legitimate need or usage patterns.
+The fairshare mechanism used to ensure fair usage between accounts does not actually limit the amount of resources that can be requested or consumed itself. It only adjusts each job's scheduling priority based on resource usage history and the account's fair-share entitlement. Resource limits may be imposed on an account, user, partition, or job by association or QoS policy. These usage limits will be reevaluated periodically and may be adjusted based on legitimate need or usage patterns.
 
 ## How Can I Make Sure That I Am Using My Resources Optimally?
 
