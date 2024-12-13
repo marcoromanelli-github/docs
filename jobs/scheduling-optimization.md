@@ -4,7 +4,7 @@ sort: 4
 
 # Scheduler Policies
 
-This guide aims to help users understand the scheduling system and resource allocation policies of the Star HPC cluster to allow users to strategize their job submissions and optimize their usage of the cluster. By submitting job and requesting resources effectively, you can enhance job efficiency, reduce wait times, and make the most of the cluster’s capabilities.
+This guide serves to provide users an understanding of the scheduling system and resource allocation policies of the Star HPC cluster to help users strategize their job submissions and optimize their usage of the cluster. By submitting job and requesting resources effectively, you can enhance job efficiency, reduce wait times, and make the most of the cluster’s capabilities.
 
 ## Why Is My Job Not Running Yet?
 
