@@ -2,7 +2,26 @@
 sort: 5
 ---
 
-# Scheduler Policies (Alex's version)
+# Scheduler Policies
+
+As demand for HPC resources typically surpasses supply, a method of establishing the priority of the jobs and the order of their execution is needed. The simplest scheduling policy is to run jobs strictly on a first-come, first-serve basis, known as "first-in, first-out" (FIFO). While simple to implement, plain FIFO does not take any other factor into consideration and can result in inefficient resource utilization. For example, a handful of large jobs that arrive first could prevent many smaller, shorter jobs from running for an extended period, even if the smaller jobs are more urgent and could be run quickly between the larger jobs. This situation, known as *job starvation*, can degrade the cluster's overall throughput and compromise the user experience. To address the limitations of FIFO, more advanced scheduling policies are typically employed in HPC environments that take into account other factors such as job size, runtime estimates, resource requirements, and user priorities.
+
+By taking these other factors into consideration, the scheduler can improve resource utilization, minimize job wait times, and ensure fairness among users while balancing the needs of the system and its workload.
+
+
+
+These methods, along with priority modifiers such as job dependencies, Quality of Service (QoS) levels, and user-assigned priorities, allow for a more balanced and efficient use of HPC resources. They also enable scheduling policies to be optimized to the specific needs of the user base.
+
+
+
+
+
+
+
+When the cluster is occupied, the submitted jobs will wait in queue for execution. The pending jobs will be ordered acccording to their priority, where the higher the priority, the sooner will the job be executed.
+
+However the applications of rules and policies can change the priority of a job, which will be expressed as a number to the scheduler. Some of the main factors are:
+
 
 ## Job Priority
 
