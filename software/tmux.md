@@ -84,7 +84,7 @@ Moving between panes is straightforward:
 To quickly identify panes:
 1. Press `Ctrl+b`, release
 2. Press `q`
-This will briefly display large numbers in the middle of each pane, as shown in [Reference to image showing pane numbers].
+This will briefly display large numbers in the middle of each pane, as shown in the image above (containg the numbers)
 
 ### Resizing Panes
 
