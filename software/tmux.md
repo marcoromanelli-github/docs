@@ -17,10 +17,10 @@ Tmux allows you to achieve this functionality, through a single interactive sess
 
 Before getting started, let's understand some common Tmux terminology:
 
-- **Session**: A group of windows that can be attached (viewed) or detached (running in background)
+- **Prefix** (like a escape key): The key combination that tells Tmux you're about to enter a command (default: `Ctrl+b`)
+- **Session**: A group of windows that can be attached (viewed) or detached (run in background)
 - **Window**: Like tabs in your browser, each containing one or more panes
 - **Pane**: Split sections within a window
-- **Prefix**: The key combination that tells Tmux you're about to enter a command (default: `Ctrl+b`)
 
 We will further clarify these terms through the image attached below.
 
