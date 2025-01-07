@@ -6,16 +6,15 @@ sort: 5
 
 ## Introduction
 
-Tmux (Terminal Multiplexer) allows you to create multiple terminal sessions within a single window.
-This functionality can come in handy when working on the compute nodes, through an interactive session.
+Tmux is a terminal multiplexer, which is a utility that allows you to access multiple terminal sessions from a single terminal window. This is a convience as users commonly need multiple terminal windows, e.g. you have your task running in one terminal, and monitor its activity from another.
 
-Users commonly need multiple terminal windows, e.g. you have your task running in one terminal, and monitor its activity from another.
+Tmux also allows you to detach your sessions from the consoles they are accessed on, which comes in handy whenever you are working over a remote session (e.g. SSH).
 
-Tmux allows you to achieve this functionality, through a single interactive session on a node.
+```note
 
 ### Keywords to know
 
-Before getting started, let's understand some common Tmux terminology:
+Before getting started, you should familiarize yourself with some common Tmux terminology:
 
 - **Prefix** (like a escape key): The key combination that tells Tmux you're about to enter a command (default: `Ctrl+b`)
 - **Session**: A group of windows that can be attached (viewed) or detached (run in background)
@@ -24,15 +23,17 @@ Before getting started, let's understand some common Tmux terminology:
 
 We will further clarify these terms through the image attached below.
 
-## Getting Started
+```
+
+## Starting a Session
 
 Tmux is already available on the compute nodes, so you can go ahead and create a new **Tmux session** using:
 
 ```bash
-tmux new -s your_session_name
+tmux new -s tutorial-0
 ```
 
-When you create a new session, you'll automatically be attached to it. You'll notice a green status bar appear at the bottom of your terminal. The bottom-left corner shows your session name (in this case, "your_session_name"), which helps you keep track of where you are.
+When you create a new session, it will automatically attach you to it. You'll notice a green status bar appear at the bottom of your terminal. The bottom-left corner shows your session name (in this case, "tutorial-0") to help you keep track of where you are.
 
 To list existing sessions:
 ```bash
@@ -41,10 +42,10 @@ tmux ls
 
 To attach to an existing session:
 ```bash
-tmux attach -t your_session_name
+tmux attach -t tutorial-0
 ```
 
-## Understanding the Interface
+## Tmux's Interface
 
 ![tmux]({{ site.baseurl }}/images/tmux-images/1.png "tmux1")
 
