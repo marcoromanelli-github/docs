@@ -26,7 +26,6 @@ You would create a job script to launch Jupyter Notebook and most other applicat
 ```bash
 #!/bin/bash
 
-#SBATCH --nodelist=<compute-node>
 #SBATCH --gpus=2
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
@@ -59,7 +58,7 @@ user=$(whoami)
 echo "==================================================================="
 echo "To connect to your Jupyter notebook, run this command on your local machine:"
 echo ""
-echo "ssh -N -L ${port}:${compute_node}:${port} -J ${user}@adams204${XX}.hofstra.edu:${LOGIN_PORT},${user}@${LOGIN_NODE}:${LOGIN_PORT} ${user}@${LOGIN_NODE}"
+echo "ssh -N -L ${port}:${compute_node}:${port} -J ${user}@adams204${XX}.hofstra.edu:${LOGIN_PORT} ${user}@${LOGIN_NODE} -p ${LOGIN_PORT}"
 echo ""
 echo "When finished, clean up by running this command on the login node:"
 echo "scancel ${SLURM_JOB_ID}"
