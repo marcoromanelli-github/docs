@@ -886,114 +886,82 @@ This will remove the target directory, which contains all compiled files and dow
 
 ### How to create and use a virtual environment in Ruby
 
-Ruby offers several tools for managing project-specific environments and dependencies. The most popular tools are RVM (Ruby Version Manager) and rbenv, which allow you to manage multiple Ruby versions and gemsets. While not traditional virtual environments like in Python, these tools provide similar functionality by isolating project dependencies and Ruby versions. RVM is more feature-rich and handles both Ruby versions and gemsets, while rbenv is lighter and focuses on Ruby version management, often used with Bundler for dependency management. Below are directions using both RVM and rbenv to create and manage isolated Ruby environments.
+RVM (Ruby Version Manager) provides functionality to manage both Ruby versions and isolate project environments through gemsets. Unlike traditional virtual environments in other languages, RVM combines version management and dependency isolation in one tool. This allows you to manage multiple Ruby versions and create isolated sets of gems for different projects. Below are directions for using RVM on Rocky Linux.
 
 #### Setup environment
-Create a new Ruby environment using either RVM or rbenv.
+Create a new Ruby environment using RVM.
 
-1. Check Ruby version:
+1. Install required dependencies:
    ```bash
-   ruby -v
+   sudo dnf install -y git gcc-c++ make patch libyaml-devel autoconf automake
+   sudo dnf install -y bison libffi-devel readline-devel sqlite-devel
+   sudo dnf install -y zlib-devel openssl-devel libyaml-devel
    ```
 
-2. Create directory for project:
+2. Install RVM:
    ```bash
-   mkdir Project
+   # Install GPG keys
+   gpg --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+
+
+   # Install RVM
+   \curl -sSL https://get.rvm.io | bash -s stable --ruby
+
+
+   # Load RVM
+   source ~/.rvm/scripts/rvm
    ```
 
-3. Navigate to directory:
+3. Create project directory:
    ```bash
-   cd Project
+   mkdir myproject
+   cd myproject
    ```
 
-4. For RVM:
+4. Setup Ruby environment:
    ```bash
-   # Install RVM if not already installed
-   \curl -sSL https://get.rvm.io | bash
-   
-   # Create new gemset
-   rvm use ruby-3.2.0@myproject --create
-   
-   # Verify environment
+   # Install specific Ruby version
+   rvm install 3.2.0
+
+   # Create project gemset
+   rvm use 3.2.0@myproject --create
+
+   # Verify setup
    rvm current
    ```
 
-5. For rbenv:
+#### Installing packages
+Install gems for your project.
+
+1. Install Bundler:
    ```bash
-   # Install rbenv if not already installed
-   brew install rbenv  # macOS
-   # or
-   git clone https://github.com/rbenv/rbenv.git ~/.rbenv  # Linux
-   
-   # Install Ruby version
-   rbenv install 3.2.0
-   
-   # Set local Ruby version
-   rbenv local 3.2.0
-   
-   # Verify environment
-   rbenv version
+   gem install bundler
    ```
 
-#### Activate environment
-Activating a specific Ruby environment ensures your project uses the correct Ruby version and gems.
-
-For RVM:
-```bash
-rvm use ruby-3.2.0@myproject
-```
-
-For rbenv:
-```bash
-eval "$(rbenv init -)"
-rbenv shell 3.2.0
-```
-
-#### Deactivate environment
-Deactivating returns you to the system's default Ruby environment.
-
-For RVM:
-```bash
-rvm use system
-```
-
-For rbenv:
-```bash
-rbenv shell system
-```
-
-#### Installing packages
-Install gems (Ruby packages) specific to your project environment.
-
-1. Initialize Bundler:
+2. Create Gemfile:
    ```bash
    bundle init
    ```
 
-2. Add gems to Gemfile:
+3. Add gems to Gemfile:
    ```ruby
    source 'https://rubygems.org'
-   
-   gem 'rails', '~> 7.0.0'
-   gem 'rspec', '~> 3.12'
+
+   gem 'rails'
+   gem 'sqlite3'
    ```
 
-3. Install gems:
+4. Install dependencies:
    ```bash
    bundle install
-   ```
-
-4. Install a single gem:
-   ```bash
-   gem install gem_name
    ```
 
 #### Using dependencies
-Manage project dependencies using Bundler to ensure consistent gem versions across different environments.
+Manage project dependencies within the gemset.
 
-1. Install dependencies from Gemfile:
+1. List installed gems:
    ```bash
-   bundle install
+   gem list
    ```
 
 2. Update all gems:
@@ -1001,93 +969,109 @@ Manage project dependencies using Bundler to ensure consistent gem versions acro
    bundle update
    ```
 
-3. Check outdated gems:
+3. Install specific gem:
    ```bash
-   bundle outdated
+   gem install gem_name
    ```
 
 #### Running Ruby scripts
-Run Ruby scripts within the project environment:
+Execute scripts within the RVM environment:
 
-1. Using Bundler:
-   ```bash
-   bundle exec ruby your_script.rb
-   ```
+```bash
+# Using bundler
+bundle exec ruby script.rb
 
-2. Direct execution:
-   ```bash
-   ruby your_script.rb
-   ```
+# Direct execution
+ruby script.rb
+```
 
 #### Managing different Ruby versions
-Both RVM and rbenv allow managing multiple Ruby versions for different projects.
+Switch between Ruby versions:
 
-For RVM:
 ```bash
+# List available versions
+rvm list known
+
+# Install new version
+rvm install 3.1.0
+
+# Switch version
+rvm use 3.1.0
+
+# List installed versions
 rvm list
-
-rvm install 3.2.0
-
-rvm use 3.2.0
 ```
 
-For rbenv:
-```bash
-rbenv versions
+#### Creating and using a project environment
+Set up project-specific configuration:
 
-rbenv install 3.2.0
-
-rbenv local 3.2.0
-```
-
-#### Creating and using .ruby-version file
-Specify Ruby version for your project:
-
-1. Create .ruby-version file:
+1. Create configuration files:
    ```bash
+   # Set Ruby version
    echo "3.2.0" > .ruby-version
+
+   # Set gemset
+   echo "myproject" > .ruby-gemset
    ```
 
-2. Both RVM and rbenv will automatically switch to this version when entering the directory.
+2. RVM will automatically switch to this environment when entering the directory.
 
 #### Delete virtual environment
-Remove the Ruby environment and its associated gems.
+Remove the Ruby environment:
 
-For RVM:
-```bash
-rvm gemset delete myproject
+1. Delete gemset:
+   ```bash
+   rvm gemset delete myproject
+   ```
 
-rvm remove 3.2.0
-```
-
-For rbenv:
-```bash
-rm .ruby-version
-
-rbenv uninstall 3.2.0
-```
+2. Remove Ruby version (optional):
+   ```bash
+   rvm remove 3.2.0
+   ```
 
 #### Sharing environments
-Share your project environment configuration with others:
+Share project configuration:
 
-1. Include these files in version control:
-   - Gemfile
-   - Gemfile.lock
-   - .ruby-version
-
-2. Others can recreate the environment:
+1. Include in version control:
    ```bash
-   # Install correct Ruby version
-   rbenv install $(cat .ruby-version)  # for rbenv
-   # or
-   rvm install $(cat .ruby-version)    # for RVM
-   
-   # Install dependencies
+   # Add configuration files
+   git add .ruby-version .ruby-gemset Gemfile Gemfile.lock
+   ```
+
+2. Add to .gitignore:
+   ```bash
+   .bundle/
+   vendor/
+   ```
+
+3. Others can recreate environment:
+   ```bash
+   # RVM will automatically:
+   # - Install required Ruby version
+   # - Create and use correct gemset
+   # Just run:
    bundle install
    ```
 
-Add files to .gitignore:
-```
-.bundle/
-vendor/
+#### Troubleshooting
+
+1. RVM not found:
+   ```bash
+   source ~/.rvm/scripts/rvm
+   ```
+
+2. Permission issues:
+   ```bash
+   rvm fix-permissions
+   ```
+
+3. Update RVM:
+   ```bash
+   rvm get stable
+   ```
+
+Remember to periodically update RVM to get the latest features and security updates:
+```bash
+rvm get stable
+rvm reload
 ```
