@@ -886,7 +886,7 @@ This will remove the target directory, which contains all compiled files and dow
 
 ### How to create and use a virtual environment in Ruby
 
-RVM (Ruby Version Manager) provides functionality to manage both Ruby versions and isolate project environments through gemsets. Unlike traditional virtual environments in other languages, RVM combines version management and dependency isolation in one tool. This allows you to manage multiple Ruby versions and create isolated sets of gems for different projects. Below are directions for using RVM on Rocky Linux.
+RVM (Ruby Version Manager) provides functionality to manage both Ruby versions and isolate project environments through gemsets. This allows you to manage multiple Ruby versions and create isolated sets of gems for different projects. Below are directions for using RVM on Rocky Linux.
 
 #### Setup environment
 Create a new Ruby environment using RVM.
