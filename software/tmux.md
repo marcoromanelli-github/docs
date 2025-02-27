@@ -160,7 +160,7 @@ set mouse off
 ### Scrolling Through Pane History
 
 To view previous output in a pane:
-1. Press `Ctrl+b`, elease
+1. Press `Ctrl+b`, release
 2. Press `[` to enter scroll mode
 3. Use arrow keys, PgUp/PgDn, trackpad, etc to navigate
 4. Press `q` or `Ctrl+c` to exit scroll mode and return to normal operation
