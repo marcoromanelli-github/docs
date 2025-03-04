@@ -4,6 +4,11 @@ sort: 1
 
 # Frequently asked questions
 
+## Privileges
+### How to get root access on the cluster?
+
+The root access to the cluster is not provided to users.
+
 ## Passwords
 
 ### I forgot my password - what now?
