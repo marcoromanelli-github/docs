@@ -105,7 +105,7 @@ Making complex and time-intensive calculations simple and accessible.
 Our heart is set on creating a community where our cluster is a symbol of collaboration and discovery. We are wishing to provide a supportive space where researchers and students can express their scientific ideas and explore unchanted areas. We aim to make the complicated world of computational research a shared path of growth, learning, and significant discoveries for the ones that are eager to learn.
 
 ## Operations Team
-
+- Michael Khlystun
 - Alexander Rosenberg
 - Mani Tofigh
 
