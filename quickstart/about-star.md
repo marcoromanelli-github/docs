@@ -107,7 +107,6 @@ Our heart is set on creating a community where our cluster is a symbol of collab
 ## Operations Team
 - Michael Khlystun
 - Alexander Rosenberg
-- Mani Tofigh
 
 ## The Board
 
@@ -117,4 +116,3 @@ Our heart is set on creating a community where our cluster is a symbol of collab
 - Jason D. Williams
 - Thomas G. Re
 - Oren Segal
-- John Ortega
