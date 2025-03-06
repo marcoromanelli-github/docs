@@ -23,7 +23,7 @@ You can run the `passwd` command on the login node to change your password. Plea
 
 {% comment %}A web portal is currently under development. Once launched, your password can also be changed from the password reset page, [link to be provided]. Log in using your username on Star.{% endcomment %}
 
-### What is the ssh key fingerprint for star.hofstra.edu?
+### What is the ssh key fingerprint for the Star cluster?
 
 The SHA256 key fingerprint is:
 `SHA256:W0NKVfQBl5FeOlOkoEIKIVsp1+47yIvzJAYMx6ECpwM`
