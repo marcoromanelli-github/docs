@@ -119,9 +119,13 @@ No, a Slurm account is something entirely different. Users can belong to multipl
 
 QoS (Quality of Service) define job with different priorities and resource limits. Selecting the appropriate QoS can influence your job’s priority in the queue. Be mindful of the tradeoff that comes with the long QoS. While long QoS allows more runtime for your jobs, they may result in longer wait times due to lower scheduling priority.
 
-- **short**: For jobs up to 1 hour, with higher priority, suitable for testing and quick tasks.
-- **medium**: For jobs up to 48 hours, balanced priority for standard workloads.
-- **long**: For jobs up to 120 hours, lower priority due to resource demands, suitable for extensive computations.
+- **normal**: For jobs up to 1 hour, with higher priority, suitable for testing and quick tasks.
+- **burst**: For jobs up to 30 minutes, with highest priority, suitable for urgent short-term tasks.
+- **long**: For jobs up to 7 days, suitable for extensive computations, low priority due to resource fair sharing.
+- **long2x**: For jobs up to 14 days, suitable for very long computations, even lower priority.
+- **long-16pa**: For jobs up to 7 days, suitable for extended parallel jobs; priority between long2x and long.
+- **admin**: Reserved for administrative tasks.
+
 
 
 ## Can I Have More Resources?
@@ -140,16 +144,16 @@ The fairshare mechanism used to ensure fair usage between accounts does not actu
 
 You can tailor your job according to its duration and the resources it needs.
 
-When submitting a **short job**, consider using the **short QoS** to gain higher priority in the queue. Request only the necessary resources to keep the job lightweight and reduce wait times.
+When submitting a **short job**, consider using the **burst QoS** to gain higher priority in the queue. Request only the necessary resources to keep the job lightweight and reduce wait times.
 
 **Example:**
 
 ```bash
 #!/bin/bash
 #SBATCH --job-name=debug_job
-#SBATCH --partition=mixed-use
-#SBATCH --qos=short
-#SBATCH --time=00:30:00
+#SBATCH --partition=defq
+#SBATCH --qos=burst
+#SBATCH --time=00:20:00
 #SBATCH --mem=1G
 
 module load python3
@@ -171,11 +175,11 @@ Be aware of **fairshare implications**; consistently running long jobs can reduc
 ```bash
 #!/bin/bash
 #SBATCH --job-name=long_job
-#SBATCH --partition=gpu-large
+#SBATCH --partition=defq
 #SBATCH --qos=long
 #SBATCH --time=120:00:00
 #SBATCH --nodes=2
-#SBATCH --mem=64G
+#SBATCH --mem=4G
 
 module load python3
 python3 my_long_job.py
