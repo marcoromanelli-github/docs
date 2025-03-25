@@ -4,6 +4,11 @@ sort: 1
 
 # Frequently asked questions
 
+## Privileges
+### How to get root access on the cluster?
+
+The root access to the cluster is not provided to users.
+
 ## Passwords
 
 ### I forgot my password - what now?
@@ -18,7 +23,7 @@ You can run the `passwd` command on the login node to change your password. Plea
 
 {% comment %}A web portal is currently under development. Once launched, your password can also be changed from the password reset page, [link to be provided]. Log in using your username on Star.{% endcomment %}
 
-### What is the ssh key fingerprint for star.hofstra.edu?
+### What is the ssh key fingerprint for the Star cluster?
 
 The SHA256 key fingerprint is:
 `SHA256:W0NKVfQBl5FeOlOkoEIKIVsp1+47yIvzJAYMx6ECpwM`
@@ -57,10 +62,73 @@ solution for you, please contact us and we will do our best to help you.
 
 Yes. Please see [Virtual environments]({{site.baseurl}}{% link software/virtual-env.md %}).
 
+### How can I get sudo access?
+
+Due to the cluster's architecture and security model, `root` or `sudo` access is restricted and standard users cannot perform operations that require root access. However, most standard tasks do not actually require root privledges or have non-root alternatives anyway. Please learn about using [environment modules]({{site.baseurl}}{% link software/env-modules.md %}) and [virtual environments]({{site.baseurl}}{% link software/virtual-env.md %}). If there is any other task that appears to require `sudo` access, please submit a support request or contact the HPC support team to assist you with your needs. 
+
+### How can I install packages without root access?
+
+Because normal users do not have sudo or root access, you may want to create a virtual environment or install into the home directory for your required software packages. Setting up a project like this will allow you to isolate project dependencies, prevent version conflicts, and ensure your environment is reproducible if sharing or collaboration is necessary. For more information, please see the [virtual environments guide]({{site.baseurl}}{% link software/virtual-env.md %}).
+
+#### Python Example
+Below are directions on using a simple virtual environment with venv. It is one of the many packages that allow you to manage virtual environments along with conda, virtualenv, and others.
+
+Create a virtual environment:
+```sh
+python3 -m venv research1
+```
+
+Activate the environment:
+```sh
+source research1/bin/activate
+```
+
+Your current line should be prefixed with the environment name:
+```
+(research1) user@super-computer
+```
+
+Install new package:
+```sh
+pip install package_name
+```
+
+Deactivate the environment if it's active:
+```sh
+deactivate
+```
+
+#### R example
+Below are directions on using a simple virtual environment with renv. It is one of the main packages used to manage virtual environments in R.
+
+Create a virtual environment:
+```sh
+renv::init()
+```
+
+Activate the environment:
+```sh
+renv::activate()
+```
+
+Install new package:
+```sh
+install.packages("package_name")
+```
+
+Deactivate the environment if it's active:
+```sh
+renv::deactivate()
+```
+
+For more information on setting up development environments for other languages, including Julia, NodeJS, C, C++, and Rust, please see the [virtual environments guide]({{site.baseurl}}{% link software/virtual-env.md %}).
+
+
 ## Compute and storage quota
 
 ### How can I check my disk quota and disk usage?
 
+{% comment %}
 To check the disk quota of your home directory ( /home/username ), you can use the repquota command which prints a summary of the disc usage and quotas for the specified file systems.
 
     $ /usr/sbin/repquota -a -s
@@ -77,20 +145,13 @@ Hard Limit -> This is the absolute maximum disk space or number of files a user 
 Grace Period -> The amount of time a user is allowed to exceed the soft limit before they are required to get back under it. If this period expires, the soft limit becomes enforced like a hard limit.
 
 File limits (inodes) -> These limit the number of files a user can create, regardless of their size.
+{% endcomment %}
 
+To check the quota of the main project storage (parallel file system - `/fs1/projects/<project>`), you can use this command:
 
+    $ mmlsquota -j <project_name> fs1
 
-To check the quota of the main project storage (parallel file system - `/fs1/proj/<project>`), you can use this command:
-
-    $ mmlsquota -j <fileset_name> <filesystem_name>
-
-The -j option specifies that you are querying a fileset. Filesets in GPFS are similar to directories that can have independent quota limits.
-
-fileset_name -> This is the name of the fileset whose quota you want to check.
-
-filesystem_name -> The name of the GPFS filesystem in which the fileset resides.
-
-example: mmlsquota -j project_fileset gpfs1
+The -j option specifies that you are querying a fileset, which is how quotas are set on different directories in GPFS.
 
 
 ### How many CPU hours have I spent?
@@ -124,6 +185,7 @@ your local PC.
 
 Please read about Interactive jobs at [Submitting jobs]({{site.baseurl}}{% link jobs/submitting-jobs.md %}).
 
+{% comment %}
 ### My ssh connections are dying / freezing
 
 How to prevent your ssh connections from dying / freezing.
@@ -143,6 +205,7 @@ using
 you can take a look at this page explaining
 [keepalives](https://the.earth.li/~sgtatham/putty/0.60/htmldoc/Chapter4.html#config-keepalive)
 for a similar solution.
+{% endcomment %}
 
 ### Where can I find an example of job script?
 
@@ -241,7 +304,8 @@ Priority means that resources are in principle available, but someone
 else has higher priority in the queue. Resources means the at the moment
 the requested resources are not available.
 
-### How can I customize emails that I get after a job has completed?
+{% comment %}
+### How can I send emails when a job has completed?
 
 Use the mail command and you can customize it to your liking but make
 sure that you send the email via the login node.
@@ -250,6 +314,7 @@ As an example, add and adapt the following line at the end of your
 script:
 
     echo "email content" | ssh star-1.local 'mail -s "Job finished: ${SLURM_JOBID}" firstname.lastname@hofstra.edu'
+{% endcomment %}
 
 ### How can I run many short tasks?
 
