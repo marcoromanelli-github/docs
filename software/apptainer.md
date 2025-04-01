@@ -73,26 +73,6 @@ This command pulls the latest `tensorflow` image from Docker Hub and creates an 
 
 However, in some cases, you might benefit from some existing Docker containers that may not be available on NGC.
 
-#### Container Tags
-
-When pulling containers from Docker Hub or NGC, you'll notice that images often have tags (e.g., `:latest`, `:latest-gpu`, `:23.05-py3`). These tags help you specify exactly which version of a container you want to use. 
-
-For example, when pulling the TensorFlow container, you might see different tags like:
-```bash
-tensorflow/tensorflow:latest        # Latest CPU-only version
-tensorflow/tensorflow:latest-gpu    # Latest version with GPU support
-tensorflow/tensorflow:2.13.0-gpu    # Specific version (2.13.0) with GPU support
-```
-
-Here's how you would pull a GPU-enabled version of TensorFlow using Apptainer:
-```bash
-apptainer pull --name tensorflow-gpu.sif docker://tensorflow/tensorflow:latest-gpu
-```
-
-**Note:** When working on the Star cluster with GPU nodes, you should generally use GPU-enabled containers (indicated by tags like `-gpu` or similar) to take full advantage of the available hardware.
-
-If you don't specify a tag, Apptainer will default to using the `:latest` tag, which might not include GPU support. Always check the container's documentation to ensure you're using the appropriate tag for your needs.
-
 **Remember:** Apptainer is very similar to Docker, with the most crucial difference that it runs under user privileges rather than root.
 
 Note the `nvcr.io/nvidia/pytorch:23.05-py3` section of the command. If you are pulling another container, make sure you replace it with the proper link.
@@ -209,6 +189,26 @@ ended: Tue Oct 15 17:15:53 EDT 2024
 **Note:** Even if your script's execution is successful, you will see the `.err` file; however, it will be empty.
 
 If your output file is empty, try seeing if there is anything informational in the `.err` file to diagnose the issue.
+
+### Container Tags
+
+When pulling containers from Docker Hub or NGC, you'll notice that images often have tags (e.g., `:latest`, `:latest-gpu`, `:23.05-py3`). These tags help you specify exactly which version of a container you want to use. 
+
+For example, when pulling the TensorFlow container, you might see different tags like:
+```bash
+tensorflow/tensorflow:latest        # Latest CPU-only version
+tensorflow/tensorflow:latest-gpu    # Latest version with GPU support
+tensorflow/tensorflow:2.13.0-gpu    # Specific version (2.13.0) with GPU support
+```
+
+Here's how you would pull a GPU-enabled version of TensorFlow using Apptainer:
+```bash
+apptainer pull --name tensorflow-gpu.sif docker://tensorflow/tensorflow:latest-gpu
+```
+
+**Note:** When working on the Star cluster with GPU nodes, you should generally use GPU-enabled containers (indicated by tags like `-gpu` or similar) to take full advantage of the available hardware.
+
+If you don't specify a tag, Apptainer will default to using the `:latest` tag, which might not include GPU support. Always check the container's documentation to ensure you're using the appropriate tag for your needs.
 
 ## Apptainer job examples
 
