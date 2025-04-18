@@ -4,6 +4,76 @@ sort: 1
 
 # Frequently asked questions
 
+## Connecting through SSH
+
+### How do I connect to the cluster?
+
+Please see the welcome email that was sent to you when your account was created.
+
+### What is the ssh key fingerprint for the cluster?
+
+The SHA256 key fingerprint is:
+`SHA256:W0NKVfQBl5FeOlOkoEIKIVsp1+47yIvzJAYMx6ECpwM`
+
+If you are more of a visual person, run
+`ssh -p 5010 -o VisualHostKey=yes [login node].star.hofstra.edu` and compare it to this visual
+key:
+
+    +--[ED25519 256]--+
+    |E + ++  . .o=.+=.|
+    |o=.=o..o . . +ooo|
+    |* +o .. o o  .o+ |
+    |+o    .. +    =  |
+    |..   .  S o    o |
+    | .    .  o .     |
+    |  o... ..        |
+    | ..+o o          |
+    |  .oo. .         |
+    +----[SHA256]-----+
+
+
+### How do I access the compute nodes?
+
+To access the compute nodes, you need to run `sbatch` or `srun` on a login node to [submit a job]({{site.baseurl}}{% link jobs/submitting-jobs.md %}).
+
+If you are looking for the same experience as with ssh, you can use `srun` to launch a remote interactive shell. For more information and an example, please see [Interactive jobs]({{site.baseurl}}{% link jobs/submitting-jobs.md %}#interactive-jobs).
+
+
+### How can I run a GUI-based application on the cluster?
+ 
+To run software with a graphical user interface (GUI), you need to have an X server installed on your computer (such as [Cygwin-X](https://cs.hofstra.edu/docs/pages/guides/cygwin_x11_forwarding.html) on Windows or XQuartz on Mac) and need to connect to the cluster with display forwarding. 
+
+1.  First login to Star with display forwarding. For example:
+
+        $ ssh -Y [login node].star.hofstra.edu
+    
+2.  Then you should reserve resources with display forwarding through the
+    queuing system. E.g.:
+
+        $ srun -N 1 -t 1:0:0 --pty bash -I     # reserve and log in on a compute node
+
+{% comment %}
+### My ssh connections are dying / freezing
+
+How to prevent your ssh connections from dying / freezing.
+
+If your ssh connections more or less randomly are dying / freezing, try
+to add the following to your *local* `~/.ssh/config` file:
+
+    ServerAliveCountMax 3
+    ServerAliveInterval 10
+
+(*local* means that you need to make these changes to your computer, not
+on star)
+
+The above config is for [OpenSSH](https://www.openssh.org), if you're
+using
+[PUTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty/docs.html)
+you can take a look at this page explaining
+[keepalives](https://the.earth.li/~sgtatham/putty/0.60/htmldoc/Chapter4.html#config-keepalive)
+for a similar solution.
+{% endcomment %}
+
 ## Passwords
 
 ### I forgot my password - what now?
@@ -129,77 +199,6 @@ The -j option specifies that you are querying a fileset, which is how quotas are
 This command gives you a report of account utilization, including CPU hours, for the specified period.
 
     $ sreport cluster AccountUtilizationByUser start=YYYY-MM-DD end=YYYY-MM-DD
-
-## Connecting through SSH
-
-### What is the ssh key fingerprint for the cluster?
-
-The SHA256 key fingerprint is:
-`SHA256:W0NKVfQBl5FeOlOkoEIKIVsp1+47yIvzJAYMx6ECpwM`
-
-If you are more of a visual person, run
-`ssh -p 5010 -o VisualHostKey=yes [login node].star.hofstra.edu` and compare it to this visual
-key:
-
-    +--[ED25519 256]--+
-    |E + ++  . .o=.+=.|
-    |o=.=o..o . . +ooo|
-    |* +o .. o o  .o+ |
-    |+o    .. +    =  |
-    |..   .  S o    o |
-    | .    .  o .     |
-    |  o... ..        |
-    | ..+o o          |
-    |  .oo. .         |
-    +----[SHA256]-----+
-
-
-### How can I export the display from a compute node to my desktop?
-
-If you need to export the display from a compute node to your desktop
-you should
-
-1.  First login to Star with display forwarding.
-2.  Then you should reserve a node, with display forwarding, trough the
-    queuing system.
-
-Here is an example:
-
-    $ ssh -Y [login node].star.hofstra.edu       # log in with port forwarding
-    $ srun -N 1 -t 1:0:0 --pty bash -I     # reserve and log in on a compute node
-
-This example assumes that you are running an X-server on your local
-desktop, which should be available for most users running Linux, Unix
-and Mac OS. If you are using Windows you must install some X-server on
-your local PC.
-
-### How do I access the compute nodes?
-
-To access the compute nodes, you need to run `sbatch` or `srun` on the login node to [submit a job]({{site.baseurl}}{% link jobs/submitting-jobs.md %}).
-
-If you are looking for the same experience as with ssh, you can use `srun` to launch a remote interactive shell. For more information and an example, please see [Interactive jobs]({{site.baseurl}}{% link jobs/submitting-jobs.md %}#interactive-jobs).
-
-{% comment %}
-### My ssh connections are dying / freezing
-
-How to prevent your ssh connections from dying / freezing.
-
-If your ssh connections more or less randomly are dying / freezing, try
-to add the following to your *local* `~/.ssh/config` file:
-
-    ServerAliveCountMax 3
-    ServerAliveInterval 10
-
-(*local* means that you need to make these changes to your computer, not
-on star)
-
-The above config is for [OpenSSH](https://www.openssh.org), if you're
-using
-[PUTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty/docs.html)
-you can take a look at this page explaining
-[keepalives](https://the.earth.li/~sgtatham/putty/0.60/htmldoc/Chapter4.html#config-keepalive)
-for a similar solution.
-{% endcomment %}
 
 ## Working with jobs
 
