@@ -10,7 +10,19 @@ sort: 1
 
 Please see the welcome email that was sent to you when your account was created.
 
-### What is the ssh key fingerprint for the cluster?
+### I forgot my password - what now?
+
+{% comment %}You can reset it here: [link to be provided]{% endcomment %}
+
+Please contact the [support team]({{site.baseurl}}{% link help/contact.md %}).
+
+### How do I change my password on Star?
+
+You can run the `passwd` command on the login node to change your password. Please note `passwd` will have no affect from the compute nodes.
+
+{% comment %}A web portal is currently under development. Once launched, your password can also be changed from the password reset page, [link to be provided]. Log in using your username on Star.{% endcomment %}
+
+### What is the ssh key fingerprint for the Star cluster?
 
 The SHA256 key fingerprint is:
 `SHA256:W0NKVfQBl5FeOlOkoEIKIVsp1+47yIvzJAYMx6ECpwM`

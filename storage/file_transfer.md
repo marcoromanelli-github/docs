@@ -12,12 +12,12 @@ Standard SCP and SFTP clients can be used for secure file transfers. Here are th
 
 ```bash
 # run this on your local computer to transfer a file to Star
-scp -P 5010 /path/to/my/local/file <username>@star.hofstra.edu:/destination/path/to/file/on/star
+scp -P 5010 /path/to/my/local/file <username>@<login-node>.star.hofstra.edu:/destination/path/to/file/on/star
 
 # run this on your local computer to transfer a file from Star
-scp -P 5010 <username>@star.hofstra.edu:/path/to/file/on/star /destination/path/to/file/on/local/computer
+scp -P 5010 <username>@<login-node>.star.hofstra.edu:/path/to/file/on/star /destination/path/to/file/on/local/computer
 
-sftp <username>@star.hofstra.edu
+sftp <username>@<login-node>.star.hofstra.edu
 ```
 
 ## Mounting the File System on Your Local Machine Using SSHFS
@@ -25,13 +25,13 @@ sftp <username>@star.hofstra.edu
 Star HPC Cluster allows users to mount remote file systems on their local machines. For Linux, the command would look like this:
 
 ```bash
-sshfs [user@]star.hofstra.edu:[dir] mountpoint [options]
+sshfs [user@]<login-node>.star.hofstra.edu:[dir] mountpoint [options]
 ```
 
 For example:
 
 ```bash
-sshfs yourusername@star.hofstra.edu: /home/yourusername/star-fs/
+sshfs yourusername@login1.star.hofstra.edu: /home/yourusername/star-fs/
 ```
 
 Windows and Mac users can use [Cyberduck](https://cs.hofstra.edu/docs/pages/guides/cyberduck_setup.html) for similar functionality. WinSCP is another option for Windows, and FileZilla can be used across Windows, Mac, and Linux.

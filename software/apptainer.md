@@ -73,54 +73,6 @@ This command pulls the latest `tensorflow` image from Docker Hub and creates an 
 
 However, in some cases, you might benefit from some existing Docker containers that may not be available on NGC.
 
-## Apptainer job examples
-
-We will go through two examples:
-
-1. We will setup an NGC account, use it to pull the Pytorch container, and run a sample job with it.
-
-2. We will use a TensorFlow container and run a sample job.
-
-### NGC's Pytorch container example
-
-#### Create and setup an NGC account
-
-1. Visit [this link](https://ngc.nvidia.com/signin) and enter the email you'd like to sign up with (or sign in if you have an account already and skip to step 3).
-
-   **Note:** Don't get misguided by the "login" page. If the email you enter is not found as an already-existing account, you will automatically be redirected to the sign up page.
-
-2. Fill out all the required fields and verify your E-mail afterwards, as prompted.
-
-3. Login to your account, and later follow the steps at [this link](https://docs.nvidia.com/ngc/gpu-cloud/ngc-user-guide/index.html#generating-api-key) to setup an API key with which you will pull your containers.
-
-   **Note:** You need to make sure you save your API key once it's revealed after its generation. You later need to save it on the login node.
-
-4. Once you have your API key ready, go ahead and login to the login node (Binary).
-
-Run the following command:
-```bash
-ngc config set
-```
-
-You will be prompted to enter your API key. Go ahead and paste it, and then hit Enter.
-
-For the rest of the prompts, just enter the default available option, and hit Enter.
-
-Upon a successful set, you will be shown the path at which the configuration has been saved to.
-
-#### Pull and run Pytorch
-
-If you don't find Pytorch useful, you can pull any other container found at [this link](https://catalog.ngc.nvidia.com/containers?filters=&orderBy=weightPopularDESC&query=&page=&pageSize=).
-
-Once you find your desired container, click on it, and look for the "**Get Container v**" button at the top right of the screen.
-
-In this example's case, our container's link is `nvcr.io/nvidia/pytorch:23.05-py3`.
-
-Run the following command, which both pulls your container, and converts it to an `.sif` file which Apptainer can work with.
-```bash
-apptainer pull pytorch_23.05.sif docker://nvcr.io/nvidia/pytorch:23.05-py3
-```
-
 **Remember:** Apptainer is very similar to Docker, with the most crucial difference that it runs under user privileges rather than root.
 
 Note the `nvcr.io/nvidia/pytorch:23.05-py3` section of the command. If you are pulling another container, make sure you replace it with the proper link.
@@ -237,6 +189,74 @@ ended: Tue Oct 15 17:15:53 EDT 2024
 **Note:** Even if your script's execution is successful, you will see the `.err` file; however, it will be empty.
 
 If your output file is empty, try seeing if there is anything informational in the `.err` file to diagnose the issue.
+
+### Container Tags
+
+When pulling containers from Docker Hub or NGC, you'll notice that images often have tags (e.g., `:latest`, `:latest-gpu`, `:23.05-py3`). These tags help you specify exactly which version of a container you want to use. 
+
+For example, when pulling the TensorFlow container, you might see different tags like:
+```bash
+tensorflow/tensorflow:latest        # Latest CPU-only version
+tensorflow/tensorflow:latest-gpu    # Latest version with GPU support
+tensorflow/tensorflow:2.13.0-gpu    # Specific version (2.13.0) with GPU support
+```
+
+Here's how you would pull a GPU-enabled version of TensorFlow using Apptainer:
+```bash
+apptainer pull --name tensorflow-gpu.sif docker://tensorflow/tensorflow:latest-gpu
+```
+
+**Note:** When working on the Star cluster with GPU nodes, you should generally use GPU-enabled containers (indicated by tags like `-gpu` or similar) to take full advantage of the available hardware.
+
+If you don't specify a tag, Apptainer will default to using the `:latest` tag, which might not include GPU support. Always check the container's documentation to ensure you're using the appropriate tag for your needs.
+
+## Apptainer job examples
+
+We will go through two examples:
+
+1. We will setup an NGC account, use it to pull the Pytorch container, and run a sample job with it.
+
+2. We will use a TensorFlow container and run a sample job.
+
+### NGC's Pytorch container example
+
+#### Create and setup an NGC account
+
+1. Visit [this link](https://ngc.nvidia.com/signin) and enter the email you'd like to sign up with (or sign in if you have an account already and skip to step 3).
+
+   **Note:** Don't get misguided by the "login" page. If the email you enter is not found as an already-existing account, you will automatically be redirected to the sign up page.
+
+2. Fill out all the required fields and verify your E-mail afterwards, as prompted.
+
+3. Login to your account, and later follow the steps at [this link](https://docs.nvidia.com/ngc/gpu-cloud/ngc-user-guide/index.html#generating-api-key) to setup an API key with which you will pull your containers.
+
+   **Note:** You need to make sure you save your API key once it's revealed after its generation. You later need to save it on the login node.
+
+4. Once you have your API key ready, go ahead and login to the login node (Binary).
+
+Run the following command:
+```bash
+ngc config set
+```
+
+You will be prompted to enter your API key. Go ahead and paste it, and then hit Enter.
+
+For the rest of the prompts, just enter the default available option, and hit Enter.
+
+Upon a successful set, you will be shown the path at which the configuration has been saved to.
+
+#### Pull and run Pytorch
+
+If you don't find Pytorch useful, you can pull any other container found at [this link](https://catalog.ngc.nvidia.com/containers?filters=&orderBy=weightPopularDESC&query=&page=&pageSize=).
+
+Once you find your desired container, click on it, and look for the "**Get Container v**" button at the top right of the screen.
+
+In this example's case, our container's link is `nvcr.io/nvidia/pytorch:23.05-py3`.
+
+Run the following command, which both pulls your container, and converts it to an `.sif` file which Apptainer can work with.
+```bash
+apptainer pull pytorch_23.05.sif docker://nvcr.io/nvidia/pytorch:23.05-py3
+```
 
 ### TensorFlow container job example
 
