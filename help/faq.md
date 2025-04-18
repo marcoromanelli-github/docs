@@ -18,27 +18,6 @@ You can run the `passwd` command on the login node to change your password. Plea
 
 {% comment %}A web portal is currently under development. Once launched, your password can also be changed from the password reset page, [link to be provided]. Log in using your username on Star.{% endcomment %}
 
-### What is the ssh key fingerprint for star.hofstra.edu?
-
-The SHA256 key fingerprint is:
-`SHA256:W0NKVfQBl5FeOlOkoEIKIVsp1+47yIvzJAYMx6ECpwM`
-
-If you are more of a visual person, run
-`ssh -p 5010 -o VisualHostKey=yes binary.star.hofstra.edu` and compare it to this visual
-key:
-
-    +--[ED25519 256]--+
-    |E + ++  . .o=.+=.|
-    |o=.=o..o . . +ooo|
-    |* +o .. o o  .o+ |
-    |+o    .. +    =  |
-    |..   .  S o    o |
-    | .    .  o .     |
-    |  o... ..        |
-    | ..+o o          |
-    |  .oo. .         |
-    +----[SHA256]-----+
-
 ## Installing software
 
 ### I need Python package X but the one on Star is too old or I cannot find it.
@@ -57,7 +36,7 @@ solution for you, please contact us and we will do our best to help you.
 
 Due to the cluster's architecture and security model, `root` or `sudo` access is restricted and standard users cannot perform operations that require root access. However, most standard tasks do not actually require root privledges or have non-root alternatives anyway. Please learn about using [environment modules]({{site.baseurl}}{% link software/env-modules.md %}) and [virtual environments]({{site.baseurl}}{% link software/virtual-env.md %}). If there is any other task that appears to require `sudo` access, please submit a support request or contact the HPC support team to assist you with your needs. 
 
-### How can I install packages without root access?
+### How can I install packages?
 
 To install packages, you can create a [virtual environments]({{site.baseurl}}{% link software/virtual-env.md %}) or install them into the home directory. Setting up a virtual environment allows you to isolate project dependencies, prevent version conflicts, and ensure your environment is reproducible if sharing or collaboration is necessary.
 
@@ -153,6 +132,28 @@ This command gives you a report of account utilization, including CPU hours, for
 
 ## Connecting through SSH
 
+### What is the ssh key fingerprint for the cluster?
+
+The SHA256 key fingerprint is:
+`SHA256:W0NKVfQBl5FeOlOkoEIKIVsp1+47yIvzJAYMx6ECpwM`
+
+If you are more of a visual person, run
+`ssh -p 5010 -o VisualHostKey=yes [login node].star.hofstra.edu` and compare it to this visual
+key:
+
+    +--[ED25519 256]--+
+    |E + ++  . .o=.+=.|
+    |o=.=o..o . . +ooo|
+    |* +o .. o o  .o+ |
+    |+o    .. +    =  |
+    |..   .  S o    o |
+    | .    .  o .     |
+    |  o... ..        |
+    | ..+o o          |
+    |  .oo. .         |
+    +----[SHA256]-----+
+
+
 ### How can I export the display from a compute node to my desktop?
 
 If you need to export the display from a compute node to your desktop
@@ -164,17 +165,19 @@ you should
 
 Here is an example:
 
-    $ ssh -Y binary.star.hofstra.edu                 # log in with port forwarding
+    $ ssh -Y [login node].star.hofstra.edu       # log in with port forwarding
     $ srun -N 1 -t 1:0:0 --pty bash -I     # reserve and log in on a compute node
 
 This example assumes that you are running an X-server on your local
 desktop, which should be available for most users running Linux, Unix
-and Mac Os X. If you are using Windows you must install some X-server on
+and Mac OS. If you are using Windows you must install some X-server on
 your local PC.
 
-### How can I access a compute node from the login node?
+### How do I access the compute nodes?
 
-Please read about Interactive jobs at [Submitting jobs]({{site.baseurl}}{% link jobs/submitting-jobs.md %}).
+To access the compute nodes, you need to run `sbatch` or `srun` on the login node to [submit a job]({{site.baseurl}}{% link jobs/submitting-jobs.md %}).
+
+If you are looking for the same experience as with ssh, you can use `srun` to launch a remote interactive shell. For more information and an example, please see [Interactive jobs]({{site.baseurl}}{% link jobs/submitting-jobs.md %}#interactive-jobs).
 
 {% comment %}
 ### My ssh connections are dying / freezing
