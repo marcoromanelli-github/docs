@@ -203,9 +203,17 @@ for a similar solution.
 
 ## Working with jobs
 
-### Where can I find an example of job script?
+### What are jobs?
 
-You can find job script examples at [Submitting jobs]({{site.baseurl}}{% link jobs/submitting-jobs.md %}).
+A job is a unit of work that is submitted to a scheduler or workload manager for execution. A job consists of a shell script or executable, the job's resource requirements specification (e.g. number of processors, memory, time limit), input data, specification of where output should be written to, and environment configuration. Jobs are submitted through a scheduler, which queues them and runs them on the compute nodes. Please read more at the [Job Overview]({{site.baseurl}}{% link jobs/submitting-jobs.md %}) page.
+
+### How do I submit a job?
+
+Jobs are submitted by running the `sbatch` or `srun` commands. You would create a job script to load any needed modules and setup the environment needed for your program.
+
+### Where can I find example job scripts?
+
+You can find examples at [Submitting jobs]({{site.baseurl}}{% link jobs/submitting-jobs.md %}) or on the cluster at `/fs1/shared/docs/examples/`.
 
 ### When will my job start?
 
@@ -225,7 +233,7 @@ new jobs are submitted that get higher priority.
 
 In the command line, see the job queue by using `squeue`.
 
-For a more comprehensive list of commands to monitor/manage your jobs, please see [Monitoring jobs]({{site.baseurl}}{% link jobs/monitoring-jobs.md %}).
+For more commands, please see [Monitoring jobs]({{site.baseurl}}{% link jobs/monitoring-jobs.md %}).
 
 ### Why does my job not start or give me error feedback when submitting?
 
