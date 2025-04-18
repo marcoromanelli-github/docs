@@ -88,118 +88,6 @@ You can run the `passwd` command on the login node to change your password. Plea
 
 {% comment %}A web portal is currently under development. Once launched, your password can also be changed from the password reset page, [link to be provided]. Log in using your username on Star.{% endcomment %}
 
-## Installing software
-
-### I need Python package X but the one on Star is too old or I cannot find it.
-
-You can choose different Python versions throguh the [module system]({{site.baseurl}}{% link software/env-modules.md %})
-or by using [Anaconda (Miniforge)]({{site.baseurl}}{% link software/conda.md %}).
-
-In cases where this still doesn't solve your problem or you would like
-to install a package yourself, please read the next section below about
-installing without sudo rights.
-
-If we don't have it installed, and installing it yourself is not a good
-solution for you, please contact us and we will do our best to help you.
-
-### How can I get sudo access?
-
-Due to the cluster's architecture and security model, `root` or `sudo` access is restricted and standard users cannot perform operations that require root access. However, most standard tasks do not actually require root privledges or have non-root alternatives anyway. Please learn about using [environment modules]({{site.baseurl}}{% link software/env-modules.md %}) and [virtual environments]({{site.baseurl}}{% link software/virtual-env.md %}). If there is any other task that appears to require `sudo` access, please submit a support request or contact the HPC support team to assist you with your needs. 
-
-### How can I install packages?
-
-To install packages, you can create a [virtual environments]({{site.baseurl}}{% link software/virtual-env.md %}) or install them into the home directory. Setting up a virtual environment allows you to isolate project dependencies, prevent version conflicts, and ensure your environment is reproducible if sharing or collaboration is necessary.
-
-#### Python Example
-Below are directions on using a simple virtual environment with venv. It is one of the many packages that allow you to manage virtual environments along with conda, virtualenv, and others.
-
-Create a virtual environment:
-```sh
-python3 -m venv research1
-```
-
-Activate the environment:
-```sh
-source research1/bin/activate
-```
-
-Your current line should be prefixed with the environment name:
-```
-(research1) user@super-computer
-```
-
-Install new package:
-```sh
-pip install package_name
-```
-
-Deactivate the environment if it's active:
-```sh
-deactivate
-```
-
-#### R example
-Below are directions on using a simple virtual environment with renv. It is one of the main packages used to manage virtual environments in R.
-
-Create a virtual environment:
-```sh
-renv::init()
-```
-
-Activate the environment:
-```sh
-renv::activate()
-```
-
-Install new package:
-```sh
-install.packages("package_name")
-```
-
-Deactivate the environment if it's active:
-```sh
-renv::deactivate()
-```
-
-For more information on setting up development environments for other languages, including Julia, NodeJS, C, C++, and Rust, please see the [virtual environments guide]({{site.baseurl}}{% link software/virtual-env.md %}).
-
-
-## Compute and storage quota
-
-### How can I check my disk quota and disk usage?
-
-{% comment %}
-To check the disk quota of your home directory ( /home/username ), you can use the repquota command which prints a summary of the disc usage and quotas for the specified file systems.
-
-    $ /usr/sbin/repquota -a -s
-    $                    Block limits                 File limits
-    $ User              used    soft    hard  grace    used   soft  hard  grace
-    $ cchave6    --     116M   1024M   1280M           1922      0     0
-
-Here,
-
-Soft Limit -> This is a warning threshold. A user can exceed this limit temporarily, but they must reduce usage back under this limit within a "grace period."
-
-Hard Limit -> This is the absolute maximum disk space or number of files a user can use. The user cannot exceed this limit at all.
-
-Grace Period -> The amount of time a user is allowed to exceed the soft limit before they are required to get back under it. If this period expires, the soft limit becomes enforced like a hard limit.
-
-File limits (inodes) -> These limit the number of files a user can create, regardless of their size.
-{% endcomment %}
-
-To check the quota of the main project storage (parallel file system - `/fs1/projects/<project>`), you can use this command:
-
-    $ mmlsquota -j <project_name> fs1
-
-The -j option specifies that you are querying a fileset, which is how quotas are set on different directories in GPFS.
-
-
-### How many CPU hours have I spent?
-
-This command gives you a report of account utilization, including CPU hours, for the specified period.
-
-    $ sreport cluster AccountUtilizationByUser start=YYYY-MM-DD end=YYYY-MM-DD
-
 ## Working with jobs
 
 ### What are jobs?
@@ -417,3 +305,116 @@ echo "Task $1 has slept for $sleeptime seconds"
 ```
 
 Source: [HPC-UiT FAQ](https://hpc-uit.readthedocs.io/en/latest/help/faq.html)
+
+## Installing software
+
+### I need Python package X but the one on Star is too old or I cannot find it.
+
+You can choose different Python versions throguh the [module system]({{site.baseurl}}{% link software/env-modules.md %})
+or by using [Anaconda (Miniforge)]({{site.baseurl}}{% link software/conda.md %}).
+
+In cases where this still doesn't solve your problem or you would like
+to install a package yourself, please read the next section below about
+installing without sudo rights.
+
+If we don't have it installed, and installing it yourself is not a good
+solution for you, please contact us and we will do our best to help you.
+
+### How can I get sudo access?
+
+Due to the cluster's architecture and security model, `root` or `sudo` access is restricted and standard users cannot perform operations that require root access. However, most standard tasks do not actually require root privledges or have non-root alternatives anyway. Please learn about using [environment modules]({{site.baseurl}}{% link software/env-modules.md %}) and [virtual environments]({{site.baseurl}}{% link software/virtual-env.md %}). If there is any other task that appears to require `sudo` access, please submit a support request or contact the HPC support team to assist you with your needs.
+
+### How can I install packages?
+
+To install packages, you can create a [virtual environments]({{site.baseurl}}{% link software/virtual-env.md %}) or install them into the home directory. Setting up a virtual environment allows you to isolate project dependencies, prevent version conflicts, and ensure your environment is reproducible if sharing or collaboration is necessary.
+
+#### Python Example
+Below are directions on using a simple virtual environment with venv. It is one of the many packages that allow you to manage virtual environments along with conda, virtualenv, and others.
+
+Create a virtual environment:
+```sh
+python3 -m venv research1
+```
+
+Activate the environment:
+```sh
+source research1/bin/activate
+```
+
+Your current line should be prefixed with the environment name:
+```
+(research1) user@super-computer
+```
+
+Install new package:
+```sh
+pip install package_name
+```
+
+Deactivate the environment if it's active:
+```sh
+deactivate
+```
+
+#### R example
+Below are directions on using a simple virtual environment with renv. It is one of the main packages used to manage virtual environments in R.
+
+Create a virtual environment:
+```sh
+renv::init()
+```
+
+Activate the environment:
+```sh
+renv::activate()
+```
+
+Install new package:
+```sh
+install.packages("package_name")
+```
+
+Deactivate the environment if it's active:
+```sh
+renv::deactivate()
+```
+
+For more information on setting up development environments for other languages, including Julia, NodeJS, C, C++, and Rust, please see the [virtual environments guide]({{site.baseurl}}{% link software/virtual-env.md %}).
+
+
+## Compute and storage quota
+
+### How can I check my disk quota and disk usage?
+
+{% comment %}
+To check the disk quota of your home directory ( /home/username ), you can use the repquota command which prints a summary of the disc usage and quotas for the specified file systems.
+
+    $ /usr/sbin/repquota -a -s
+    $                    Block limits                 File limits
+    $ User              used    soft    hard  grace    used   soft  hard  grace
+    $ cchave6    --     116M   1024M   1280M           1922      0     0
+
+Here,
+
+Soft Limit -> This is a warning threshold. A user can exceed this limit temporarily, but they must reduce usage back under this limit within a "grace period."
+
+Hard Limit -> This is the absolute maximum disk space or number of files a user can use. The user cannot exceed this limit at all.
+
+Grace Period -> The amount of time a user is allowed to exceed the soft limit before they are required to get back under it. If this period expires, the soft limit becomes enforced like a hard limit.
+
+File limits (inodes) -> These limit the number of files a user can create, regardless of their size.
+{% endcomment %}
+
+To check the quota of the main project storage (parallel file system - `/fs1/projects/<project>`), you can use this command:
+
+    $ mmlsquota -j <project_name> fs1
+
+The -j option specifies that you are querying a fileset, which is how quotas are set on different directories in GPFS.
+
+
+### How many CPU hours have I spent?
+
+This command gives you a report of account utilization, including CPU hours, for the specified period.
+
+    $ sreport cluster AccountUtilizationByUser start=YYYY-MM-DD end=YYYY-MM-DD
+
