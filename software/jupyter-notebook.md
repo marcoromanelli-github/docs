@@ -67,7 +67,9 @@ echo "==================================================================="
 # Start Jupyter notebook
 jupyter notebook --no-browser --port=${port} --ip=0.0.0.0
 ```
+
 The script uses these Slurm parameters:
+
 - `--nodelist`: Specifies which compute node to use (e.g., `gpu1` or `cn01`)
 - `--gpus=2`: This enables us to use 2 of the GPUs on the specified node. See each node's GPU information [here]({{site.baseurl}}{% link quickstart/about-star.md %}). Without this specification, you cannot see or use the GPUs on the compute node. Feel free to replace this number with another **valid option**.
 - `--ntasks=1`: Runs one instance of Jupyter
@@ -89,6 +91,7 @@ The `<...>` placeholders need to be replaced with what _you_ need:
 ```bash
 sbatch jupyter.sbatch
 ```
+
 Upon your job's submission to the queue, you will see the output indicating your job's ID. You need to replace _your_ job ID value with the `<jobid>` placeholder throughout this documentation.
 
 _**Your job may not start right away!**_
@@ -104,6 +107,7 @@ Before proceeding to **Step 4**, wait until your job has changed to the `RUNNING
 ```bash
 cat jupyter_notebook_<jobid>.out  # Run this command in the directory the .out file is located.
 ```
+
 Replace `<jobid>` with the job ID you received after submitting the job.
 
 ### Step 5: Run the SSH port-forwarding command
@@ -113,9 +117,11 @@ Open a new terminal on your local machine and run the SSH command provided in th
 ### Step 6: Find and open the link in your browser
 
 Check the error file on the login node for your Jupyter notebook's URL:
+
 ```bash
 cat jupyter_notebook_<jobid>.err  | grep '127.0.0.1' # Run this command in the directory the .err file is located.
 ```
+
 Replace `<jobid>` with the job ID you received after submitting the job.
 
 _**Be patient!**_
@@ -129,9 +135,11 @@ Copy the URL from the error file and paste it into your **local machine's browse
 ### Step 7: Clean up
 
 If you're done prior to the job's termination due to the walltime, clean up your session by running this command on the login node:
+
 ```bash
 scancel <jobid>
 ```
+
 Replace `<jobid>` with the job ID you received after submitting the job.
 
 Afterwards, press `Ctrl + C` on your local computer's terminal session, where you ran the port forwarding command. This would terminate the SSH connection.
@@ -140,3 +148,43 @@ Afterwards, press `Ctrl + C` on your local computer's terminal session, where yo
 
 Do you need to access the node running Jupyter Notebook? You can use `srun` to launch an interactive shell. Check out [interactive jobs]({{site.baseurl}}{% link jobs/submitting-jobs.md %}#interactive-jobs) for more information.
 
+## Run a Jupyter Notebook directly on a computing node from Visual Studio Code ()
+
+This is a list of steps required to run a Jupyter Notebook directly on a computing node from Visual Studio Code.
+<!-- This section was made possible thanks to the generous help of Mikhail Khlystun. -->
+1. In StarHPC prepare a SLURM script to create a `ssh` tunnel directly to an assigned computing node:
+
+   ```bash
+   #!/bin/bash
+
+   #SBATCH --output="tunnel.log"
+   #SBATCH --job-name="tunnel"
+   #SBATCH --time=1:00:00     # walltime
+   #SBATCH --cpus-per-task=4  # number of cores
+   #SBATCH --mem-per-cpu=16G   # memory per CPU core
+   #SBATCH --gres=gpu:A30:1
+
+
+   # find open port
+   PORT=$(python -c 'import socket; s=socket.socket(); s.bind(("", 0)); print(s.getsockname()[1]); s.close()')
+   scontrol update JobId="$SLURM_JOB_ID" Comment="$PORT"
+   # start sshd server on the available port
+   echo "Starting sshd on port $PORT"
+   /usr/sbin/sshd -D -p ${PORT} -f /dev/null -h ${HOME}/.ssh/<private_key_for_your_StarHPC_account>
+   ```
+
+2. On your local machine add the following lines to your `.ssh/config` file:
+
+   ```bash
+   Host login2
+    HostName login2.star.hofstra.edu
+    Port 5010
+
+   Host hpcx
+    ProxyCommand ssh login2 "nc \$(squeue --me --name=tunnel --states=R -h -O NodeList,Comment)"
+    StrictHostKeyChecking no
+    ```
+
+   where `login2` is the login node to access StarHPC, and `hpcx` is the assigned computing node.
+
+   You can now ssh into this `hpcx` and start a Jupyter server, e.g. using an Anaconda environment, and run it directly from the dedicated window in your local instance of Visual Studio Code.
