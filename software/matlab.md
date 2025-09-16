@@ -33,4 +33,4 @@ Once the desktop environment starts, open the menu:
 
 - After MATLAB opens, you can start writing and executing your scripts as usual.
 - You can use the editor for `.m` files or run commands directly in the command window.
-![Desktop]({{ site.baseurl }}/images/desktop_2.png "Matlab Running")
+![Desktop]({{ site.baseurl }}/images/matlab2.png "Matlab Running")
