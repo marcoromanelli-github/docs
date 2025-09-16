@@ -27,10 +27,10 @@ Wait a few seconds until the **Launch Desktop** button becomes available.
 
 Once the desktop environment starts, open the menu:
    **Applications → Others → MATLAB**
-![Desktop]({{ site.baseurl }}/images/matlab.png.png "Matlab")
+![Desktop]({{ site.baseurl }}/images/matlab.png "Matlab")
 
 ## Running MATLAB Code
 
 - After MATLAB opens, you can start writing and executing your scripts as usual.
 - You can use the editor for `.m` files or run commands directly in the command window.
-![Desktop]({{ site.baseurl }}/images/desktop_2.png "Matlab Running")
+![Desktop]({{ site.baseurl }}/images/matlab2.png "Matlab Running")
